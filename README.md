@@ -25,9 +25,9 @@ results will be labeled as development, pilot, or final benchmark results.
 
 ```text
 benchmark/   Benchmark specifications, generators, scoring, and evaluation artifacts
-docs/        Public architecture and design documentation
+docs/        Public architecture, design, and roadmap documentation
 paper/       Preprints, drafts, and publication material
-reports/     Reproducible evaluation reports
+reports/     Reproducible evaluation and development reports
 results/     Published or reviewable benchmark results
 tests/       Public benchmark and regression tests
 configs/     Reproducible evaluation configurations

@@ -10,3 +10,6 @@ Gate**. The current public specification is
 
 The generator, scorer, replay tooling, and pilot results are not yet part of
 the public release.
+
+The current implementation boundary is summarized in the
+[structural-family development report](../reports/development/2026-10-15-structural-family-progress.md).
