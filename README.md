@@ -4,6 +4,9 @@ GPU-first synthetic intelligence architecture with a CPU reference runtime,
 evidence-grounded cognition, structural learning, and reproducible benchmarks
 for transfer, uncertainty, and explanation fidelity.
 
+[Read the Protama vision](VISION.md) to learn what the project is becoming,
+what it explicitly does not claim, and how its research roadmap is organized.
+
 ## Project status
 
 Protama is an active research and engineering project. The public repository
