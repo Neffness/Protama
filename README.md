@@ -23,6 +23,8 @@ evaluate structural generalization rather than memorization.
 
 [Read the Protama vision](VISION.md) to learn what the project is becoming,
 what it explicitly does not claim, and how its research roadmap is organized.
+Read the [official Protama etymology](ETYMOLOGY.md) for the name's
+pronunciation, meaning, and usage.
 See [Use Cases](USE_CASES.md) for potential application areas and the evidence
 required before making deployment claims.
 See [Safety and Governance](SAFETY_AND_GOVERNANCE.md) for the project's

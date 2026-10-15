@@ -42,6 +42,49 @@ language-model stack for every decision.
 - demonstrated robustness under changed inputs;
 - clear limits on what the device can and cannot infer.
 
+## High-throughput and high-power systems
+
+### Opportunity
+
+Some deployments need to process many streams of structured input at once,
+maintain larger working contexts, or evaluate multiple hypotheses in real
+time. These workloads may justify dedicated GPU hardware, larger memory
+budgets, and continuous power.
+
+Potential targets include:
+
+- industrial monitoring across many machines or facilities;
+- robotics and simulation at scale;
+- scientific and engineering workloads;
+- digital-twin and operational modeling;
+- large benchmark and evaluation runs;
+- multi-agent coordination and environment analysis.
+
+### Why Protama may fit
+
+The GPU Protama direction is intended for high-throughput structural
+processing rather than only conversational interaction. A higher-power
+deployment could evaluate more observations, maintain more active structural
+families, compare competing hypotheses, and serve multiple connected
+workflows at the same time.
+
+The goal is to use high-power hardware where it creates meaningful capacity,
+while preserving a shared behavioral contract with lower-power CPU Protama
+systems. A customer could therefore use a GPU Protama for central processing
+and deploy smaller CPU Protama systems at the edge where latency, privacy, or power
+matter more.
+
+### Evidence required
+
+- throughput and latency under realistic concurrent workloads;
+- scaling behavior as observations and structural families increase;
+- GPU-versus-CPU behavioral parity;
+- memory, power, and operating-cost measurements;
+- reliability during long-running workloads;
+- comparison with language-model and symbolic baselines;
+- evidence that additional hardware improves structural capability rather than
+  only raw volume.
+
 ## Industrial and operational automation
 
 ### Opportunity
