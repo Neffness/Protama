@@ -5,6 +5,8 @@ episode generators, near-miss definitions, scoring code, leakage checks, and
 replay tooling.
 
 The primary benchmark is the **Protama Structural Induction and Transfer
-Gate**. Its current design specification is maintained in the private
-development workspace until the first public benchmark artifact is approved
-for release.
+Gate**. The current public specification is
+[`Protama_Inductive_Structural_Invention_Test.md`](Protama_Inductive_Structural_Invention_Test.md).
+
+The generator, scorer, replay tooling, and pilot results are not yet part of
+the public release.
