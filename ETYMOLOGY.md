@@ -22,8 +22,8 @@ technical systems.
 Protama is an intentionally coined name. Its official project interpretation
 combines:
 
-- **pro-** — forward, ahead, or toward;
-- **-tama** — the structural core or essential pattern that a system seeks to
+- **pro-:** forward, ahead, or toward;
+- **-tama:** the structural core or essential pattern that a system seeks to
   discover and work with.
 
 The name therefore carries the intended meaning:
