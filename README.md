@@ -1,8 +1,25 @@
 # Protama
 
-GPU-first synthetic intelligence architecture with a CPU reference runtime,
-evidence-grounded cognition, structural learning, and reproducible benchmarks
-for transfer, uncertainty, and explanation fidelity.
+Protama is a synthetic intelligence architecture designed to run anywhere,
+from low-power CPU devices to high-throughput GPU systems, built to learn,
+transfer, and revise structure, not merely predict the next token.
+
+We make no official claim to general intelligence, yet. That is, in fact,
+<u>the goal</u>.
+
+It is being built to acquire reusable relational structure from limited
+examples, apply that structure to unfamiliar vocabulary and situations, reject
+typed near-misses, and explain decisions from inspectable evidence.
+
+Where statistical language models often rely on scale, surface similarity, or
+memorized patterns, Protama explores explicit hypotheses, structural
+revision, uncertainty, and abstention. The goal is not to make a more fluent
+chatbot. The goal is to investigate whether an intelligence can learn
+relationships that remain useful when the words and circumstances change.
+
+This repository contains the public Protama research artifacts and the
+**Protama Structural Induction and Transfer Gate**: a benchmark designed to
+evaluate structural generalization rather than memorization.
 
 [Read the Protama vision](VISION.md) to learn what the project is becoming,
 what it explicitly does not claim, and how its research roadmap is organized.
@@ -11,19 +28,19 @@ required before making deployment claims.
 See [Safety and Governance](SAFETY_AND_GOVERNANCE.md) for the project's
 human-inspection, external-review, training-control, and guardrail principles.
 
-## Project status
+## What Protama is trying to achieve
 
 Protama is an active research and engineering project. The public repository
 is being assembled incrementally from the private development workspace.
 
-Current public focus:
+The project is working toward systems that can:
 
-- structural induction and transfer;
-- typed evidence and decision traces;
-- near-miss discrimination;
-- CPU reference behavior;
-- GPU-oriented execution targets;
-- reproducible benchmark design.
+- induce and transfer structure;
+- form and revise reusable relational hypotheses;
+- distinguish structural validity from surface resemblance;
+- preserve uncertainty when evidence is incomplete;
+- produce trace-grounded explanations;
+- operate across CPU reference and GPU-oriented execution paths.
 
 The project does not currently claim to prove general intelligence. Public
 results will be labeled as development, pilot, or final benchmark results.
@@ -55,9 +72,8 @@ Transfer Gate**. It evaluates whether a system can:
 4. abstain when evidence is insufficient or ambiguous;
 5. produce explanations reconstructible from pre-decision evidence.
 
-The benchmark specification will be added under
-[`benchmark/`](benchmark/) when the first public benchmark artifact is
-approved for release.
+Read the [benchmark specification](benchmark/Protama_Inductive_Structural_Invention_Test.md)
+for the formal task, controls, metrics, and claim boundaries.
 
 ## Development model
 
