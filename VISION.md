@@ -89,6 +89,57 @@ learner that can:
 This is a research direction, not a guarantee of a particular final system.
 Each step must earn its claim through reproducible evidence.
 
+## Product vision
+
+The long-term product vision is to make Protama available as a pre-trained,
+purpose-built intelligence appliance.
+
+A customer would be able to describe the kind of Protama they need. We would
+train and configure that system in-house, deliver it as a ready-to-use unit,
+and provide an interactive interface through which the customer could
+continue teaching and working with it in real time.
+
+The intended experience includes:
+
+- two primary appliance classes: a CPU Protama for lower-power deployments and
+  a GPU Protama for higher-throughput workloads;
+- a CPU Protama with a compact power and USB-C data connection where the
+  target deployment supports it;
+- a GPU Protama with a dedicated power-supply connection and a USB-C
+  input/output port;
+- a pre-trained foundation suited to the customer's chosen type of work;
+- customer-specific training before delivery;
+- an interactive interface for teaching, conversation, inspection, and
+  correction;
+- the ability to provide new input types through guided interaction;
+- outputs that conform to a documented API;
+- deployment into existing systems through standard connections, adapters,
+  and integration contracts.
+
+The goal is not to sell a generic black box that customers must accept
+unchanged. The goal is to deliver a useful starting intelligence that can be
+configured for a domain, taught by its operators, inspected by its owners,
+and integrated into systems they already use.
+
+In the most ambitious version of this vision, Protama becomes a
+plug-and-play structural intelligence layer: a customer supplies the inputs
+available in its environment, teaches the system the relationships that
+matter, and receives reliable outputs through an agreed interface. USB-C is
+the intended input/output connection for both appliance classes, while the
+GPU class uses a separate dedicated power connection. True compatibility still
+depends on power, data, protocol, security, and system-integration
+requirements.
+
+This product vision depends on capabilities that must be demonstrated:
+
+- stable behavior after customer-specific teaching;
+- controlled learning and rollback;
+- separation between approved operation and further training;
+- robust handling of unfamiliar inputs;
+- reliable API-conforming outputs;
+- inspectable evidence and correction history;
+- safe integration with customer systems.
+
 ## Roadmap
 
 ### Near term

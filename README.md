@@ -6,6 +6,10 @@ for transfer, uncertainty, and explanation fidelity.
 
 [Read the Protama vision](VISION.md) to learn what the project is becoming,
 what it explicitly does not claim, and how its research roadmap is organized.
+See [Use Cases](USE_CASES.md) for potential application areas and the evidence
+required before making deployment claims.
+See [Safety and Governance](SAFETY_AND_GOVERNANCE.md) for the project's
+human-inspection, external-review, training-control, and guardrail principles.
 
 ## Project status
 
