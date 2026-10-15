@@ -16,10 +16,14 @@ Useful early contributions include:
 
 ## Public-release boundary
 
-The primary development workspace is private. Do not copy or submit private
-implementation files, credentials, generated output, proprietary data,
-third-party code, or Unreal Engine source unless redistribution rights have
-been verified.
+The primary development workspace is private. Unreal Engine was used as an
+R&D platform during earlier Protama development. Protama's ongoing
+implementation work continues in Python, and this repository does not publish
+Unreal Engine source, engine files, or proprietary assets.
+
+Do not copy or submit private implementation files, credentials, generated
+output, proprietary data, or third-party code unless redistribution rights
+have been verified.
 
 ## Pull requests
 
