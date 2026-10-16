@@ -59,6 +59,9 @@ may receive, and what constitutes a pass.
 - [ ] Selective risk and risk-coverage curve.
 - [ ] False-commitment rate.
 - [ ] Abstention precision.
+- [ ] Episode-level delta from the declared pre-episode snapshot.
+- [ ] Snapshot round-trip behavioral fidelity.
+- [ ] Retention and backward-transfer performance on prior evaluation sets.
 - [ ] Explanation invariant correctness.
 - [ ] Explanation irrelevance recognition.
 - [ ] Explanation counterfactual sensitivity.
@@ -115,6 +118,19 @@ explanation
 score contribution
 ```
 
+Continual-learning evaluations must additionally record:
+
+```text
+declared pre-episode snapshot
+pre-episode probe score
+post-episode probe score
+episode-level delta
+snapshot round-trip result
+prior-episode retention score
+backward-transfer score
+forgetting and interference indicators
+```
+
 ## Acceptance criteria
 
 Phase A is complete only when:
@@ -126,6 +142,12 @@ Phase A is complete only when:
 5. Pass thresholds are fixed before final episodes are generated.
 6. A reviewer can determine whether a result is L2, L3, L4, or L5 without
    relying on undocumented assumptions.
+7. Continual-learning claims identify what was known at the declared
+   pre-episode snapshot and report induction delta separately from absolute
+   post-episode performance.
+8. Snapshot restoration passes behavioral equivalence probes before scoring.
+9. Retention and backward-transfer results are reported for any cumulative
+   or continual-learning evaluation.
 
 ## Evidence to attach
 
