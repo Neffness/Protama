@@ -37,6 +37,8 @@ Protama inputs.
 - [x] Split-isolation checks exist.
 - [x] Versioned machine-readable leakage report exists.
 - [x] Near-miss category coverage test exists.
+- [x] Deterministic 100-episode development manifest with per-episode
+      fingerprints exists.
 
 ## Acceptance criteria
 
@@ -61,7 +63,10 @@ independent final-test generator or locked final seed set.
 
 The development generator now has structural and template split checks,
 versioned leakage reports, and a 100-episode replay/leakage test. Its output
-still remains development evidence.
+still remains development evidence. The new
+`Tools/Protama/structural_gate_manifest.py` certification layer records the
+seed list, episode IDs, per-episode content fingerprints, and fail-closed
+leakage reports without serializing evaluator-only family gold.
 
 Validation result:
 
