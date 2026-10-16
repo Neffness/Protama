@@ -11,6 +11,12 @@
 > to evaluate Protama fairly. It does not claim that the Structural Induction
 > and Transfer Gate has been passed.
 
+This is an evaluation-infrastructure milestone. A separate capability
+milestone, [Learned Research Affordance](2026-10-16-learned-research-affordance.md),
+tests whether Protama can recognize a knowledge gap and choose an available
+research tool. The two milestones are complementary and may proceed in
+parallel.
+
 ## 1. The milestone
 
 Protama's next major milestone is:
@@ -41,6 +47,22 @@ to:
 The purpose is not to make the benchmark larger for its own sake. The
 purpose is to establish that the measurement process can produce a fair,
 repeatable test before asking Protama to pass it.
+
+The dictionary-family development pools also exposed an important design
+requirement before publication. Their first negative controls treated family
+labels as mutually exclusive, but a dictionary definition can express
+multiple valid structural relations. A definition such as “A partial
+evacuation” can support both a noun-equivalence interpretation and an
+action-related interpretation. A phrase such as “used for food” can appear
+inside a definition of a person rather than an object. The resulting
+development score is therefore useful for finding routing and control
+problems, but its negative-rejection result is not publication evidence.
+
+The independent generator must produce relation-compatible negatives,
+support multi-label or overlapping structural relations where appropriate,
+and include unresolved-reference cases. Those cases should test whether the
+system recognizes when a definition depends on a term it has not learned and
+decides to look it up or request clarification.
 
 ## 2. Why this comes next
 
@@ -282,4 +304,3 @@ surface memorization, and post-hoc interpretation.
 - [Structural Gate Publication Task List](../benchmark/Protama_Structural_Gate_Publication_Task_List.md)
 - [First Gold Gate Publication](2026-10-16-first-gold-gate.md)
 - [Structural Learning Roadmap](../docs/roadmap/structural-learning-roadmap.md)
-
