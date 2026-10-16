@@ -84,10 +84,38 @@ The first preregistered contract uses:
 | Explanation fidelity            |   >= 0.85 |
 | Coverage                        |   >= 0.75 |
 | Selective risk                  |   <= 0.10 |
+| Eligible-episode mean delta    | 95% CI lower bound > 0 |
+| Snapshot round-trip fidelity  | 100% exact agreement |
 
 Confidence intervals use 10,000 episode-bootstrap resamples at 95% confidence
 with seed `1729`. Critical leakage is disqualifying. The complete locked
 configuration is [structural_gate_v1.json](../configs/structural_gate_v1.json).
+
+The delta criterion is evaluated only on eligible episodes whose pre-episode
+probe score is below the ceiling, with a minimum eligible-episode count fixed
+before final evaluation. This avoids requiring positive movement from an
+already-perfect baseline while still preventing a zero-induction result from
+passing on post-state performance alone. The 0.90/0.85 accuracy thresholds are
+pre-final-evaluation design targets for a high-confidence benchmark, not
+estimates fitted to the final test results; their rationale and provenance
+must be preserved in the preregistration record.
+
+The pre-episode probe is a separate split. Its inputs, vocabulary, templates,
+and labels are disjoint from every scored evaluation set and it is excluded
+from all transfer, near-miss, coverage, and risk metrics. Probe execution
+occurs only to characterize the declared snapshot and must not be used to
+adapt the system before the scored episode.
+
+Snapshot round-trip fidelity means that a fixed, versioned probe set of at
+least 20 cases is run before saving, after restoring into a fresh instance,
+and compared case-by-case. Decisions, abstentions, evidence identities, and
+confidence values must match exactly, subject only to a preregistered
+numeric tolerance. Any mismatch invalidates the episode.
+
+Retention and backward transfer are required reports in v1 but are not yet
+additional pass thresholds. This is an explicit scope decision: v1
+establishes the measurements and artifacts; v2 will add preregistered
+retention and forgetting thresholds after development variance is measured.
 
 ## Proposed artifact schemas
 
@@ -148,6 +176,10 @@ Phase A is complete only when:
 8. Snapshot restoration passes behavioral equivalence probes before scoring.
 9. Retention and backward-transfer results are reported for any cumulative
    or continual-learning evaluation.
+10. The pre-episode probe is disjoint from all scored evaluation data and
+    cannot adapt the system.
+11. Snapshot round-trip fidelity is measured on a fixed probe set with the
+    exact-match rule defined above.
 
 ## Evidence to attach
 
@@ -184,3 +216,11 @@ Validation result:
 47 passed
 1 intentionally skipped
 ```
+
+The skipped test is not a contract failure: it is the separate structural
+invention test
+`Tools/Protama/tests/test_structural_invention.py::test_invents_agent_family_and_rejects_near_misses`,
+which is explicitly marked as requiring variable-bound structural-family
+induction. The contract test module itself contains no unconditional skip.
+This historical count must be regenerated and reported from the exact test
+selection used for any final artifact.

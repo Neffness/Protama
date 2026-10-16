@@ -44,6 +44,7 @@ publication-ready evidence.
 - [ ] Deterministic replay command and replay artifacts.
 - [ ] Failure, abstention, and excluded-episode manifest.
 - [ ] Pre/post episode delta report relative to declared snapshots.
+- [ ] Conditional delta pass criterion and eligible-episode count report.
 - [ ] Snapshot round-trip behavioral fidelity report.
 - [ ] Retention, backward-transfer, and interference report.
 - [ ] Clean-environment reproduction instructions.
@@ -109,6 +110,8 @@ replayed episode fixtures.
 - [ ] Capture the generated explanation request/result.
 - [ ] Capture final snapshot identity and all scored outputs.
 - [ ] Capture pre-episode probe, post-episode probe, and episode-level delta.
+- [ ] Keep pre-episode probes in a disjoint, unscored split that cannot
+      adapt the system.
 - [ ] Verify snapshot save/restore behavioral equivalence before evaluation.
 - [ ] Re-run prior episode evaluation sets after later learning and report
       retention, backward transfer, forgetting, and interference.
@@ -180,6 +183,8 @@ move each metric, especially lexical-identity ablation.
 - [ ] Do not inspect or use held-out labels before scoring is complete.
 - [ ] Report episode-level induction deltas separately from post-state scores.
 - [ ] Include snapshot round-trip and prior-episode retention results.
+- [ ] Record threshold provenance and the explicit v1/v2 retention-gating
+      decision.
 - [ ] Produce raw artifacts before aggregate metrics.
 - [ ] Produce confidence intervals and category-level failures.
 - [ ] Run leakage checks.
