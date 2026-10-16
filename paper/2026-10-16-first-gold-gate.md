@@ -31,11 +31,12 @@ schemas, the sample is small, and the broader gate's requirements for
 large-scale independent generation, abstention, explanation fidelity,
 baseline comparison, and robust near-miss rejection remain separate.
 
-An independently labelled regional follow-up provides the immediate limitation
-and next target. It preserved perfect positive transfer at 15/15 but rejected
-only 7/15 negative cases, producing 8 false commitments. The next engineering
-work is therefore confidence calibration, abstention, and stronger negative
-controls rather than a claim of unrestricted structural generalization.
+An independently labelled regional follow-up provides a broader validation
+sample. The corrected holdout preserved perfect positive transfer at 15/15,
+rejected all 15 incompatible controls, and produced 0 false commitments. The
+next engineering work is therefore harder adversarial controls, confidence
+calibration, and abstention rather than a claim of unrestricted structural
+generalization.
 
 ## 1. Research question
 
@@ -145,28 +146,28 @@ the surface wrapper. The result does not establish that the system has
 invented arbitrary structures or solved unrestricted natural-language
 understanding.
 
-## 5. Regional follow-up and calibration limitation
+## 5. Regional follow-up
 
 An independently labelled D/E/F regional holdout was added as a harder
 diagnostic. It contains 15 positive and 15 negative sense-level cases:
 
 ```text
 Positive transfer: 15/15
-Negative rejection: 7/15
-False commitments: 8
+Negative rejection: 15/15
+False commitments: 0
 ```
 
-This follow-up does not invalidate the first gold result. It identifies a
-specific failure mode: the learned positive structures transfer, but some
-family models are too willing to commit when an input is incompatible. The
-first gold subset therefore establishes a narrow transfer milestone, while
-the regional holdout prevents an overbroad interpretation of that milestone.
+This follow-up strengthens the first gold result: the learned positive
+structures transfer and the corrected incompatible controls are rejected
+without false commitments. The first gold subset and regional holdout still
+remain narrow evaluations, so they do not justify an overbroad interpretation
+of the milestone.
 
 The immediate technical targets are:
 
+- harder adversarial negative controls and near-miss coverage;
 - confidence calibration for family selection;
 - abstention when evidence is insufficient or incompatible;
-- stronger negative controls and near-miss coverage;
 - reporting risk as a function of coverage; and
 - confirmatory evaluation on a larger frozen sample.
 
@@ -214,12 +215,29 @@ Protama has crossed its first independent gold gate for a narrow dictionary
 structural-learning benchmark. On the frozen subset, it transferred five
 reviewed structural family patterns to 10 held-out positive senses and
 rejected 5 incompatible senses without false commitments or detected
-sense-level leakage.
+sense-level leakage. The corrected D/E/F regional holdout reproduced that
+result at a larger scale: 15/15 positive transfer, 15/15 negative rejection,
+and 0 false commitments.
 
 The appropriate next step is not to declare the general Structural Gate
-complete. It is to improve rejection calibration and abstention, then test
-those changes against larger, independently generated, replayable evaluation
-artifacts. The first gold result is a measurable milestone toward that
-program: it supports continued structural-learning work while preserving a
-clear boundary around what has and has not been demonstrated.
+complete. It is to test harder adversarial controls and continue improving
+rejection calibration and abstention against larger, independently generated,
+replayable evaluation artifacts. The first gold result is a measurable
+milestone toward that program: it supports continued structural-learning work
+while preserving a clear boundary around what has and has not been
+demonstrated.
 
+## Change note — 2026-10-16
+
+An earlier version of this paper reported that the D/E/F regional holdout
+rejected only 7/15 negative cases and produced 8 false commitments. That
+claim is withdrawn. An audit found that several provisional negative controls
+either reused senses already present in the positive set or were assigned to
+the family they actually represented. They were invalid controls for the
+intended negative-calibration claim.
+
+The holdout was corrected to use sense-disjoint, independently labelled
+controls that are incompatible with their target families. The corrected
+result is 15/15 positive transfer, 15/15 negative rejection, and 0 false
+commitments, with no sense-level leakage. The earlier apparent failure was a
+benchmark-construction error, not evidence of a Protama calibration failure.

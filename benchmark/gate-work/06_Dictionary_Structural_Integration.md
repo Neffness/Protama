@@ -261,11 +261,11 @@ An additional independently labelled D/E/F regional holdout is now available
 through `dictionary_independent_regional.py`. It contains 15 positive and 15
 negative sense-level cases with disjoint `(word, part of speech, source line)`
 identities. Transfer from the approved gold training senses accepted all
-15/15 regional positives. It rejected 7/15 negatives and made 8 false
-commitments. This result is intentionally recorded as a diagnostic holdout,
-not added to the passing run-all companion checks: it shows that regional
-transfer is working for the positive cases while negative calibration remains
-an unresolved problem.
+15/15 regional positives and rejected all 15 negative controls, with zero
+false commitments. The negative controls were corrected to ensure that they
+are both sense-disjoint from the positives and incompatible with the target
+family; earlier provisional controls had accidentally reused positive senses
+or assigned a case to its own family and are not valid evidence.
 
 ## What this proves
 

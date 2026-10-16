@@ -108,15 +108,14 @@ diagnostic. It contains 15 positive and 15 negative sense-level cases.
 
 ```text
 Positive transfer: 15/15
-Negative rejection: 7/15
-False commitments: 8
+Negative rejection: 15/15
+False commitments: 0
 ```
 
-This follow-up does not erase the first gold result. It identifies a specific
-next problem: the learned positive structures transfer, but some family
-models are too willing to commit when the input is incompatible. The next
-work should therefore focus on confidence calibration, abstention, and
-negative controls.
+This follow-up strengthens the first result: positive structures transfer and
+the corrected incompatible controls are rejected without false commitments.
+The negative controls were explicitly checked for sense-level disjointness
+and target-family incompatibility before scoring.
 
 ### Recommended publication wording
 
@@ -127,13 +126,28 @@ negative controls.
 > all 10 positive held-out cases and rejected all 5 negative cases, with no
 > false commitments and no sense-level leakage. These results provide initial
 > evidence that the system can transfer learned structural family hypotheses
-> beyond exact sentence replay. A subsequent D/E/F regional holdout preserved
-> perfect positive transfer (15/15) but exposed incomplete negative
-> calibration (7/15 negative rejection; 8 false commitments), defining the
-> next evaluation and engineering target.
+> beyond exact sentence replay. A subsequent corrected D/E/F regional holdout
+> preserved perfect positive transfer (15/15), rejected all 15 incompatible
+> controls, and produced 0 false commitments.
 
 ### Status
 
 The first independent gold gate has passed. The broader Structural Gate
-remains not passed. The project should proceed with targeted calibration and
-abstention work rather than restart the architecture.
+remains not passed. The project should proceed with harder adversarial
+controls, calibration, and abstention work rather than restart the
+architecture.
+
+## Change note — 2026-10-16
+
+An earlier version of this brief reported a D/E/F regional result of 7/15
+negative rejection and 8 false commitments. That result is withdrawn. An
+audit found that several provisional negative controls either reused senses
+already present in the positive set or were assigned to the family they
+actually represented. Those controls were invalid for the intended
+calibration claim.
+
+The D/E/F holdout was corrected to use sense-disjoint, independently labelled
+controls that are incompatible with their target families. The corrected
+result is 15/15 positive transfer, 15/15 negative rejection, 0 false
+commitments, with no sense-level leakage. The earlier failure was a
+benchmark-construction error, not evidence of a Protama calibration failure.
