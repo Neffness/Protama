@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "protama://structural-gate/prediction.v1",
+  "type": "object",
+  "required": [
+    "schema",
+    "episode_id",
+    "case_id",
+    "predicted_status",
+    "abstained",
+    "trace_id"
+  ],
+  "properties": {
+    "schema": {
+      "const": "protama.structural-gate.prediction.v1"
+    },
+    "episode_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "case_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "predicted_status": {
+      "enum": [
+        "accepted",
+        "rejected",
+        "abstained"
+      ]
+    },
+    "selected_family_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "abstained": {
+      "type": "boolean"
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": false
+}

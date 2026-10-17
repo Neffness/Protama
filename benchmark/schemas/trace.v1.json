@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "protama://structural-gate/trace.v1",
+  "type": "object",
+  "required": [
+    "schema",
+    "trace_id",
+    "episode_id",
+    "case_id",
+    "candidate_hypotheses",
+    "selected_evidence",
+    "rejected_evidence",
+    "operation_sequence",
+    "explanation"
+  ],
+  "properties": {
+    "schema": {
+      "const": "protama.structural-gate.trace.v1"
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "episode_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "case_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "candidate_hypotheses": {
+      "type": "array"
+    },
+    "selected_evidence": {
+      "type": "array"
+    },
+    "rejected_evidence": {
+      "type": "array"
+    },
+    "operation_sequence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "explanation": {
+      "type": "object",
+      "required": [
+        "invariants",
+        "irrelevancies",
+        "counterfactuals",
+        "uncertainty"
+      ],
+      "properties": {
+        "invariants": {
+          "type": "array"
+        },
+        "irrelevancies": {
+          "type": "array"
+        },
+        "counterfactuals": {
+          "type": "array"
+        },
+        "uncertainty": {}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "protama://structural-gate/episode.v1",
+  "type": "object",
+  "required": [
+    "schema",
+    "episode_id",
+    "seed",
+    "family_gold",
+    "training",
+    "evaluation"
+  ],
+  "properties": {
+    "schema": {
+      "const": "protama.structural-gate.episode.v1"
+    },
+    "episode_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "family_gold": {
+      "type": "object",
+      "description": "Evaluator-only content; never supplied to Protama."
+    },
+    "training": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/case"
+      }
+    },
+    "evaluation": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/case"
+      }
+    }
+  },
+  "$defs": {
+    "case": {
+      "type": "object",
+      "required": [
+        "case_id",
+        "split",
+        "category",
+        "input",
+        "expected_status"
+      ],
+      "properties": {
+        "case_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "split": {
+          "enum": [
+            "train",
+            "held_out"
+          ]
+        },
+        "category": {
+          "enum": [
+            "positive",
+            "negative",
+            "near_miss",
+            "ambiguous",
+            "contradictory"
+          ]
+        },
+        "near_miss_category": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "input": {},
+        "expected_status": {
+          "enum": [
+            "accepted",
+            "rejected",
+            "abstained"
+          ]
+        },
+        "novel_vocabulary": {
+          "type": "boolean"
+        },
+        "novel_template": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

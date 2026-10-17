@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "protama://structural-gate/leakage-report.v1",
+  "type": "object",
+  "required": [
+    "schema",
+    "checks",
+    "critical_leakage_detected"
+  ],
+  "properties": {
+    "schema": {
+      "const": "protama.structural-gate.leakage-report.v1"
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "passed",
+          "details"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "passed": {
+            "type": "boolean"
+          },
+          "details": {}
+        },
+        "additionalProperties": false
+      }
+    },
+    "critical_leakage_detected": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false
+}

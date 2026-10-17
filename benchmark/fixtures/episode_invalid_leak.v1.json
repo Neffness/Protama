@@ -1,0 +1,40 @@
+{
+  "schema": "protama.structural-gate.episode.v1",
+  "episode_id": "invalid-leak-0001",
+  "seed": 102,
+  "family_gold": {
+    "family_id": "leaked-family",
+    "invariants": [
+      "is-a(source, person)"
+    ]
+  },
+  "training": [
+    {
+      "case_id": "train-leak-0001",
+      "split": "train",
+      "category": "positive",
+      "near_miss_category": null,
+      "input": {
+        "prompt": "Use leaked-family for this example.",
+        "family_id": "leaked-family"
+      },
+      "expected_status": "accepted",
+      "novel_vocabulary": false,
+      "novel_template": false
+    }
+  ],
+  "evaluation": [
+    {
+      "case_id": "positive-leak-0001",
+      "split": "held_out",
+      "category": "positive",
+      "near_miss_category": null,
+      "input": [
+        ["is-a", "mira", "person"]
+      ],
+      "expected_status": "accepted",
+      "novel_vocabulary": true,
+      "novel_template": true
+    }
+  ]
+}

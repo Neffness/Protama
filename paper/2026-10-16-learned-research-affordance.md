@@ -2,10 +2,13 @@
 
 ## Teaching Protama to recognize knowledge gaps and choose tools
 
-**Project:** Protama**Publication type:** Public research milestone**Date:** 2026-10-16**Status:** Capability milestone proposed; implementation and evaluation pending
+**Project:** Protama**Publication type:** Public research milestone**Date:** 2026-10-16**Status:** Capability milestone demonstrated through ProtamaUI; broader autonomy remains unclaimed
 
-> **Scope notice:** This document defines a new capability milestone. It does
-> not claim that Protama can currently conduct autonomous dictionary research.
+> **Scope notice:** This document defines a bounded capability milestone. The
+> learned research loop, dictionary tool boundary, observable decision
+> trajectory, and checkpointed supervised continuation have now been
+> demonstrated through ProtamaUI. This does not claim unrestricted autonomous
+> research or general-purpose tool use.
 
 ## 1. Context: why this milestone exists
 
@@ -73,10 +76,11 @@ a larger version of the existing dictionary training run.
 
 ## 2. ProtamaUI as the runtime surface
 
-The capability will be developed and observed through the private
-ProtamaUI runtime rather than an unobserved batch script. ProtamaUI already
-keeps a live Protama instance running, displays output as it occurs, accepts
-human input, supports feedback, and records structured interaction events.
+The capability will be developed and used through the private ProtamaUI
+runtime rather than an unobserved batch script. ProtamaUI is the intended
+usable runtime for the entity, not merely a test harness. It keeps a live
+Protama instance running, displays output as it occurs, accepts human input,
+supports feedback, and records structured interaction events.
 
 The planned runtime behavior is:
 
@@ -122,11 +126,26 @@ resume the same task rather than starting a new session. The event log should
 preserve the question, answer, tool decisions, returned evidence, and resume
 transition.
 
-This runtime is part of the testing mechanism, not a hidden replacement for
-Protama's decision-making. Protama emits a thought or action request. An
-external research pass obtains and organizes the requested word's details.
-That research packet is fed back into Protama as new thought input, and
-Protama produces the next thought.
+The first external source adapter now exists as a separate boundary:
+
+```text
+runtime LookupRequest
+    -> DictionaryResearcher
+    -> source-backed ResearchPacket
+    -> runtime receive_research()
+```
+
+The adapter accepts only an explicit dictionary lookup request. It does not
+infer a lookup from an unknown word, mutate Protama's semantic state, or turn
+retrieved dictionary text into a fabricated thought. This keeps source
+retrieval testable while the learned interpretation layer is still being
+extended to propose target and source arguments.
+
+This runtime is the operational environment for the capability, not a hidden
+replacement for Protama's decision-making. Protama emits a thought or action
+request. An external research pass obtains and organizes the requested word's
+details. That research packet is fed back into Protama as new thought input,
+and Protama produces the next thought.
 
 ## 3. The discovery
 
@@ -139,7 +158,7 @@ entire dictionary. It is more fundamental:
 
 This is a learned capability, not a hard-coded dictionary rule.
 
-The dictionary is a useful testing environment, not the final purpose of the
+The dictionary is a useful research environment, not the final purpose of the
 capability, because it provides a clear relationship between:
 
 ```text
@@ -365,7 +384,8 @@ This milestone does not yet establish:
 - the full Structural Induction and Transfer Gate.
 
 It establishes a narrower and more foundational question: whether Protama can
-learn that research is an available response to an unresolved problem.
+learn that research is an available response to an unresolved problem and
+carry that decision through an observable, resumable runtime task.
 
 ## 11. Relationship to the independent episode generator
 
@@ -390,14 +410,16 @@ not currently provide.
 Current status:
 
 ```text
-Teaching curriculum:              specified
-Dictionary tool boundary:         specified
-Interactive research loop:        not implemented
-Decision trajectory logging:      not implemented
-Research-affordance evaluation:  not run
+Teaching curriculum:              implemented and exercised
+Dictionary tool boundary:         implemented and exercised
+Interactive research loop:        demonstrated through ProtamaUI
+Decision trajectory logging:      implemented and observable
+Lifecycle checkpointing:           implemented and UI-validated
+500-entry supervised batch:       completed through ProtamaUI
+Research-affordance evaluation:  bounded evaluation completed
 ```
 
-The next implementation should create the teaching curriculum and a small
-interactive dictionary environment. It must first demonstrate that Protama
-chooses dictionary lookup when the knowledge gap requires it, without a hidden
-automatic lookup rule.
+The next implementation should certify the independent episode generator and
+connect Protama to that evaluation through complete decision traces. The
+dictionary batch remains a supervised runtime exercise, not evidence of
+unrestricted autonomy or dictionary understanding.

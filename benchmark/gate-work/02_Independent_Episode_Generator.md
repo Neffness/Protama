@@ -68,6 +68,36 @@ still remains development evidence. The new
 seed list, episode IDs, per-episode content fingerprints, and fail-closed
 leakage reports without serializing evaluator-only family gold.
 
+The development batch now also rotates across three deterministic hidden
+relation-name variants. This verifies that the generator is not merely
+repeating one literal family signature across all seeds. The variants retain
+the current three-relation topology; independent family topology and final
+generator independence remain future work.
+
+A separate topology slice is now implemented in
+`Tools/Protama/structural_gate_topologies.py`. It generates deterministic
+one-relation equivalence episodes and two-relation object-purpose episodes,
+with held-out positives, role/relation/omission near-misses, ambiguity, and
+contradiction cases. These topologies pass replay and leakage tests but are
+still development fixtures; they have not yet been merged into the final
+preregistered episode pool.
+
+The topology certification layer now produces a 100-episode mixed manifest
+(`structural-gate-topology-manifest-v1`) spanning both topologies, with
+per-episode fingerprints and fail-closed leakage reports. Evaluator-only
+family gold remains excluded from the serialized manifest.
+
+Both topology slices now enumerate all ten contract near-miss categories,
+including type violation, single-feature mismatch, surface decoy, lexical
+overlap, and novel negative cases. This is category-generation coverage only:
+the evaluator-side topology constraints now verify required relation
+signatures, arity changes, contradiction evidence, ambiguity emptiness,
+lexical overlap, and novel-negative separation. Richer typed argument
+constraints now also verify the generated `word -> alias` and
+`tool -> form/purpose` bindings, including explicit type-violation cases.
+These remain evaluator-side development constraints and are not yet a final
+preregistered generator.
+
 Validation result:
 
 ```text

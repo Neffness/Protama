@@ -157,9 +157,11 @@ It detected `24,908` headwords with multiple senses. Different source lines
 are retained as separate senses, including when their family labels differ.
 The full scan finds 168 headwords with this valid cross-family sense
 variation; these are not contradictions requiring human review. The automated
-exception queue is therefore empty. Classifier quality will be evaluated
-through held-out positive and negative family pools instead of asking a human
-to review legitimate multi-sense words.
+exception queue is therefore empty. This is a corpus-scan result, not a claim
+that all inferred family labels are correct. Held-out family pools are the
+next classifier-quality check, but their negative controls must be
+relation-compatible and human-audited rather than inferred solely from
+mutually exclusive family labels.
 
 The first deterministic pool builder is implemented in
 `Tools/Protama/dictionary_family_pools.py`. It selects distinct positive
@@ -179,6 +181,43 @@ only after raw relation recognition abstains. The raw relation path remains
 first, and the fallback records normalized dictionary evidence separately. The
 benchmark therefore checks reusable family application rather than comparing
 pattern strings alone.
+
+### Human audit finding — 2026-10-16
+
+The 45/75 development result is not publication-grade negative-calibration
+evidence. A human audit found that the pool builder treated family labels as
+mutually exclusive, even though dictionary definitions can express more than
+one valid relation. For example:
+
+```text
+Abevacuation — A partial evacuation.
+```
+
+This can validly express noun equivalence while also referring to an action
+or process. It is therefore not a valid negative control for `action_noun`
+merely because the pool builder assigned it to `known_noun`. The audit also
+identified surface-trigger risks such as:
+
+```text
+Badger — An itinerant licensed dealer in commodities used for food...
+```
+
+The phrase `used for` does not make this an `object_used_for` definition; the
+headword describes a person. This is a semantic near-miss that the benchmark
+must distinguish from a valid positive.
+
+The provisional 45/75 score remains retained as development output for
+diagnosis, but its negative-rejection claim is withdrawn. The initial
+dictionary pool benchmark must be redesigned to support multi-label structural
+relations, relation-compatible negative controls, and unresolved referenced
+terms before it can support a publication claim.
+
+This finding also motivates a separate dictionary-navigation capability:
+when a definition references a term Protama does not yet understand, the
+system should detect the unresolved dependency, decide whether lookup is
+needed, acquire or request the referenced definition, and then update its
+interpretation. Hand-feeding isolated definitions does not test that
+capability.
 
 Fallback safety is covered separately in
 `Tools/Protama/tests/test_dictionary_fallback_guards.py`: inputs without a

@@ -1,0 +1,44 @@
+{
+  "benchmark_version": "structural-gate-v1",
+  "schema_version": "1",
+  "evaluation_level": "L2-L5",
+  "episode_count_minimum": 100,
+  "evaluation_seed_count_minimum": 10,
+  "confidence_interval": {
+    "method": "episode_bootstrap",
+    "confidence_level": 0.95,
+    "resamples": 10000,
+    "seed": 1729
+  },
+  "pass_rule": {
+    "positive_transfer_accuracy_min": 0.9,
+    "negative_rejection_accuracy_min": 0.9,
+    "near_miss_accuracy_min": 0.9,
+    "near_miss_category_accuracy_min": 0.85,
+    "novel_vocabulary_accuracy_min": 0.9,
+    "explanation_fidelity_min": 0.85,
+    "coverage_min": 0.75,
+    "selective_risk_max": 0.1,
+    "critical_leakage_allowed": false
+  },
+  "near_miss_categories": [
+    "role_reversal",
+    "relation_reversal",
+    "type_violation",
+    "argument_omission",
+    "single_feature_mismatch",
+    "surface_decoy",
+    "lexical_overlap",
+    "novel_negative",
+    "ambiguous",
+    "contradictory"
+  ],
+  "required_artifacts": [
+    "episode.json",
+    "prediction.jsonl",
+    "trace.jsonl",
+    "scores.json",
+    "leakage-report.json",
+    "replay-manifest.json"
+  ]
+}

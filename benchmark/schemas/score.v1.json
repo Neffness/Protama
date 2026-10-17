@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "protama://structural-gate/score.v1",
+  "type": "object",
+  "required": [
+    "schema",
+    "benchmark_version",
+    "pass_rule_version",
+    "episode_count",
+    "metrics",
+    "confidence_intervals",
+    "leakage"
+  ],
+  "properties": {
+    "schema": {
+      "const": "protama.structural-gate.score.v1"
+    },
+    "benchmark_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pass_rule_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "episode_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "metrics": {
+      "type": "object"
+    },
+    "confidence_intervals": {
+      "type": "object"
+    },
+    "leakage": {
+      "type": "object",
+      "required": [
+        "critical_leakage_detected"
+      ],
+      "properties": {
+        "critical_leakage_detected": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

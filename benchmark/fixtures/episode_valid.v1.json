@@ -1,0 +1,69 @@
+{
+  "schema": "protama.structural-gate.episode.v1",
+  "episode_id": "dev-episode-0001",
+  "seed": 101,
+  "family_gold": {
+    "family_id": "evaluator-only-family",
+    "invariants": [
+      "is-a(source, person)",
+      "performs-action(source, action)",
+      "has-role(source, role)"
+    ]
+  },
+  "training": [
+    {
+      "case_id": "train-0001",
+      "split": "train",
+      "category": "positive",
+      "near_miss_category": null,
+      "input": [
+        ["is-a", "rilo", "person"],
+        ["performs-action", "rilo", "repairs"],
+        ["has-role", "rilo", "horologist"]
+      ],
+      "expected_status": "accepted",
+      "novel_vocabulary": false,
+      "novel_template": false
+    }
+  ],
+  "evaluation": [
+    {
+      "case_id": "positive-0001",
+      "split": "held_out",
+      "category": "positive",
+      "near_miss_category": null,
+      "input": [
+        ["is-a", "mira", "person"],
+        ["performs-action", "mira", "charts"],
+        ["has-role", "mira", "cartographer"]
+      ],
+      "expected_status": "accepted",
+      "novel_vocabulary": true,
+      "novel_template": true
+    },
+    {
+      "case_id": "near-0001",
+      "split": "held_out",
+      "category": "near_miss",
+      "near_miss_category": "role_reversal",
+      "input": [
+        ["is-a", "clock", "person"],
+        ["performs-action", "clock", "repairs"],
+        ["has-role", "person", "horologist"]
+      ],
+      "expected_status": "rejected",
+      "novel_vocabulary": true,
+      "novel_template": true
+    },
+    {
+      "case_id": "ambiguous-0001",
+      "split": "held_out",
+      "category": "ambiguous",
+      "near_miss_category": null,
+      "input": [],
+      "expected_status": "abstained",
+      "novel_vocabulary": true,
+      "novel_template": true
+    }
+  ]
+}

@@ -5,7 +5,7 @@
 **Project:** Protama  
 **Publication type:** Public research milestone  
 **Date:** 2026-10-16  
-**Status:** Development generator exists; final certification remains in progress
+**Status:** Development generator exists; final certification is the next research milestone
 
 > **Scope notice:** This publication describes the benchmark machinery needed
 > to evaluate Protama fairly. It does not claim that the Structural Induction
@@ -247,17 +247,23 @@ clean-environment replay evidence required for publication.
 Development evidence must remain labelled as development evidence. It must
 not be presented as a completed Structural Gate evaluation.
 
+The Protama runtime now also provides a separate observable research surface
+for interactive capability work: ProtamaUI records task decisions, tool
+requests, source evidence, lifecycle transitions, and checkpoint state. That
+runtime evidence does not replace independent episode isolation or leakage
+certification; it establishes the adapter boundary that the certified
+episode package must eventually drive.
+
 ## 8. What follows this milestone
 
 The next stages are:
 
-1. **Independent episode generator**
-2. **Leakage and replay certification**
-3. **Protama evaluation adapter with complete traces**
-4. **Baseline and ablation suite**
-5. **Development-scale full benchmark**
-6. **Final preregistration and freeze**
-7. **Final Structural Gate evaluation**
+1. **Leakage and replay certification**
+2. **Protama evaluation adapter with complete traces**
+3. **Baseline and ablation suite**
+4. **Development-scale full benchmark**
+5. **Final preregistration and freeze**
+6. **Final Structural Gate evaluation**
 
 This ordering is deliberate. The adapter should not be treated as a
 complete scientific evaluation until it can consume a certified episode

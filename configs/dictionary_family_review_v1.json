@@ -1,0 +1,106 @@
+{
+  "version": "dictionary-family-review-v1",
+  "status": "needs_human_validation",
+  "selection_rule": "include all five initial candidate families",
+  "exception_policy": {
+    "sense_identity": "word_part_of_speech_source_line",
+    "automatic_disposition": "Different source lines are retained as separate senses, including when their family labels differ.",
+    "human_queue": "Do not treat multi-sense family variation as an exception; review classifier errors through held-out family pools.",
+    "queue_cap": "five examples per family"
+  },
+  "latest_population_scan": {
+    "entries_seen": 172785,
+    "multi_sense_headwords": 24908,
+    "cross_family_sense_groups": 168,
+    "bounded_queue_entries": 0
+  },
+  "families": [
+    {
+      "family_id": "known_noun",
+      "observed_count": 4308,
+      "proposed_schema": "means(headword, referenced_noun)",
+      "human_review": {
+        "decision": "machine_validated_pending_exceptions",
+        "review_note": "The starter examples are direct noun-equivalence definitions; review should focus on ambiguous or non-equivalence entries rather than the obvious cases."
+      },
+      "samples": [
+        ["Aback", "An abacus."],
+        ["Abbreviate", "An abridgment."],
+        ["Aberuncator", "A weeding machine."]
+      ]
+    },
+    {
+      "family_id": "agent_noun",
+      "observed_count": 3327,
+      "proposed_schema": "describes-agent(headword, action_or_role)",
+      "human_review": {
+        "decision": "accepted",
+        "review_note": "Starter batch accepted: words describing a person by what that person does."
+      },
+      "samples": [
+        ["Abacist", "One who uses an abacus in casting accounts; a calculator."],
+        ["Abactor", "One who steals and drives away cattle or beasts by herds or droves."],
+        ["Abandoner", "One who abandons."]
+      ]
+    },
+    {
+      "family_id": "action_noun",
+      "observed_count": 1911,
+      "proposed_schema": "describes-action(headword, action)",
+      "human_review": {
+        "decision": "accepted",
+        "review_note": "Starter batch accepted: words naming an action or process."
+      },
+      "samples": [
+        ["Abacination", "The act of abacinating."],
+        ["Abalienation", "The act of abalienating; alienation; estrangement."],
+        ["Abdication", "The act of abdicating; the renunciation of a high office."]
+      ]
+    },
+    {
+      "family_id": "object_used_for",
+      "observed_count": 100,
+      "proposed_schema": "used-for(headword, purpose)",
+      "human_review": {
+        "decision": "accepted",
+        "review_note": "Starter batch accepted: definitions identify an object's use or purpose."
+      },
+      "samples": [
+        ["Arrasene", "A material of wool or silk used for working the figures in embroidery."],
+        ["Badger", "An itinerant licensed dealer in commodities used for food."],
+        ["Banding plane", "A plane used for cutting out grooves and inlaying strings and bands."]
+      ]
+    },
+    {
+      "family_id": "one_of_class_alias",
+      "observed_count": 32,
+      "proposed_schema": "member-of(headword, class) plus means(headword, alias)",
+      "human_review": {
+        "decision": "accepted",
+        "review_note": "Starter batch accepted: definitions identify class membership and an alternate name."
+      },
+      "samples": [
+        ["Abaciscus", "One of the tiles or squares of a tessellated pavement; an abaculus."],
+        ["Aphid", "One of the genus Aphis; an aphidian."],
+        ["Aphidian", "One of the aphides; an aphid."],
+        ["Araneidan", "One of the Araneina; a spider."]
+      ],
+      "sense_scope": "word_part_of_speech_source_line",
+      "exceptions": [
+        {
+          "word": "Araneidan",
+          "reason": "The same headword also has an adjective sense; retain noun and adjective entries separately."
+        }
+      ]
+    }
+  ],
+  "review_requirements": [
+    "confirm or revise the proposed relation schema",
+    "mark each sample as valid, invalid, or requiring a different family",
+    "identify required negative controls",
+    "identify surface variants suitable for held-out evaluation",
+    "allow overlapping structural relations instead of assuming mutually exclusive families",
+    "audit negative controls for target-family incompatibility",
+    "identify unresolved referenced terms that require dictionary navigation"
+  ]
+}
