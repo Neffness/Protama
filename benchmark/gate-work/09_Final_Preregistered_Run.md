@@ -10,7 +10,6 @@ The held-out evaluation artifacts are:
 - [structural-gate-heldout-adapter-run-v2.json](../artifacts/structural-gate-heldout-adapter-run-v2.json)
 - [structural-gate-heldout-baseline-suite-v2.json](../artifacts/structural-gate-heldout-baseline-suite-v2.json)
 - [structural-gate-heldout-report-v2.json](../artifacts/structural-gate-heldout-report-v2.json)
-- [structural-gate-heldout-report-v2.txt](../artifacts/structural-gate-heldout-report-v2.txt)
 - [structural-gate-publication-evidence-v1.json](../artifacts/structural-gate-publication-evidence-v1.json)
 - [structural-gate-heldout-review-v1.json](../artifacts/structural-gate-heldout-review-v1.json)
 
