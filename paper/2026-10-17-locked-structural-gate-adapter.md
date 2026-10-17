@@ -2,15 +2,30 @@
 
 ## Turning a certified episode boundary into auditable Protama traces
 
-**Project:** Protama**Publication type:** Public research milestone**Date:** 2026-10-17**Status:** Adapter implemented and replay-certified; benchmark evaluation not yet run
+**Project:** Protama  
+**Publication type:** Public research milestone  
+**Date:** 2026-10-17  
+**Status:** Adapter implemented and replay-certified; benchmark evaluation not
+yet run
 
-> **Scope notice:** This publication describes the adapter that drives Protama from the locked Structural Gate episode package. It does not claim that Protama has passed the Structural Gate, and it does not report a final capability score.
+> **Scope notice:** This publication describes the adapter that drives Protama
+> from the locked Structural Gate episode package. It does not claim that
+> Protama has passed the Structural Gate, and it does not report a final
+> capability score.
 
 ## 1. Background: what the dictionary research loop is
 
-The dictionary research loop is Protama's first bounded example of a learned system recognizing that it lacks information, selecting a tool, incorporating the result, and continuing a task. The dictionary is not the point of the capability. It is a controlled source with explicit word-definition relationships, references between entries, known and unknown terms, and repeatable lookup results.
+The dictionary research loop is Protama's first bounded example of a learned
+system recognizing that it lacks information, selecting a tool, incorporating
+the result, and continuing a task. The dictionary is not the point of the
+capability. It is a controlled source with explicit word-definition
+relationships, references between entries, known and unknown terms, and
+repeatable lookup results.
 
-In the interactive loop, Protama receives an ordinary natural-language request such as a question about an unfamiliar word. It does not receive a special formatted prompt containing hard coded values such as a`"word-problem:"` prefix or a command that directly names the lookup function. 
+In the interactive loop, Protama receives an ordinary natural-language request
+such as a question about an unfamiliar word. It does not receive a special
+formatted prompt containing hard-coded values such as a `"word-problem:"` prefix
+or a command that directly names the lookup function.
 
 Protama's runtime:
 
@@ -37,19 +52,36 @@ natural-language request
     -> answer, clarification, or honest blockage
 ```
 
-ProtamaUI exposes this process through separate internal-thought, protocol log, action, and external-output views. Its checkpoint system can preserve the active task, evidence, pending action, and supervised sequence boundary. The UI may externally submit the next case in a supervised batch, but that is different from forcing a `word-problem:` operator into the user's prompt: within each case, Protama must interpret the request, choose the learned operation, and correlate the returned evidence.
+ProtamaUI exposes this process through separate internal-thought, protocol log,
+action, and external-output views. Its checkpoint system can preserve the active
+task, evidence, pending action, and supervised sequence boundary. The UI may
+externally submit the next case in a supervised batch, but that is different
+from forcing a `word-problem:` operator into the user's prompt: within each
+case, Protama must interpret the request, choose the learned operation, and
+correlate the returned evidence.
 
-This loop is a **runtime capability demonstration**. It tests whether Protama can recognize and investigate a missing dictionary dependency. It is not the Structural Gate, and its dictionary entries are not the hidden evaluation families used by the benchmark described here.
+This loop is a **runtime capability demonstration**. It tests whether Protama
+can recognize and investigate a missing dictionary dependency. It is not the
+Structural Gate, and its dictionary entries are not the hidden evaluation
+families used by the benchmark described here.
 
 ## 2. The milestone
 
-The independent episode generator established a locked, leakage-checked evaluation boundary. The next problem was operational:
+The independent episode generator established a locked, leakage-checked
+evaluation boundary. The next problem was operational:
 
-> How can those episodes reach Protama without allowing evaluator-only labels, hidden family structure, or near-miss annotations to cross the system boundary?
+> How can those episodes reach Protama without allowing evaluator-only labels,
+> hidden family structure, or near-miss annotations to cross the system
+> boundary?
 
-This milestone implements that boundary as a replayable evaluation adapter. The adapter consumes the machine-readable locked manifest, reconstructs each episode from its recorded seed configuration, verifies the episode identity, projects only system-visible observations into the adapter, and records a complete prediction and reasoning trace for every held-out case.
+This milestone implements that boundary as a replayable evaluation adapter. The
+adapter consumes the machine-readable locked manifest, reconstructs each episode
+from its recorded seed configuration, verifies the episode identity, projects
+only system-visible observations into the adapter, and records a complete
+prediction and reasoning trace for every held-out case.
 
-The adapter is therefore not a new learning algorithm. It is the controlled measurement surface between:
+The adapter is therefore not a new learning algorithm. It is the controlled
+measurement surface between:
 
 ```text
 locked evaluator package
@@ -60,11 +92,16 @@ locked evaluator package
     -> later evaluator-side scoring
 ```
 
-The generator and adapter remain separate from Protama's interactive dictionary research loop. The dictionary loop demonstrates a runtime capability; this adapter establishes a fair way to measure structural learning.
+The generator and adapter remain separate from Protama's interactive dictionary
+research loop. The dictionary loop demonstrates a runtime capability; this
+adapter establishes a fair way to measure structural learning.
 
 ## 3. Why a separate adapter is necessary
 
-An evaluation can be invalid even when its generator is deterministic. If the system receives `family_gold`, expected statuses, near-miss categories, or other evaluator annotations, it can appear to generalize while actually using the answer key.
+An evaluation can be invalid even when its generator is deterministic. If the
+system receives `family_gold`, expected statuses, near-miss categories, or other
+evaluator annotations, it can appear to generalize while actually using the
+answer key.
 
 The adapter enforces a projection boundary:
 
@@ -75,7 +112,12 @@ The adapter enforces a projection boundary:
 - near-miss categories are removed;
 - rendering and scoring metadata remain outside Protama's input path.
 
-The adapter can run directly from an in-memory development episode for unit tests, but the locked-run entry point requires a manifest file. Before any episode is executed, it reconstructs the episode and compares its episode IDs and content fingerprints with the manifest. A changed generator, altered seed list, or modified artifact fails closed instead of silently producing a different benchmark.
+The adapter can run directly from an in-memory development episode for unit
+tests, but the locked-run entry point requires a manifest file. Before any
+episode is executed, it reconstructs the episode and compares its episode IDs
+and content fingerprints with the manifest. A changed generator, altered seed
+list, or modified artifact fails closed instead of silently producing a
+different benchmark.
 
 ## 4. Locked evaluation boundary
 
@@ -104,7 +146,9 @@ The manifest records:
 - episode content fingerprints; and
 - fail-closed leakage reports.
 
-It does not serialize evaluator-only `family_gold`. The manifest is an evaluation boundary, not a replacement for the generator source or a claim that all possible structural families have been covered.
+It does not serialize evaluator-only `family_gold`. The manifest is an
+evaluation boundary, not a replacement for the generator source or a claim that
+all possible structural families have been covered.
 
 ## 5. Adapter contract
 
@@ -146,11 +190,14 @@ Each trace contains:
 - counterfactual or rejected features; and
 - uncertainty state.
 
-The trace is intended to make a later score auditable. A score should not only say that a case was accepted or rejected; it should allow reviewers to inspect what structural evidence produced that decision.
+The trace is intended to make a later score auditable. A score should not only
+say that a case was accepted or rejected; it should allow reviewers to inspect
+what structural evidence produced that decision.
 
 ## 6. Replay and failure behavior
 
-The locked entry point is `run_locked_manifest(path)` in [structural_gate_adapter.py](../../Protama_Private/Protama/benchmarks/structural/structural_gate_adapter.py). 
+The locked entry point is `run_locked_manifest(path)` in
+[structural_gate_adapter.py](../../Protama_Private/Protama/benchmarks/structural/structural_gate_adapter.py).
 
 It performs these checks before execution:
 
@@ -161,7 +208,8 @@ It performs these checks before execution:
 5. reconstructed IDs match the locked IDs; and
 6. reconstructed content fingerprints match the locked fingerprints.
 
-Any mismatch raises an explicit error. The adapter does not substitute a fresh seed, accept a partial manifest, or continue with a success-shaped fallback.
+Any mismatch raises an explicit error. The adapter does not substitute a fresh
+seed, accept a partial manifest, or continue with a success-shaped fallback.
 
 The serialized adapter run is:
 
@@ -201,7 +249,8 @@ The adapter tests specifically verify:
 - serialized permitted-input replay; and
 - complete locked-manifest execution.
 
-These results certify the measurement plumbing. They do not certify Protama's structural-learning performance.
+These results certify the measurement plumbing. They do not certify Protama's
+structural-learning performance.
 
 ## 8. What this milestone does not establish
 
@@ -215,11 +264,16 @@ This milestone does not establish:
 - that the locked package is sufficient for a final publication claim; or
 - that the Structural Gate has been passed.
 
-The adapter currently applies the structural induction implementation directly through the benchmark interface. It is an evaluation adapter, not yet the complete end-to-end ProtamaUI path. That distinction must remain explicit: runtime observability and benchmark integrity are related but separate claims.
+The adapter currently applies the structural induction implementation directly
+through the benchmark interface. It is an evaluation adapter, not yet the
+complete end-to-end ProtamaUI path. That distinction must remain explicit:
+runtime observability and benchmark integrity are related but separate claims.
 
 ## 9. Next work
 
-The next milestone is the baseline and ablation suite. Every comparison must consume the same locked manifest and use the same evaluator-side scoring rules. Planned controls include:
+The next milestone is the baseline and ablation suite. Every comparison must
+consume the same locked manifest and use the same evaluator-side scoring rules.
+Planned controls include:
 
 1. exact-match behavior;
 2. keyword routing;
@@ -240,7 +294,8 @@ After those controls, the project still needs:
 - evaluator-side scoring review; and
 - a final Structural Gate run.
 
-Only after those stages can the project make a result claim about Protama's structural learning. The current claim is narrower and reproducible:
+Only after those stages can the project make a result claim about Protama's
+structural learning. The current claim is narrower and reproducible:
 
 > Protama now has a locked, replay-validated adapter that can consume
 > independent episodes, withhold evaluator-only structure, and emit complete

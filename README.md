@@ -1,8 +1,10 @@
 # Protama
 
-Protama is a synthetic intelligence architecture designed to run anywhere,
-from low-power CPU devices to high-throughput GPU systems, built to learn,
-transfer, and revise structure, not merely predict the next token.
+Protama is a research‑stage developmental cognitive architecture that acquires
+conceptual structure through lesson‑based instruction and is evaluated using a
+formal L2–L5 structural gate. The system exhibits an empirically validated
+research affordance, enabling autonomous hypothesis formation, structural
+induction, and conceptual expansion.
 
 We make no official claim to general intelligence, yet. That is, in fact,
 <u>the goal</u>.
