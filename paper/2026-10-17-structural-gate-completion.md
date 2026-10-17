@@ -31,7 +31,13 @@ The held-out package produced:
 
 The ten reported categories were role reversal, relation reversal, type violation, argument omission, single-feature mismatch, surface decoy, lexical overlap, novel negative, ambiguity, and contradiction.
 
-The primary held-out report is [structural-gate-heldout-report-v2.json](../benchmark/artifacts/structural-gate-heldout-report-v2.json), with a reviewer-readable version at [structural-gate-heldout-report-v2.txt](../benchmark/artifacts/structural-gate-heldout-report-v2.txt).
+The primary held-out report is [structural-gate-heldout-report-v2.json](../benchmark/artifacts/structural-gate-heldout-report-v2.json). Its `human_report` field contains the reviewer-readable report; the separate text export is [structural-gate-heldout-report-v2.txt](../benchmark/artifacts/structural-gate-heldout-report-v2.txt) when the artifact bundle is distributed with generated files.
+
+The decision metrics reached the ceiling on this package. That confirms the
+declared pass rule but does not distinguish future structural systems at this
+difficulty level. A future gate version should use harder latent families,
+more demanding compositional combinations, or adversarial cases rather than
+interpreting this ceiling as evidence of unlimited capability.
 
 ## Baselines and controls
 
