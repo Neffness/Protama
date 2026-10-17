@@ -1,0 +1,34 @@
+{
+  "schema": "protama.structural-gate.independent-review.v1",
+  "review_status": "PASS",
+  "scope": "read-only audit of preregistered held-out package",
+  "checks": {
+    "seed_allocation_matches_preregistration": true,
+    "episode_count_matches": true,
+    "development_and_heldout_episode_ids_disjoint": true,
+    "manifest_fingerprints_aligned": true,
+    "all_ten_required_categories_reported": true,
+    "critical_leakage_absent": true,
+    "adapter_contains_100_episode_runs": true,
+    "evaluator_only_labels_absent_from_adapter_records": true,
+    "pass_rule_status_is_pass": true,
+    "excluded_episode_count_is_zero": true,
+    "preregistered_source_hashes_match": true,
+    "clean_replay_is_byte_equivalent": true
+    ,"publication_evidence_present": true
+    ,"snapshot_round_trip_evidence_passes": true
+    ,"accuracy_at_coverage_reported": true
+    ,"peak_traced_memory_reported": true
+  },
+  "claim_boundary": [
+    "L2 latent relation/family induction",
+    "L3 novel vocabulary and surface transfer",
+    "L4 typed structural near-miss rejection",
+    "L5 unseen combinations of known components",
+    "pre-decision explanation trace fidelity",
+    "no claim of L6/L7 independent invention or interactive refinement"
+  ],
+  "superseded_protocol": "structural-gate-preregistration-v1",
+  "active_protocol": "structural-gate-preregistration-v2",
+  "heldout_report": "structural-gate-heldout-report-v2.json"
+}

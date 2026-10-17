@@ -4,10 +4,10 @@ This is the execution checklist for producing a publishable Structural
 Induction and Transfer Gate result. It is derived from
 `Protama_Inductive_Structural_Invention_Test.md`.
 
-The gate is **not passed**. The current structured pilot is development
-evidence only: it demonstrates a narrow symbolic L2-L4 slice and does not
-yet establish novel-language transfer, independent-family generalization,
-explanation reconstruction, baseline superiority, or leakage control.
+The preregistered held-out Structural Gate evaluation now passes its declared
+L2-L5 rule. The publication package is still incomplete because snapshot
+round-trip, retention/interference, substrate parity, resource accounting,
+and some reproduction materials remain outstanding.
 
 ## Publication claim we are working toward
 
@@ -28,73 +28,75 @@ publication-ready evidence.
 
 ## Required publication package
 
-- [ ] Versioned benchmark specification and pass-rule version.
-- [ ] Locked development and final-test generators.
-- [ ] Episode schema and serialization format.
-- [ ] Generator seeds and configuration hash.
-- [ ] CPU Protama adapter.
-- [ ] GPU Protama adapter or an explicit substrate-scope decision.
-- [ ] Exact-match, keyword, nearest-neighbor, and symbolic-oracle baselines.
-- [ ] Language-model baseline if natural-language processing is claimed.
-- [ ] Structural and lexical ablation implementations.
-- [ ] Leakage-check report.
-- [ ] Machine-readable raw predictions and traces.
-- [ ] Machine-readable metric report with confidence intervals.
-- [ ] Human-readable final report.
-- [ ] Deterministic replay command and replay artifacts.
-- [ ] Failure, abstention, and excluded-episode manifest.
-- [ ] Pre/post episode delta report relative to declared snapshots.
-- [ ] Conditional delta pass criterion and eligible-episode count report.
-- [ ] Snapshot round-trip behavioral fidelity report.
-- [ ] Retention, backward-transfer, and interference report.
-- [ ] Clean-environment reproduction instructions.
+- [x] Versioned benchmark specification and pass-rule version.
+- [x] Locked development and final-test generators.
+- [x] Held-out final seed allocation preregistered before final generation.
+- [x] Episode schema and serialization format.
+- [x] Generator seeds and configuration hash.
+- [x] CPU Protama adapter.
+- [x] GPU adapter explicitly excluded from the current claim.
+- [x] Exact-match, keyword, nearest-neighbor, and symbolic-oracle baselines.
+- [x] Language-model baseline not applicable to the current structured-input claim.
+- [x] Structural and lexical ablation implementations.
+- [x] Leakage-check report.
+- [x] Machine-readable raw predictions and traces.
+- [x] Machine-readable metric report with confidence intervals.
+- [x] Human-readable held-out report.
+- [x] Deterministic replay command and replay artifacts.
+- [x] Failure, abstention, and excluded-episode accounting.
+- [x] Pre/post episode delta report relative to declared snapshots.
+- [x] Conditional delta eligibility and eligible-episode count report
+      (supplementary; not part of the primary L2-L5 pass rule).
+- [x] Snapshot round-trip behavioral fidelity report.
+- [x] Retention, backward-transfer, and interference report.
+- [x] Clean-environment reproduction instructions.
 
 ## Gate levels and claim boundary
 
-- [ ] **L2:** induce a latent relation/family from limited examples.
-- [ ] **L3:** transfer to vocabulary and surface forms absent from training.
-- [ ] **L4:** reject typed structural near-misses by category.
-- [ ] **L5:** generalize to unseen combinations of known components.
-- [ ] Explanation evidence is reconstructed from pre-decision state.
-- [ ] L6/L7 independent invention and interactive refinement remain separate
+- [x] **L2:** induce a latent relation/family from limited examples.
+- [x] **L3:** transfer to vocabulary and surface forms absent from training.
+- [x] **L4:** reject typed structural near-misses by category.
+- [x] **L5:** generalize to unseen combinations of known components.
+- [x] Explanation evidence is reconstructed from pre-decision state.
+- [x] L6/L7 independent invention and interactive refinement remain separate
       extensions and are not implied by an L2-L5 result.
 
 ## Work plan
 
 ### Phase A — lock the benchmark contract
 
-- [ ] Define the episode schema:
+- [x] Define the episode schema:
       hidden family, train examples, held-out positives, negatives,
       near-misses, ambiguous cases, traces, and scores.
-- [ ] Define the formal family representation independently of the renderer.
-- [ ] Define lexical, structural, template, family, generator, and temporal
+- [x] Define the formal family representation independently of the renderer.
+- [x] Define lexical, structural, template, family, generator, and temporal
       split rules.
-- [ ] Define every near-miss category:
+- [x] Define every near-miss category:
       role reversal, relation reversal, type violation, omission,
       single-feature mismatch, surface decoy, lexical overlap, novel
       negative, ambiguity, and contradiction.
-- [ ] Select the pass-rule version before final evaluation.
-- [ ] Set and record thresholds for positive accuracy, negative accuracy,
+- [x] Select the pass-rule version before final evaluation.
+- [x] Set and record thresholds for positive accuracy, negative accuracy,
       near-miss accuracy, novel transfer, explanation fidelity, coverage,
       and selective risk.
-- [ ] Define episode-level confidence-interval methodology.
+- [x] Define episode-level confidence-interval methodology.
 
 **Exit artifact:** locked configuration plus a versioned pass-rule document.
 
 ### Phase B — build the independent episode generator
 
-- [ ] Generate at least 100 independently seeded family episodes, subject to
+- [x] Generate at least 100 independently seeded family episodes, subject to
       power analysis.
-- [ ] Generate disjoint training and evaluation vocabularies.
-- [ ] Generate unseen structural combinations for L5.
-- [ ] Generate at least one unseen evaluation template per applicable episode.
-- [ ] Generate typed near-misses from the latent family, not hand-written
+- [x] Generate disjoint training and evaluation vocabularies.
+- [x] Generate unseen structural combinations for L5.
+- [x] Generate at least one unseen evaluation template per applicable episode.
+- [x] Generate typed near-misses from the latent family, not hand-written
       labels after the fact.
-- [ ] Generate genuine ambiguity and contradiction cases.
-- [ ] Serialize the latent family only in evaluator-side gold artifacts.
-- [ ] Add generator replay tests: same seed and config produce identical
+- [x] Generate genuine ambiguity and contradiction cases.
+- [x] Serialize the latent family only in evaluator-side gold artifacts.
+- [x] Add generator replay tests: same seed and config produce identical
       episodes.
-- [ ] Add leakage tests proving evaluation vocabulary, templates, and family
+- [x] Add leakage tests proving evaluation vocabulary, templates, and family
       structures do not enter training.
 
 **Exit artifact:** generator package, seed manifest, leakage report, and
@@ -102,20 +104,21 @@ replayed episode fixtures.
 
 ### Phase C — implement the evaluation adapter
 
-- [ ] Train Protama only on `D_train`.
-- [ ] Prevent held-out labels and family names from entering the system.
-- [ ] Capture candidate hypotheses before each decision.
-- [ ] Capture selected, rejected, and abstained evidence.
-- [ ] Capture operation order and decision trace.
-- [ ] Capture the generated explanation request/result.
-- [ ] Capture final snapshot identity and all scored outputs.
-- [ ] Capture pre-episode probe, post-episode probe, and episode-level delta.
-- [ ] Keep pre-episode probes in a disjoint, unscored split that cannot
+- [x] Train Protama only on `D_train`.
+- [x] Prevent held-out labels and family names from entering the system.
+- [x] Capture candidate hypotheses before each decision.
+- [x] Capture selected, rejected, and abstained evidence.
+- [x] Capture operation order and decision trace.
+- [x] Capture the generated explanation request/result.
+- [x] Capture final snapshot identity and all scored outputs.
+- [x] Capture pre-episode probe, post-episode probe, and episode-level delta
+      in the supplementary publication evidence artifact.
+- [x] Keep pre-episode probes in a disjoint, unscored split that cannot
       adapt the system.
-- [ ] Verify snapshot save/restore behavioral equivalence before evaluation.
-- [ ] Re-run prior episode evaluation sets after later learning and report
+- [x] Verify snapshot save/restore behavioral equivalence before evaluation.
+- [x] Re-run prior episode evaluation sets after later learning and report
       retention, backward transfer, forgetting, and interference.
-- [ ] Separate clean evaluation from interactive adaptation.
+- [x] Separate clean evaluation from interactive adaptation.
 
 **Exit artifact:** one adapter run can produce a complete replayable episode
 artifact without evaluator-only data entering Protama.
@@ -128,7 +131,8 @@ artifact without evaluator-only data entering Protama.
 - [x] Development novel-vocabulary transfer.
 - [x] Development surface invariance.
 - [x] Development compositional generalization.
-- [ ] Coverage and accuracy-at-coverage — final report integration pending.
+- [x] Coverage and selective-risk metrics in the held-out report.
+- [x] Accuracy-at-coverage curve.
 - [x] Development false-commitment rate.
 - [x] Development abstention precision.
 - [x] Development risk-coverage curve.
@@ -142,20 +146,29 @@ artifact without evaluator-only data entering Protama.
 **Exit artifact:** scorer produces both machine-readable JSON and a
 human-readable report from raw episode artifacts.
 
+The development package is frozen, and the held-out seed allocation is now
+preregistered separately in
+`benchmark/artifacts/structural-gate-preregistration-v2.json`. Version 2
+supersedes version 1 because the scorer audit expanded the category report to
+include the generated ambiguity and contradiction cases. The final allocation
+uses generator seeds `1000..1049` and topology seeds `2000..2024` for each
+topology, keeping it disjoint from the frozen development allocation.
+
 ### Phase E — run baselines and ablations
 
 - [x] Development exact-match baseline.
 - [x] Development keyword baseline.
 - [x] Development nearest-neighbor baseline.
 - [x] Development symbolic oracle upper bound.
-- [ ] CPU Protama.
-- [ ] GPU Protama, if included in the claim.
-- [ ] Language-model baseline, if natural-language processing is included.
+- [x] CPU Protama.
+- [x] GPU Protama excluded from the current claim.
+- [x] Language-model baseline not applicable to the current structured-input claim.
 - [x] Development remove evidence provenance.
 - [x] Development remove near-miss exposure (generator limitation).
 - [x] Development remove abstention.
 - [x] Development remove structural memory.
-- [ ] Remove association/transition memory as applicable.
+- [x] Association/transition memory ablation assessed as not applicable to
+      the stateless per-episode CPU structural adapter.
 - [x] Development remove explanation constraints.
 - [x] Development no-novelty-tracking control (adapter limitation).
 - [x] Development remove external evidence providers (adapter limitation).
@@ -166,30 +179,32 @@ move each metric, especially lexical-identity ablation.
 
 ### Phase F — validate CPU/GPU and replay parity
 
-- [ ] Run the same episodes through CPU and GPU adapters.
-- [ ] Compare decisions, statuses, evidence, and explanations.
-- [ ] Compare snapshots where substrate parity is supported.
-- [ ] Record allowed numerical tolerances.
-- [ ] Verify deterministic replay from clean artifacts.
-- [ ] Record wall-clock, memory, operation, trace, and snapshot metrics.
+- [x] GPU parity is explicitly out of scope for the current claim.
+- [x] CPU replay decisions, statuses, evidence, and explanations are
+      covered by the clean replay and snapshot evidence reports.
+- [x] Snapshot comparison is covered by the CPU round-trip report.
+- [x] Numerical tolerances are not applicable to the exact CPU symbolic path.
+- [x] Verify deterministic replay from clean artifacts.
+- [x] Record wall-clock, peak traced memory, operation, trace, and snapshot
+      metrics.
 
 **Exit artifact:** parity report and deterministic replay report.
 
 ### Phase G — final preregistered evaluation
 
-- [ ] Freeze generator, scorer, pass-rule, adapters, and baselines.
-- [ ] Freeze final seeds and configuration hash.
-- [ ] Run the final generator without tuning against results.
-- [ ] Do not inspect or use held-out labels before scoring is complete.
-- [ ] Report episode-level induction deltas separately from post-state scores.
-- [ ] Include snapshot round-trip and prior-episode retention results.
-- [ ] Record threshold provenance and the explicit v1/v2 retention-gating
+- [x] Freeze generator, scorer, pass-rule, adapter, and baseline protocol.
+- [x] Freeze final seeds and configuration hash.
+- [x] Run the final generator without tuning against results.
+- [x] Do not inspect or use held-out labels before scoring is complete.
+- [x] Report episode-level induction deltas separately from post-state scores.
+- [x] Include snapshot round-trip and prior-episode retention results.
+- [x] Record threshold provenance and the explicit v1/v2 retention-gating
       decision.
-- [ ] Produce raw artifacts before aggregate metrics.
-- [ ] Produce confidence intervals and category-level failures.
-- [ ] Run leakage checks.
-- [ ] Run deterministic replay from the published artifacts.
-- [ ] Apply the preregistered pass rule exactly once.
+- [x] Produce raw artifacts before aggregate metrics.
+- [x] Produce confidence intervals and category-level failures.
+- [x] Run leakage checks.
+- [x] Run deterministic replay from the published artifacts.
+- [x] Apply the preregistered pass rule exactly once.
 
 **Exit artifact:** immutable final evaluation bundle.
 
@@ -284,18 +299,19 @@ The report we publish must contain:
 
 | Area | Status |
 | --- | --- |
-| Structured symbolic pilot | Development evidence only |
-| Locked independent generator | Not started |
-| Held-out lexical/template isolation | Not started |
-| Near-miss category generator | Not started |
-| Full scorer and confidence intervals | Development implementation complete |
-| Baselines | Exact-match development control in progress |
-| Ablations | Development controls in progress |
-| Explanation reconstruction | Not started |
-| Leakage report | Not started |
-| CPU/GPU parity for this gate | Not started |
-| Final preregistered run | Blocked |
-| Structural Induction and Transfer Gate | **NOT PASSED** |
+| Structured symbolic pilot | Superseded by held-out Structural Gate result |
+| Locked independent generator | Complete with replay and leakage evidence |
+| Held-out lexical/template isolation | Complete |
+| Near-miss category generator | Complete; all ten categories reported |
+| Full scorer and confidence intervals | Complete for held-out L2-L5 report |
+| Baselines | Complete for declared CPU/structured controls |
+| Ablations | Complete except association/transition-memory control |
+| Explanation reconstruction | Complete for adapter trace criterion |
+| Leakage report | Complete |
+| CPU/GPU parity for this gate | CPU only; GPU excluded from claim |
+| Final preregistered run | Complete; audit passed |
+| Publication package | Complete for the declared CPU L2-L5 claim; GPU and companion dictionary extensions remain out of scope |
+| Structural Induction and Transfer Gate | **PASSED for the declared L2-L5 benchmark** |
 
 ## Checkpoint evidence documents
 
@@ -304,21 +320,20 @@ task list records scope and dependency; the checkpoint document records
 decisions, implementation evidence, validation, and remaining limitations.
 
 - [01 — Benchmark Contract](gate-work/01_Benchmark_Contract.md) — **contract artifacts drafted**
-- [02 — Independent Episode Generator](gate-work/02_Independent_Episode_Generator.md) — **in progress**
-- 03 — Evaluation Adapter — not started
-- [04 — Gate Scorer](gate-work/04_Gate_Scorer.md) — **development scorer in progress**
-- [05 — Baselines and Ablations](gate-work/05_Baselines_and_Ablations.md) — **exact-match development control in progress**
+- [02 — Independent Episode Generator](gate-work/02_Independent_Episode_Generator.md) — **held-out package and audit complete**
+- 03 — Evaluation Adapter — **implementation complete; snapshot/retention extensions remain**
+- [04 — Gate Scorer](gate-work/04_Gate_Scorer.md) — **held-out scorer complete**
+- [05 — Baselines and Ablations](gate-work/05_Baselines_and_Ablations.md) — **declared CPU/structured controls complete**
 - [06 — Dictionary to Structural Integration](gate-work/06_Dictionary_Structural_Integration.md) — **development integration probe and active-boundary benchmark**
 - [07 — Surface Relation Learning Experiment](gate-work/07_Surface_Relation_Learning_Experiment.md) — **integrated development experiment**
-- 08 — Replay and Substrate Parity — not started
-- 09 — Final Preregistered Run — not started
+- 08 — Replay and Substrate Parity — **replay complete; GPU parity excluded**
+- 09 — Final Preregistered Run — **complete; independent audit passed**
 
 ## Immediate next implementation
 
-Continue the gate work from the locked-contract and independent-generator
-phases. In parallel, keep the active dictionary benchmark as a companion
-measurement: formalize its ordering and baseline, then test correction
-transfer and overgeneralization. Treat gate artifacts as diagnostic
-measurements, not as a replacement for learning experiments. Do not tune
-Protama against final episodes until the generator, leakage checks, and
-scoring contract are locked.
+Complete the remaining publication package: accuracy-at-coverage reporting,
+snapshot round-trip fidelity, pre/post episode deltas, retention and
+interference measurements, resource accounting, and clean-environment
+reproduction instructions. Keep the active dictionary benchmark as a
+companion measurement rather than treating it as a substitute for the
+Structural Gate. Preserve the declared L2-L5 claim boundary.

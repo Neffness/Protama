@@ -40,6 +40,11 @@ Protama inputs.
 - [x] Deterministic 100-episode development manifest with per-episode
       fingerprints exists.
 - [x] Adapter consumes the locked manifest and emits complete traces.
+- [x] Baseline and ablation controls run against the locked manifest.
+- [x] Full scored development report generated.
+- [x] Clean-environment replay is byte-equivalent.
+- [x] Preregistered development freeze record generated.
+- [x] Held-out final seed allocation preregistered before generation.
 
 ## Acceptance criteria
 
@@ -80,21 +85,44 @@ The locked final boundary is now materialized at
 episodes: 50 canonical hidden-family episodes and 25 episodes for each of the
 two topology slices (`equivalence` and `purpose`). The artifact records the
 non-negative seeds, episode IDs, content fingerprints, and fail-closed leakage
-reports, but excludes evaluator-only family gold. Rebuilding the manifest from
-the locked seed configuration is byte-equivalent; its content fingerprint is
-`e3767bc9995aa1b531886deaa82e612ff2e1fa4343fe779e39fc5193059096ce`.
+reports, but excludes evaluator-only family gold. Rebuilding the manifest from the locked seed configuration is byte-equivalent;
+its current content fingerprint is
+`921e3f7b08c3e69fb636172450534ec005cd99f82644b5deb4a16da015e12421`.
 
 The evaluation adapter now consumes that artifact, validates seed replay and
 episode fingerprints before execution, and writes
 `benchmark/artifacts/structural-gate-final-adapter-run-v1.json`. The adapter
-output contains 100 episode runs and 1,150 complete prediction/trace pairs;
-it contains no evaluator-only family gold. Its deterministic artifact SHA-256
-is
-`349be02f09b5bee7b22d39a8f15faf55f78cb35fbdb052955f1ee7df8b8db5ca`.
+output contains 100 episode runs and 1,650 complete prediction/trace pairs;
+it contains no evaluator-only family gold. Its current deterministic artifact
+SHA-256 is
+`7ce68787b2d885dfaf4f1e5be26652bfc88b841992f80a8924635237667ccfcd`.
+
+The typed topology observations are now part of the permitted structured input
+so the adapter can learn and test word/alias and tool/form/purpose roles rather
+than receiving evaluator-only type labels. The adapter artifact was regenerated
+after this contract change.
+
+The locked baseline suite now runs 12 controls against the same 100 episodes:
+four non-structural baselines, the Protama structural adapter, and seven
+ablations. Its comparison artifact is
+`benchmark/artifacts/structural-gate-final-baseline-suite-v1.json`. The suite
+is deterministic and records aggregate development metrics; it does not
+constitute a final pass decision.
+
+The full scored development report is now materialized at
+`benchmark/artifacts/structural-gate-final-development-report-v1.json` with a
+reviewer-readable companion at
+`benchmark/artifacts/structural-gate-final-development-report-v1.txt`. It
+scores all 100 episodes with deterministic bootstrap intervals and applies the
+current preregistered pass rule. The result is `PASS` for development
+calibration, with no excluded episodes and no critical leakage. All scored
+positive, negative, vocabulary, and near-miss metrics are `1.000000`, with
+selective risk `0.000000`. This is a development result, not a final
+evaluation claim.
 
 A separate topology slice is now implemented in
 `Tools/Protama/structural_gate_topologies.py`. It generates deterministic
-one-relation equivalence episodes and two-relation object-purpose episodes,
+typed equivalence episodes and typed object-purpose episodes,
 with held-out positives, role/relation/omission near-misses, ambiguity, and
 contradiction cases. These topologies pass replay and leakage tests but are
 still development fixtures; they have not yet been merged into the final
@@ -123,5 +151,33 @@ Validation result:
 locked final manifest replay: byte-equivalent
 100/100 final episodes have no critical leakage
 adapter replay: byte-equivalent
-100 complete adapter runs / 1,150 traces
+100 complete adapter runs / 1,650 traces
+56 structural benchmark tests passed
+development report: 100 episodes scored
+development pass rule: PASS
+clean-environment replay: byte-equivalent
+freeze record: structural-gate-freeze-v1
+held-out preregistration: structural-gate-preregistration-v2
 ```
+
+The current development package is bound by
+`benchmark/artifacts/structural-gate-freeze-v1.json`. The freeze record hashes
+the generator, typed topology contract, adapter, scorer, pass-rule
+configuration, locked manifest, adapter output, baseline suite, and scored
+report. It records the development status as `PASS`, confirms no critical
+leakage, and records the clean-environment replay as verified. This freezes
+the development evidence; it is not yet a preregistered final held-out
+evaluation.
+
+The first held-out scoring attempt exposed a reporting omission: ambiguity
+and contradiction cases were generated but were absent from the per-category
+metric table. The scorer was corrected before accepting the result, and
+preregistration version 2 explicitly supersedes version 1. The corrected
+held-out report now contains all ten required categories, including
+`ambiguous` and `contradictory`.
+
+The read-only independent audit is recorded in
+`benchmark/artifacts/structural-gate-heldout-review-v1.json`. It found no
+seed, leakage, fingerprint, label-isolation, exclusion, or claim-boundary
+violations. The active result is therefore eligible for publication review,
+subject to preserving the stated L2-L5 claim boundary.
