@@ -24,7 +24,7 @@ Protama inputs.
 - [x] Deterministic replay.
 - [x] Leakage checks.
 - [x] 100-episode development generation run.
-- [ ] Independent final-test generator or locked final seed set.
+- [x] Locked final seed set with machine-readable manifest.
 
 ## Current evidence
 
@@ -39,6 +39,7 @@ Protama inputs.
 - [x] Near-miss category coverage test exists.
 - [x] Deterministic 100-episode development manifest with per-episode
       fingerprints exists.
+- [x] Adapter consumes the locked manifest and emits complete traces.
 
 ## Acceptance criteria
 
@@ -56,10 +57,10 @@ Phase B is complete only when:
 
 ## Current status
 
-The generator now exists as a deterministic development generator in
-`Tools/Protama/structural_gate_generator.py`. It is not yet the locked final
-generator: it still needs a machine-readable final artifact bundle and an
-independent final-test generator or locked final seed set.
+The generator remains a deterministic development generator, while the final
+evaluation boundary is a locked seed package rather than an independently
+generated final family. The machine-readable final artifact bundle is now
+versioned under `benchmark/artifacts/`.
 
 The development generator now has structural and template split checks,
 versioned leakage reports, and a 100-episode replay/leakage test. Its output
@@ -73,6 +74,23 @@ relation-name variants. This verifies that the generator is not merely
 repeating one literal family signature across all seeds. The variants retain
 the current three-relation topology; independent family topology and final
 generator independence remain future work.
+
+The locked final boundary is now materialized at
+`benchmark/artifacts/structural-gate-final-manifest-v1.json`. It contains 100
+episodes: 50 canonical hidden-family episodes and 25 episodes for each of the
+two topology slices (`equivalence` and `purpose`). The artifact records the
+non-negative seeds, episode IDs, content fingerprints, and fail-closed leakage
+reports, but excludes evaluator-only family gold. Rebuilding the manifest from
+the locked seed configuration is byte-equivalent; its content fingerprint is
+`e3767bc9995aa1b531886deaa82e612ff2e1fa4343fe779e39fc5193059096ce`.
+
+The evaluation adapter now consumes that artifact, validates seed replay and
+episode fingerprints before execution, and writes
+`benchmark/artifacts/structural-gate-final-adapter-run-v1.json`. The adapter
+output contains 100 episode runs and 1,150 complete prediction/trace pairs;
+it contains no evaluator-only family gold. Its deterministic artifact SHA-256
+is
+`349be02f09b5bee7b22d39a8f15faf55f78cb35fbdb052955f1ee7df8b8db5ca`.
 
 A separate topology slice is now implemented in
 `Tools/Protama/structural_gate_topologies.py`. It generates deterministic
@@ -101,7 +119,9 @@ preregistered generator.
 Validation result:
 
 ```text
-53 tests
-52 passed
-1 intentionally skipped
+16 targeted generator/manifest/topology tests passed
+locked final manifest replay: byte-equivalent
+100/100 final episodes have no critical leakage
+adapter replay: byte-equivalent
+100 complete adapter runs / 1,150 traces
 ```

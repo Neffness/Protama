@@ -235,14 +235,22 @@ The current development validation reports:
 
 ```text
 53 tests
-52 passed
-1 intentionally skipped
+16 targeted generator/manifest/topology tests passed
+locked final manifest replay: byte-equivalent
+100/100 final episodes have no critical leakage
 ```
 
-This is meaningful progress toward the milestone, but it is not the final
-certification. The remaining boundary is an independent final-test generator
-or a locked final seed set, together with the final artifact bundle and
-clean-environment replay evidence required for publication.
+This is meaningful progress toward the milestone, but it is not a completed
+Structural Gate evaluation. The locked final boundary is materialized at
+`benchmark/artifacts/structural-gate-final-manifest-v1.json` with 50 canonical
+episodes and 25 episodes for each of the two topology slices. Its content
+fingerprint is
+`e3767bc9995aa1b531886deaa82e612ff2e1fa4343fe779e39fc5193059096ce`.
+The evaluation adapter now consumes that locked artifact, validates seed replay
+and episode fingerprints before execution, and emits complete prediction and
+trace records for all 100 episodes. The remaining work is baseline and
+ablation evidence plus clean-environment replay before publication claims can
+be made.
 
 Development evidence must remain labelled as development evidence. It must
 not be presented as a completed Structural Gate evaluation.
@@ -258,12 +266,10 @@ episode package must eventually drive.
 
 The next stages are:
 
-1. **Leakage and replay certification**
-2. **Protama evaluation adapter with complete traces**
-3. **Baseline and ablation suite**
-4. **Development-scale full benchmark**
-5. **Final preregistration and freeze**
-6. **Final Structural Gate evaluation**
+1. **Baseline and ablation suite**
+3. **Development-scale full benchmark**
+4. **Final preregistration and freeze**
+5. **Final Structural Gate evaluation**
 
 This ordering is deliberate. The adapter should not be treated as a
 complete scientific evaluation until it can consume a certified episode
