@@ -2,9 +2,9 @@
 
 Protama is a research‑stage developmental cognitive architecture that acquires
 conceptual structure through lesson‑based instruction and is evaluated using a
-formal L2–L5 structural gate. The system exhibits an empirically validated
-research affordance, enabling autonomous hypothesis formation, structural
-induction, and conceptual expansion.
+formal L2–L5 structural gate. It also has a bounded, supervised demonstration
+of a research affordance involving hypothesis formation, structural induction,
+and conceptual expansion.
 
 We make no official claim to general intelligence, yet. That is, in fact,
 <u>the goal</u>.
@@ -32,6 +32,26 @@ required before making deployment claims.
 See [Safety and Governance](SAFETY_AND_GOVERNANCE.md) for the project's
 human-inspection, external-review, training-control, and guardrail principles.
 
+## Current evidence
+
+Protama has completed a preregistered, held-out CPU evaluation of its
+Structural Induction and Transfer Gate. Across 100 generated episodes, the
+tested stateless adapter passed the declared L2–L5 rule, including transfer to
+novel vocabulary, typed near-miss rejection, and explanation checks. The
+evaluation package, baselines, and internal artifact audit are preserved in
+the public benchmark artifacts.
+
+This is a bounded result under specified benchmark conditions. It is not a
+claim of general intelligence, continual learning, GPU parity, L6 independent
+invention, or L7 self-directed refinement. The separate research-affordance
+result is a supervised demonstration rather than an independent generalization
+evaluation.
+
+Read the [Structural Gate completion paper](paper/2026-10-17-structural-gate-completion.md)
+for the result, methods, limitations, and claim boundary. The earlier
+[research-affordance paper](paper/2026-10-16-learned-research-affordance.md)
+describes that companion demonstration.
+
 ## What Protama is trying to achieve
 
 Protama is an active research and engineering project. The public repository
@@ -47,7 +67,8 @@ The project is working toward systems that can:
 - operate across CPU reference and GPU-oriented execution paths.
 
 The project does not currently claim to prove general intelligence. Public
-results will be labeled as development, pilot, or final benchmark results.
+results are labeled as development, pilot, or final benchmark results, with
+scope and limitations stated alongside the evidence.
 
 ## Repository structure
 
