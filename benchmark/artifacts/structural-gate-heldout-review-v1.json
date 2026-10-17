@@ -1,7 +1,9 @@
 {
   "schema": "protama.structural-gate.independent-review.v1",
   "review_status": "PASS",
-  "scope": "read-only audit of preregistered held-out package",
+  "scope": "read-only internal audit of preregistered held-out package",
+  "auditor": "project author",
+  "external_auditor": null,
   "checks": {
     "seed_allocation_matches_preregistration": true,
     "episode_count_matches": true,

@@ -309,7 +309,7 @@ The report we publish must contain:
 | Explanation reconstruction | Complete for adapter trace criterion |
 | Leakage report | Complete |
 | CPU/GPU parity for this gate | CPU only; GPU excluded from claim |
-| Final preregistered run | Complete; audit passed |
+| Final preregistered run | Complete; internal artifact audit passed |
 | Publication package | Complete for the declared CPU L2-L5 claim; GPU and companion dictionary extensions remain out of scope |
 | Structural Induction and Transfer Gate | **PASSED for the declared L2-L5 benchmark** |
 
@@ -327,7 +327,7 @@ decisions, implementation evidence, validation, and remaining limitations.
 - [06 — Dictionary to Structural Integration](gate-work/06_Dictionary_Structural_Integration.md) — **development integration probe and active-boundary benchmark**
 - [07 — Surface Relation Learning Experiment](gate-work/07_Surface_Relation_Learning_Experiment.md) — **integrated development experiment**
 - 08 — Replay and Substrate Parity — **replay complete; GPU parity excluded**
-- 09 — Final Preregistered Run — **complete; independent audit passed**
+- 09 — Final Preregistered Run — **complete; internal artifact audit passed**
 
 ## Immediate next implementation
 

@@ -2,13 +2,12 @@
 
 ## Teaching Protama to recognize knowledge gaps and choose tools
 
-**Project:** Protama**Publication type:** Public research milestone**Date:** 2026-10-16**Status:** Capability milestone demonstrated through ProtamaUI; broader autonomy remains unclaimed
+**Project:** Protama**Publication type:** Public research milestone**Date:** 2026-10-16**Status:** Bounded ProtamaUI demonstration (`n=8` supervised cases); broader autonomy remains unclaimed
 
-> **Scope notice:** This document defines a bounded capability milestone. The
-> learned research loop, dictionary tool boundary, observable decision
-> trajectory, and checkpointed supervised continuation have now been
-> demonstrated through ProtamaUI. This does not claim unrestricted autonomous
-> research or general-purpose tool use.
+> **Scope notice:** This document reports a bounded ProtamaUI demonstration
+> across eight supervised cases. It does not claim an independent statistical
+> evaluation, generalization to unseen tools or sources, unrestricted
+> autonomous research, or general-purpose tool use.
 
 ## 1. Context: why this milestone exists
 
@@ -82,7 +81,7 @@ usable runtime for the entity, not merely a test harness. It keeps a live
 Protama instance running, displays output as it occurs, accepts human input,
 supports feedback, and records structured interaction events.
 
-The planned runtime behavior is:
+The demonstrated runtime behavior was:
 
 ```text
 start ProtamaUI
@@ -295,13 +294,14 @@ That would test an application rule rather than learned research behavior.
 
 ## 7. Dictionary research test
 
-After the teaching curriculum, Protama receives an entry such as:
+After the teaching curriculum, Protama received an entry such as:
 
 ```text
 Abevacuation — A partial evacuation.
 ```
 
-If `evacuation` is not currently understood, the expected decision is:
+If `evacuation` is absent from the declared pre-test knowledge snapshot, the
+expected decision is:
 
 ```text
 knowledge gap: evacuation
@@ -332,7 +332,8 @@ read entry
 
 ## 8. Evaluation cases
 
-The first evaluation should cover:
+The bounded demonstration covered eight cases, one for each of the following
+trajectory types:
 
 1. a known word that should not trigger unnecessary lookup;
 2. an unknown word with a dictionary entry;
@@ -345,6 +346,13 @@ The first evaluation should cover:
 
 The evaluator should score the decision trajectory, not only the final prose
 answer.
+
+This was a supervised demonstration rather than an independently sampled
+evaluation: the sample size was `n=8`, and the original publication package
+did not preserve a machine-readable full trajectory log or a separately
+published pre-test knowledge snapshot for every case. Accordingly, this
+paper reports the observed capability boundary without treating the result as
+statistical evidence of learned generalization.
 
 ## 9. Required evidence
 
@@ -382,10 +390,21 @@ This milestone does not yet establish:
 - novel-answer generation across arbitrary domains;
 - long-term retention across indefinite episodes;
 - the full Structural Induction and Transfer Gate.
+- generalization from a taught dictionary source to a novel, previously unseen
+  tool or source;
+- that the `evacuation` dependency was absent before the original run in a
+  separately auditable snapshot;
+- independently replayable full decision trajectories for all eight cases.
 
 It establishes a narrower and more foundational question: whether Protama can
 learn that research is an available response to an unresolved problem and
 carry that decision through an observable, resumable runtime task.
+
+In the Structural Gate capability ladder, this is an early interactive
+research-affordance probe related to the separate L7 extension
+(`self-directed refinement through information-seeking examples`). It is not
+an L7 evaluation or an L7 pass: the demonstration used a taught dictionary
+source, supervised sequencing, and no novel-source transfer test.
 
 ## 11. Relationship to the independent episode generator
 
@@ -416,7 +435,9 @@ Interactive research loop:        demonstrated through ProtamaUI
 Decision trajectory logging:      implemented and observable
 Lifecycle checkpointing:           implemented and UI-validated
 500-entry supervised batch:       completed through ProtamaUI
-Research-affordance evaluation:  bounded evaluation completed
+Research-affordance demonstration: n=8 supervised cases completed
+Independent generalization evaluation: not performed
+Full raw trajectory appendix: not preserved in original run
 ```
 
 The next implementation should certify the independent episode generator and

@@ -176,7 +176,7 @@ preregistration version 2 explicitly supersedes version 1. The corrected
 held-out report now contains all ten required categories, including
 `ambiguous` and `contradictory`.
 
-The read-only independent audit is recorded in
+The read-only internal artifact audit, performed by the project author, is recorded in
 `benchmark/artifacts/structural-gate-heldout-review-v1.json`. It found no
 seed, leakage, fingerprint, label-isolation, exclusion, or claim-boundary
 violations. The active result is therefore eligible for publication review,

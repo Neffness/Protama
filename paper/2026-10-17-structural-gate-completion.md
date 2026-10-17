@@ -10,7 +10,7 @@ Protama passed the declared L2-L5 rule. The result is bounded: it is evidence fo
 
 Each episode separated system-visible training observations from held-out evaluation cases. The generator supplied positive cases, negative cases, typed near-misses, ambiguity cases, contradiction cases, novel vocabulary, and surface variants. Evaluator-only family gold and expected labels were not provided to the adapter.
 
-The active protocol is [structural-gate-preregistration-v2.json](../benchmark/artifacts/structural-gate-preregistration-v2.json). The held-out manifest, adapter output, baseline suite, scored report, and independent audit are preserved under [benchmark/artifacts/](../benchmark/artifacts/).
+The active protocol is [structural-gate-preregistration-v2.json](../benchmark/artifacts/structural-gate-preregistration-v2.json). The held-out manifest, adapter output, baseline suite, scored report, and internal artifact audit are preserved under [benchmark/artifacts/](../benchmark/artifacts/).
 
 ## Result
 
@@ -39,9 +39,9 @@ The same held-out manifest was used for the declared CPU baselines and ablations
 
 ## Reproducibility and audit
 
-The primary manifest, adapter run, baseline suite, and scored report replayed byte-for-byte in a clean environment. A read-only audit verified seed alignment, development/held-out separation, fingerprint alignment, category coverage, absence of evaluator-only labels in adapter records, leakage status, and zero exclusions.
+The primary manifest, adapter run, baseline suite, and scored report replayed byte-for-byte in a clean environment. A read-only internal artifact audit, performed by the project author using a fresh process and frozen artifacts, verified seed alignment, development/held-out separation, fingerprint alignment, category coverage, absence of evaluator-only labels in adapter records, leakage status, and zero exclusions. No external auditor participated.
 
-Supplementary evidence also covers accuracy-at-coverage, snapshot round-trip fidelity, pre/post episode deltas, retention, backward transfer, interference, operation counts, trace counts, wall-clock time, and peak traced memory. It is recorded in [structural-gate-publication-evidence-v1.json](../benchmark/artifacts/structural-gate-publication-evidence-v1.json).
+Supplementary continual-adapter evidence also covers accuracy-at-coverage, snapshot round-trip fidelity, pre/post episode deltas, retention, backward transfer, interference, operation counts, trace counts, wall-clock time, and peak traced memory. These probes are separate from the stateless per-episode adapter used for the primary gate and are not additional pass evidence for continual learning. It is recorded in [structural-gate-publication-evidence-v1.json](../benchmark/artifacts/structural-gate-publication-evidence-v1.json).
 
 The audit record is [structural-gate-heldout-review-v1.json](../benchmark/artifacts/structural-gate-heldout-review-v1.json).
 
