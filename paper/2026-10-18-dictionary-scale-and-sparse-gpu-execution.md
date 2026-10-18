@@ -157,9 +157,13 @@ The final sparse-streaming result was:
 | Peak allocated VRAM   |          3.63 GB |              **19.4 MB** |
 | Peak reserved VRAM    |          4.89 GB |              **1.53 GB** |
 
-The final path was approximately 2.9 times faster than the intermediate dense
-streaming implementation while using approximately 99.5% less active VRAM
-than the original backend.
+The final path was approximately 10.8 times faster than the intermediate
+dense-streaming implementation and approximately 2.9 times faster than the
+original backend, while using approximately 99.5% less active VRAM than the
+original backend. The intermediate implementation shows the cost of solving
+the memory problem with sharding alone: it reduced active VRAM to 47 MB but
+was approximately 3.7 times slower than the original backend. Sparse
+accumulation provided the additional step that recovered the performance.
 
 For practical hardware sizing, the final run's approximately 1.53 GB reserved
 VRAM is the conservative figure, not 19.4 MB. The smaller allocated figure
