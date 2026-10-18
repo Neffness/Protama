@@ -36,3 +36,10 @@ Thumbs.db
 # When public source is ready, add explicit allow rules for the intended
 # source directories and file types rather than removing the deny-by-default
 # policy globally.
+!pyproject.toml
+!src/
+!src/**
+!src/**/*.py
+!tests/
+!tests/**
+!tests/**/*.py

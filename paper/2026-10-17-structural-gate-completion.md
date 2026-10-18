@@ -28,6 +28,21 @@ The held-out manifest, adapter output, baseline suite, scored report, and
 internal artifact audit are preserved under
 [benchmark/artifacts/](../benchmark/artifacts/).
 
+## Public evaluation instrument
+
+The generator, topology definitions, leakage checks, public data contracts,
+and scorer used for this benchmark are released in the
+[public `protama_benchmark` source package](../src/protama_benchmark/).
+This release makes the measuring instrument inspectable and reusable without
+publishing Protama's private runtime, learned state, or production adapter.
+
+The package can be installed from the repository root with
+`python -m pip install .`. Its deterministic generator and scorer support
+independent inspection of episode construction, evaluator-side labels, and
+pass-rule calculations. The published held-out artifacts remain the frozen
+record for this completed gate; future evaluations should use a versioned
+protocol and, where appropriate, unreleased held-out material.
+
 ## Result
 
 The held-out package produced:

@@ -74,6 +74,7 @@ scope and limitations stated alongside the evidence.
 
 ```text
 benchmark/   Benchmark specifications, generators, scoring, and evaluation artifacts
+src/         Public benchmark generator, scorer, schemas, and reproduction code
 docs/        Public architecture, design, and roadmap documentation
 paper/       Preprints, drafts, and publication material
 reports/     Reproducible evaluation and development reports
@@ -83,8 +84,9 @@ configs/     Reproducible evaluation configurations
 ```
 
 The repository is intentionally docs-first while the public release boundary
-is being established. Private implementation code is not copied here
-automatically.
+is being established. The public `src/` package contains evaluation
+infrastructure only; Protama's private implementation and learned state are
+not copied here automatically.
 
 ## Core benchmark
 
