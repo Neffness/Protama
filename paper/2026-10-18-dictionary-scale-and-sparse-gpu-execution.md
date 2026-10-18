@@ -39,9 +39,23 @@ definition token sequences, with up to 24 tokens retained per definition.
 The workload used sparse directed symbol connections and scored batches of
 symbolic observations using the Torch substrate.
 
-The hardware environment was a CUDA-capable consumer NVIDIA GPU. Exact
-device, driver, interpreter, and library identifiers are intentionally omitted
-from this public version.
+The measurements were run on a Razer Blade 16 (RZ09-0528) laptop with:
+
+* AMD Ryzen AI 9 365 processor (10 cores, 20 logical processors);
+* 32 GB installed system RAM (29.6 GB reported available to the operating
+  system);
+* NVIDIA GeForce RTX 5070 Laptop GPU with 8 GB VRAM (8,151 MiB);
+* Windows 11 Home, 64-bit;
+* NVIDIA driver 616.56;
+* Python 3.12.12;
+* PyTorch 2.11.0 with CUDA 12.8.
+
+The benchmark reports both allocated and reserved VRAM. Allocated memory is
+memory actively held by live tensors; reserved memory also includes blocks
+held by the framework's caching allocator for reuse. Reserved memory is
+therefore the conservative runtime capacity requirement. Some of that cache
+can be released between workloads or when the process exits, but it should
+not be ignored when sizing a device for an uninterrupted run.
 
 The experiment recorded graph size, GPU graph-construction time, scoring time,
 active allocated VRAM, and reserved VRAM separately.
@@ -58,11 +72,12 @@ to the full corpus:
 |             5,000 |  11,172 |  32,963 |          116.8 ms |            322.7 MB |
 |            10,000 |  17,217 |  59,521 |          273.7 ms |            498.0 MB |
 |            20,000 |  27,410 | 106,839 |          826.9 ms |            791.9 MB |
-|        full `S` |  21,502 |  28,814 |           1.730 s |            828.4 MB |
+| full `S` section |  21,502 |  28,814 |           1.730 s |            828.4 MB |
 
-The curve initially looked manageable, then bent upward as graph width and
-activation costs increased. This was the point at which a full-corpus run
-appeared potentially impractical.
+Here, `S` means the tagged S section of the dictionary source, not the full
+dictionary. The curve initially looked manageable, then bent upward as graph
+width and activation costs increased. This was the point at which a
+full-corpus run appeared potentially impractical.
 
 ## Diagnosing the bottleneck
 
@@ -107,6 +122,16 @@ The backend remained semantically compatible with the CPU reference. Focused
 equivalence tests passed for single observations, batches, propagation, and
 sparse-versus-dense scoring.
 
+The intermediate dense-streaming implementation retained a bounded dense
+score matrix while moving graph shards through system RAM:
+
+| Measurement         | Intermediate dense streaming |
+| ------------------- | ---------------------------: |
+| GPU graph build     |                       680 ms |
+| GPU scoring         |                      35.29 s |
+| Peak allocated VRAM |                        47 MB |
+| Peak reserved VRAM  |                       1.53 GB |
+
 ## Full-corpus result
 
 The final run used the complete dictionary corpus:
@@ -116,6 +141,11 @@ The final run used the complete dictionary corpus:
 * 637,448 edges;
 * 50,000 scoring observations;
 * full curriculum completed before measurement.
+
+Each observation was a deterministic one-symbol probe consisting of the first
+token of a dictionary definition. The probes were repeated as needed to form
+the fixed 50,000-observation scoring batch; they were not random walks or
+synthetic graph edges.
 
 The final sparse-streaming result was:
 
@@ -130,6 +160,13 @@ The final sparse-streaming result was:
 The final path was approximately 2.9 times faster than the intermediate dense
 streaming implementation while using approximately 99.5% less active VRAM
 than the original backend.
+
+For practical hardware sizing, the final run's approximately 1.53 GB reserved
+VRAM is the conservative figure, not 19.4 MB. The smaller allocated figure
+describes the live sparse tensors; the larger reserved figure reflects the
+framework allocator's reusable cache and temporary workspace. The cache is
+reclaimable at process boundaries and can often be trimmed between workloads,
+but the run should be planned against the reserved high-water mark.
 
 ## Interpretation
 
@@ -152,6 +189,13 @@ This demonstrates that the initial multi-gigabyte behavior was not an
 intrinsic limit imposed by the dictionary or by Protama's learned graph. It
 was a correctable mismatch between a sparse workload and a dense scoring
 representation.
+
+This GPU result follows the earlier
+[Structural Gate publication](2026-10-17-structural-gate-completion.md), whose
+declared claim was CPU-only and explicitly excluded GPU parity. The two
+results should be read as sequential evidence: the gate established the
+declared CPU behavior first, and this experiment subsequently measured the
+GPU-oriented substrate path.
 
 ## Limitations
 
