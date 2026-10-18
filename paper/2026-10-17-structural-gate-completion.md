@@ -30,18 +30,21 @@ internal artifact audit are preserved under
 
 ## Public evaluation instrument
 
-The generator, topology definitions, leakage checks, public data contracts,
-and scorer used for this benchmark are released in the
+The generator, topology definitions, leakage checks, manifest fingerprinting,
+public data contracts, and scorer used for this benchmark are released in the
 [public `protama_benchmark` source package](../src/protama_benchmark/).
 This release makes the measuring instrument inspectable and reusable without
 publishing Protama's private runtime, learned state, or production adapter.
 
-The package can be installed from the repository root with
-`python -m pip install .`. Its deterministic generator and scorer support
-independent inspection of episode construction, evaluator-side labels, and
-pass-rule calculations. The published held-out artifacts remain the frozen
-record for this completed gate; future evaluations should use a versioned
-protocol and, where appropriate, unreleased held-out material.
+The package can be installed from the repository root inside a virtual
+environment with `python -m venv .venv` followed by
+`.venv\Scripts\activate` and `python -m pip install .` (or the equivalent
+`.venv/bin/activate` path on Unix-like systems). Its deterministic generator,
+manifest fingerprinting, and scorer support independent inspection of episode
+construction, artifact identity, evaluator-side labels, and pass-rule
+calculations. The published held-out artifacts remain the frozen record for
+this completed gate; future evaluations should use a versioned protocol and,
+where appropriate, unreleased held-out material.
 
 ## Result
 

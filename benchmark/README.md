@@ -8,15 +8,21 @@ The primary benchmark is the **Protama Structural Induction and Transfer
 Gate**. The current public specification is
 [`Protama_Inductive_Structural_Invention_Test.md`](Protama_Inductive_Structural_Invention_Test.md).
 
-The public generator and scorer are released under
+The public generator, manifest fingerprinting, and scorer are released under
 [`../src/protama_benchmark/`](../src/protama_benchmark/). They are the
 evaluation instrument, not Protama's private runtime or learned state.
 
-Install the source package from the repository root with:
+Create a virtual environment and install the source package from the
+repository root with:
 
 ```text
+python -m venv .venv
+.venv\Scripts\activate
 python -m pip install .
 ```
+
+On Debian or Ubuntu, use the equivalent `.venv/bin/activate` path. A virtual
+environment avoids the PEP 668 externally-managed-environment restriction.
 
 The public harness can generate deterministic episodes and score an adapter
 run through the `protama_benchmark.structural` API. The completed gate's

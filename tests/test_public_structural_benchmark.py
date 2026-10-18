@@ -11,6 +11,7 @@ from protama_benchmark.structural.models import (
     GatePrediction,
     GateTrace,
 )
+from protama_benchmark.structural.manifest import build_locked_final_manifest
 from protama_benchmark.structural.scorer import (
     aggregate_structural_gate_scores,
     evaluate_preregistered_pass_rule,
@@ -41,6 +42,21 @@ class PublicStructuralBenchmarkTests(unittest.TestCase):
             second = generate_topology_episode(2000, topology)
             self.assertEqual(episode_to_json(first), episode_to_json(second))
             self.assertTrue(all(check.passed for check in check_episode_leakage(first)))
+
+    def test_manifest_fingerprint_matches_published_heldout_artifact(self):
+        manifest = build_locked_final_manifest(
+            generator_seeds=range(1000, 1050),
+            topology_seeds=(
+                (topology, seed)
+                for topology in ("equivalence", "purpose")
+                for seed in range(2000, 2025)
+            ),
+        )
+
+        self.assertEqual(
+            manifest.content_fingerprint,
+            "efd287c8b1f81d5ee1b4a2bf88a314a1776e48dbd6ee28a21983d8824b5a3c36",
+        )
 
     def test_public_scorer_scores_a_well_formed_run(self):
         episode = generate_structural_gate_episode(41)
