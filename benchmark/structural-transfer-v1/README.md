@@ -9,7 +9,8 @@ usable for future systems and future benchmark versions.
 
 ## Contents
 
-- `Protama_Inductive_Structural_Invention_Test.md` — benchmark specification;
+- [`../../docs/gates/Protama_Inductive_Structural_Invention_Test.md`](../../docs/gates/Protama_Inductive_Structural_Invention_Test.md)
+  — benchmark specification;
 - `Protama_Structural_Gate_Publication_Task_List.md` — development and
   publication record;
 - `artifacts/` — frozen manifests, runs, reports, and audit records;

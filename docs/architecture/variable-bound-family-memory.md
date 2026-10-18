@@ -20,7 +20,7 @@ The public objective is to determine whether a system can:
 - provide an auditable account of the evidence used for a decision.
 
 These objectives are evaluated through the
-[Benchmark A: Structural Transfer](../../benchmark/structural-transfer-v1/Protama_Inductive_Structural_Invention_Test.md).
+[Structural Induction and Transfer Gate](../gates/Protama_Inductive_Structural_Invention_Test.md).
 
 ## Scope boundary
 

@@ -312,7 +312,7 @@ surface memorization, and post-hoc interpretation.
 ## Related artifacts
 
 - [Independent Episode Generator](../benchmark/structural-transfer-v1/gate-work/02_Independent_Episode_Generator.md)
-- [Structural Induction and Transfer Gate](../benchmark/structural-transfer-v1/Protama_Inductive_Structural_Invention_Test.md)
+- [Structural Induction and Transfer Gate](../docs/gates/Protama_Inductive_Structural_Invention_Test.md)
 - [Structural Gate Publication Task List](../benchmark/structural-transfer-v1/Protama_Structural_Gate_Publication_Task_List.md)
 - [First Gold Gate Publication](2026-10-16-first-gold-gate.md)
 - [Structural Learning Roadmap](../docs/roadmap/structural-learning-roadmap.md)

@@ -104,8 +104,13 @@ Gate. It evaluates whether a system can:
 4. abstain when evidence is insufficient or ambiguous;
 5. produce explanations reconstructible from pre-decision evidence.
 
-Read the [Benchmark A specification](benchmark/structural-transfer-v1/Protama_Inductive_Structural_Invention_Test.md)
+Read the [Structural Induction and Transfer Gate specification](docs/gates/Protama_Inductive_Structural_Invention_Test.md)
 for the formal task, controls, metrics, and claim boundaries.
+
+The proposed [Epistemic Growth and Active Inquiry Gate](docs/gates/epistemic-growth-active-inquiry-gate.md)
+is a separate, future evaluation of knowledge-boundary regulation and
+information-seeking behavior. It is a specification only; no implementation or
+passing result is claimed.
 
 ## Development model
 

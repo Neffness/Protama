@@ -2,7 +2,7 @@
 
 This is the execution checklist for producing a publishable Structural
 Induction and Transfer Gate result. It is derived from
-`Protama_Inductive_Structural_Invention_Test.md`.
+[`../../docs/gates/Protama_Inductive_Structural_Invention_Test.md`](../../docs/gates/Protama_Inductive_Structural_Invention_Test.md).
 
 The preregistered held-out Structural Gate evaluation now passes its declared
 L2-L5 rule. The publication package is still incomplete because snapshot

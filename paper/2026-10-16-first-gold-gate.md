@@ -198,7 +198,7 @@ The source brief for this publication is:
 
 The relevant public benchmark context is:
 
-- [Structural Induction and Transfer Test](../benchmark/structural-transfer-v1/Protama_Inductive_Structural_Invention_Test.md)
+- [Structural Induction and Transfer Gate](../docs/gates/Protama_Inductive_Structural_Invention_Test.md)
 - [Dictionary-to-Structural Integration](../benchmark/structural-transfer-v1/gate-work/06_Dictionary_Structural_Integration.md)
 - [Structural Gate Publication Task List](../benchmark/structural-transfer-v1/Protama_Structural_Gate_Publication_Task_List.md)
 - [Structural Family Memory Development Update](../reports/development/2026-10-15-structural-family-progress.md)

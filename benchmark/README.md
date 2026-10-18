@@ -7,8 +7,8 @@ replay tooling.
 ## Benchmark A: Structural Transfer
 
 The primary benchmark is **Benchmark A: Structural Transfer**, initially
-developed to evaluate Protama. Its current public specification is
-[`Protama_Inductive_Structural_Invention_Test.md`](structural-transfer-v1/Protama_Inductive_Structural_Invention_Test.md).
+developed to evaluate Protama. its current public specification is the
+[Structural Induction and Transfer Gate](../docs/gates/Protama_Inductive_Structural_Invention_Test.md).
 
 The public generator, manifest fingerprinting, and scorer are released under
 [`../src/structural_transfer_benchmark/`](../src/structural_transfer_benchmark/).
@@ -37,3 +37,6 @@ generator and topology distribution; it is not an external-family test.
 
 The current implementation boundary is summarized in the
 [structural-family development report](../reports/development/2026-10-15-structural-family-progress.md).
+
+The separate [Epistemic Growth and Active Inquiry Gate](../docs/gates/epistemic-growth-active-inquiry-gate.md)
+is a proposed future gate and has no released benchmark implementation yet.
