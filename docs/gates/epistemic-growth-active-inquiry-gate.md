@@ -209,7 +209,8 @@ Before each scored probe or answer decision, the system must record:
 - estimate reliability and the evidence supporting it;
 - candidate probes and predicted information value;
 - selected action and its reason;
-- whether the decision is continue, verify, clarify, answer, or abstain; and
+- whether the decision is continue, verify, clarify, answer, or abstain
+  (clarify decisions are recorded but unscored in v1); and
 - the resource cost assigned to the action.
 
 The record must be append-only or otherwise auditable. Evidence added after
@@ -244,7 +245,11 @@ anti-decoration test for the gate.
 The decisive control is an estimate-lesion condition: provide a deliberately
 incorrect boundary model while holding the rest of the system fixed. Probe
 behavior and discovery efficiency must degrade in a measurable, preregistered
-way. If they do not, the estimate is not action-relevant.
+way. A crash, malformed decision, or unrecoverable trace is an operational
+failure, not evidence of coupling: it invalidates that lesion trial for the
+quantitative coupling score and is reported separately as a robustness
+failure. If the system completes the trial but its behavior does not change,
+the estimate is not action-relevant.
 
 ### Unknown conversion
 
@@ -277,9 +282,12 @@ The gate must include at least:
 - an estimate-lesion control; and
 - a scripted policy matched for probe budget.
 
-The systematic baseline is essential. A weak random baseline would allow a
-well-engineered enumerator to appear metacognitive without modeling its own
-knowledge boundary.
+The strong systematic enumerator uses breadth-first traversal, round-robin
+selection across available groups, and a fixed probe order, with no
+self-model, while matching the system under test for observations, probe
+interface, and resource budget. It is essential because a weak random baseline
+would allow a well-engineered enumerator to appear metacognitive without
+modeling its own knowledge boundary.
 
 The evaluator must also test whether a system can pass using:
 
