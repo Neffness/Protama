@@ -1,4 +1,4 @@
-"""Public Structural Induction and Transfer Gate harness."""
+"""Public harness for Benchmark A: Structural Transfer."""
 
 from .generator import (
     GateCase,

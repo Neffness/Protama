@@ -1,4 +1,4 @@
-# The Locked Structural Gate Adapter
+﻿# The Locked Structural Gate Adapter
 
 ## Turning a certified episode boundary into auditable Protama traces
 
@@ -129,7 +129,7 @@ The final seed package contains 100 episodes:
 
 The locked manifest is:
 
-[structural-gate-final-manifest-v1.json](../benchmark/artifacts/structural-gate-final-manifest-v1.json)
+[structural-gate-final-manifest-v1.json](../benchmark/structural-transfer-v1/artifacts/structural-gate-final-manifest-v1.json)
 
 Its content fingerprint is:
 
@@ -213,7 +213,7 @@ seed, accept a partial manifest, or continue with a success-shaped fallback.
 
 The serialized adapter run is:
 
-[structural-gate-final-adapter-run-v1.json](../benchmark/artifacts/structural-gate-final-adapter-run-v1.json)
+[structural-gate-final-adapter-run-v1.json](../benchmark/structural-transfer-v1/artifacts/structural-gate-final-adapter-run-v1.json)
 
 It is deterministic and contains no evaluator-only family gold.
 

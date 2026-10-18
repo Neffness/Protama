@@ -1,16 +1,19 @@
 # Benchmark
 
-This directory will contain the public Protama benchmark specifications,
+This directory contains public benchmark specifications,
 episode generators, near-miss definitions, scoring code, leakage checks, and
 replay tooling.
 
-The primary benchmark is the **Protama Structural Induction and Transfer
-Gate**. The current public specification is
-[`Protama_Inductive_Structural_Invention_Test.md`](Protama_Inductive_Structural_Invention_Test.md).
+## Benchmark A: Structural Transfer
+
+The primary benchmark is **Benchmark A: Structural Transfer**, initially
+developed to evaluate Protama. Its current public specification is
+[`Protama_Inductive_Structural_Invention_Test.md`](structural-transfer-v1/Protama_Inductive_Structural_Invention_Test.md).
 
 The public generator, manifest fingerprinting, and scorer are released under
-[`../src/protama_benchmark/`](../src/protama_benchmark/). They are the
-evaluation instrument, not Protama's private runtime or learned state.
+[`../src/structural_transfer_benchmark/`](../src/structural_transfer_benchmark/).
+They are the evaluation instrument, not Protama's private runtime or learned
+state.
 
 Create a virtual environment and install the source package from the
 repository root with:
@@ -25,7 +28,8 @@ On Debian or Ubuntu, use the equivalent `.venv/bin/activate` path. A virtual
 environment avoids the PEP 668 externally-managed-environment restriction.
 
 The public harness can generate deterministic episodes and score an adapter
-run through the `protama_benchmark.structural` API. The completed gate's
+run through the `structural_transfer_benchmark.structural` API. The completed
+Structural Gate's
 frozen artifacts remain the historical evaluation record; a future gate can
 use a new version and separate held-out material.
 

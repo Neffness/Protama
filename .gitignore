@@ -38,8 +38,15 @@ Thumbs.db
 # policy globally.
 !pyproject.toml
 !src/
-!src/**
-!src/**/*.py
+!src/structural_transfer_benchmark/
+!src/structural_transfer_benchmark/__init__.py
+!src/structural_transfer_benchmark/structural/
+!src/structural_transfer_benchmark/structural/__init__.py
+!src/structural_transfer_benchmark/structural/generator.py
+!src/structural_transfer_benchmark/structural/manifest.py
+!src/structural_transfer_benchmark/structural/models.py
+!src/structural_transfer_benchmark/structural/scorer.py
+!src/structural_transfer_benchmark/structural/topologies.py
 !tests/
 !tests/**
 !tests/**/*.py

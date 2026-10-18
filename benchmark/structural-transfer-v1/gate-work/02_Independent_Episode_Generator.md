@@ -1,4 +1,4 @@
-# Gate Work 02 — Independent Episode Generator
+﻿# Gate Work 02 â€” Independent Episode Generator
 
 Status: **IN PROGRESS**
 
@@ -65,7 +65,7 @@ Phase B is complete only when:
 The generator remains a deterministic development generator, while the final
 evaluation boundary is a locked seed package rather than an independently
 generated final family. The machine-readable final artifact bundle is now
-versioned under `benchmark/artifacts/`.
+versioned under `benchmark/structural-transfer-v1/artifacts/`.
 
 The development generator now has structural and template split checks,
 versioned leakage reports, and a 100-episode replay/leakage test. Its output
@@ -81,7 +81,7 @@ the current three-relation topology; independent family topology and final
 generator independence remain future work.
 
 The locked final boundary is now materialized at
-`benchmark/artifacts/structural-gate-final-manifest-v1.json`. It contains 100
+`benchmark/structural-transfer-v1/artifacts/structural-gate-final-manifest-v1.json`. It contains 100
 episodes: 50 canonical hidden-family episodes and 25 episodes for each of the
 two topology slices (`equivalence` and `purpose`). The artifact records the
 non-negative seeds, episode IDs, content fingerprints, and fail-closed leakage
@@ -91,7 +91,7 @@ its current content fingerprint is
 
 The evaluation adapter now consumes that artifact, validates seed replay and
 episode fingerprints before execution, and writes
-`benchmark/artifacts/structural-gate-final-adapter-run-v1.json`. The adapter
+`benchmark/structural-transfer-v1/artifacts/structural-gate-final-adapter-run-v1.json`. The adapter
 output contains 100 episode runs and 1,650 complete prediction/trace pairs;
 it contains no evaluator-only family gold. Its current deterministic artifact
 SHA-256 is
@@ -105,14 +105,14 @@ after this contract change.
 The locked baseline suite now runs 12 controls against the same 100 episodes:
 four non-structural baselines, the Protama structural adapter, and seven
 ablations. Its comparison artifact is
-`benchmark/artifacts/structural-gate-final-baseline-suite-v1.json`. The suite
+`benchmark/structural-transfer-v1/artifacts/structural-gate-final-baseline-suite-v1.json`. The suite
 is deterministic and records aggregate development metrics; it does not
 constitute a final pass decision.
 
 The full scored development report is now materialized at
-`benchmark/artifacts/structural-gate-final-development-report-v1.json` with a
+`benchmark/structural-transfer-v1/artifacts/structural-gate-final-development-report-v1.json` with a
 reviewer-readable companion at
-`benchmark/artifacts/structural-gate-final-development-report-v1.txt`. It
+`benchmark/structural-transfer-v1/artifacts/structural-gate-final-development-report-v1.txt`. It
 scores all 100 episodes with deterministic bootstrap intervals and applies the
 current preregistered pass rule. The result is `PASS` for development
 calibration, with no excluded episodes and no critical leakage. All scored
@@ -161,7 +161,7 @@ held-out preregistration: structural-gate-preregistration-v2
 ```
 
 The current development package is bound by
-`benchmark/artifacts/structural-gate-freeze-v1.json`. The freeze record hashes
+`benchmark/structural-transfer-v1/artifacts/structural-gate-freeze-v1.json`. The freeze record hashes
 the generator, typed topology contract, adapter, scorer, pass-rule
 configuration, locked manifest, adapter output, baseline suite, and scored
 report. It records the development status as `PASS`, confirms no critical
@@ -177,7 +177,7 @@ held-out report now contains all ten required categories, including
 `ambiguous` and `contradictory`.
 
 The read-only internal artifact audit, performed by the project author, is recorded in
-`benchmark/artifacts/structural-gate-heldout-review-v1.json`. It found no
+`benchmark/structural-transfer-v1/artifacts/structural-gate-heldout-review-v1.json`. It found no
 seed, leakage, fingerprint, label-isolation, exclusion, or claim-boundary
 violations. The active result is therefore eligible for publication review,
 subject to preserving the stated L2-L5 claim boundary.

@@ -74,7 +74,7 @@ scope and limitations stated alongside the evidence.
 
 ```text
 benchmark/   Benchmark specifications, generators, scoring, and evaluation artifacts
-src/         Public benchmark generator, scorer, schemas, and reproduction code
+src/         Public benchmark generators, scorers, schemas, and reproduction code
 docs/        Public architecture, design, and roadmap documentation
 paper/       Preprints, drafts, and publication material
 reports/     Reproducible evaluation and development reports
@@ -84,14 +84,15 @@ configs/     Reproducible evaluation configurations
 ```
 
 The repository is intentionally docs-first while the public release boundary
-is being established. The public `src/` package contains evaluation
+is being established. The public `src/` packages contain evaluation
 infrastructure only; Protama's private implementation and learned state are
 not copied here automatically.
 
 ## Core benchmark
 
-The primary public evaluation is the **Protama Structural Induction and
-Transfer Gate**. It evaluates whether a system can:
+The primary public evaluation is **Benchmark A: Structural Transfer**, whose
+first completed evaluation was the Protama Structural Induction and Transfer
+Gate. It evaluates whether a system can:
 
 1. infer a reusable latent relational structure from limited examples;
 2. transfer that structure to novel vocabulary and surface forms;
@@ -99,7 +100,7 @@ Transfer Gate**. It evaluates whether a system can:
 4. abstain when evidence is insufficient or ambiguous;
 5. produce explanations reconstructible from pre-decision evidence.
 
-Read the [benchmark specification](benchmark/Protama_Inductive_Structural_Invention_Test.md)
+Read the [Benchmark A specification](benchmark/structural-transfer-v1/Protama_Inductive_Structural_Invention_Test.md)
 for the formal task, controls, metrics, and claim boundaries.
 
 ## Development model

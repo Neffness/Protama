@@ -1,4 +1,4 @@
-# Protama Crosses Its First Gold Gate
+﻿# Protama Crosses Its First Gold Gate
 
 ## Initial evidence of learned structural transfer in dictionary-definition families
 
@@ -194,13 +194,13 @@ dictionary-transfer measurements to imply that the full gate has passed.
 
 The source brief for this publication is:
 
-- [First Gold Gate Publication Brief](../benchmark/gate-work/07_First_Gold_Gate_Publication_Brief.md)
+- [First Gold Gate Publication Brief](../benchmark/structural-transfer-v1/gate-work/07_First_Gold_Gate_Publication_Brief.md)
 
 The relevant public benchmark context is:
 
-- [Structural Induction and Transfer Test](../benchmark/Protama_Inductive_Structural_Invention_Test.md)
-- [Dictionary-to-Structural Integration](../benchmark/gate-work/06_Dictionary_Structural_Integration.md)
-- [Structural Gate Publication Task List](../benchmark/Protama_Structural_Gate_Publication_Task_List.md)
+- [Structural Induction and Transfer Test](../benchmark/structural-transfer-v1/Protama_Inductive_Structural_Invention_Test.md)
+- [Dictionary-to-Structural Integration](../benchmark/structural-transfer-v1/gate-work/06_Dictionary_Structural_Integration.md)
+- [Structural Gate Publication Task List](../benchmark/structural-transfer-v1/Protama_Structural_Gate_Publication_Task_List.md)
 - [Structural Family Memory Development Update](../reports/development/2026-10-15-structural-family-progress.md)
 
 These artifacts distinguish development integration evidence from final gate
@@ -227,7 +227,7 @@ milestone toward that program: it supports continued structural-learning work
 while preserving a clear boundary around what has and has not been
 demonstrated.
 
-## Change note — 2026-10-16
+## Change note â€” 2026-10-16
 
 An earlier version of this paper reported that the D/E/F regional holdout
 rejected only 7/15 negative cases and produced 8 false commitments. That

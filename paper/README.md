@@ -4,7 +4,7 @@ This directory contains benchmark introductions, preprints, citations,
 figures, and publication artifacts.
 
 The [Structural Gate completion paper](2026-10-17-structural-gate-completion.md)
-also documents the public release of the benchmark generator and scorer. The
+also documents the public release of **Benchmark A: Structural Transfer**. The
 source package exposes the evaluation instrument, not Protama's private
 runtime or learned state.
 

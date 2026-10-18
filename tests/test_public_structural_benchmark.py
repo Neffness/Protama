@@ -1,23 +1,23 @@
 import unittest
 
-from protama_benchmark.structural.generator import (
+from structural_transfer_benchmark.structural.generator import (
     NEAR_MISS_CATEGORIES,
     check_episode_leakage,
     episode_to_json,
     generate_structural_gate_episode,
 )
-from protama_benchmark.structural.models import (
+from structural_transfer_benchmark.structural.models import (
     GateAdapterRun,
     GatePrediction,
     GateTrace,
 )
-from protama_benchmark.structural.manifest import build_locked_final_manifest
-from protama_benchmark.structural.scorer import (
+from structural_transfer_benchmark.structural.manifest import build_locked_final_manifest
+from structural_transfer_benchmark.structural.scorer import (
     aggregate_structural_gate_scores,
     evaluate_preregistered_pass_rule,
     score_structural_gate_episode,
 )
-from protama_benchmark.structural.topologies import generate_topology_episode
+from structural_transfer_benchmark.structural.topologies import generate_topology_episode
 
 
 class PublicStructuralBenchmarkTests(unittest.TestCase):

@@ -1,4 +1,4 @@
-# Gate Work 06 — Dictionary to Structural Interpretation
+# Gate Work 06 â€” Dictionary to Structural Interpretation
 
 Status: **DEVELOPMENT INTEGRATION PROBE**
 
@@ -17,7 +17,7 @@ direct structured-family application: unavailable from the selected context
 ```
 
 The canonical
-[ProtomaDictionaryTraining.py](../../Tools/ProtomaDictionaryTraining.py)
+the private dictionary training implementation
 path now preserves dictionary context and publishes the selected observations
 to learned surface-relation memory. Surface-derived hypotheses now carry
 candidate provenance and route through Protama's existing learned
@@ -182,7 +182,7 @@ first, and the fallback records normalized dictionary evidence separately. The
 benchmark therefore checks reusable family application rather than comparing
 pattern strings alone.
 
-### Human audit finding — 2026-10-16
+### Human audit finding â€” 2026-10-16
 
 The 45/75 development result is not publication-grade negative-calibration
 evidence. A human audit found that the pool builder treated family labels as
@@ -190,7 +190,7 @@ mutually exclusive, even though dictionary definitions can express more than
 one valid relation. For example:
 
 ```text
-Abevacuation — A partial evacuation.
+Abevacuation â€” A partial evacuation.
 ```
 
 This can validly express noun equivalence while also referring to an action
@@ -199,7 +199,7 @@ merely because the pool builder assigned it to `known_noun`. The audit also
 identified surface-trigger risks such as:
 
 ```text
-Badger — An itinerant licensed dealer in commodities used for food...
+Badger â€” An itinerant licensed dealer in commodities used for food...
 ```
 
 The phrase `used for` does not make this an `object_used_for` definition; the

@@ -89,7 +89,8 @@ The first preregistered contract uses:
 
 Confidence intervals use 10,000 episode-bootstrap resamples at 95% confidence
 with seed `1729`. Critical leakage is disqualifying. The complete locked
-configuration is [structural_gate_v1.json](../configs/structural_gate_v1.json).
+configuration is
+[structural_gate_v1.json](../../../configs/structural_gate_v1.json).
 
 The delta criterion is evaluated only on eligible episodes whose pre-episode
 probe score is below the ceiling, with a minimum eligible-episode count fixed
@@ -199,7 +200,7 @@ preregistration.
 
 ## Phase A evidence
 
-- [structural_gate_v1.json](../configs/structural_gate_v1.json)
+- [structural_gate_v1.json](../../../configs/structural_gate_v1.json)
 - [episode.v1.json](../schemas/episode.v1.json)
 - [prediction.v1.json](../schemas/prediction.v1.json)
 - [trace.v1.json](../schemas/trace.v1.json)

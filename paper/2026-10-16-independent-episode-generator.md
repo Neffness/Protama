@@ -1,4 +1,4 @@
-# The Next Big Milestone: Protama's Independent Episode Generator
+﻿# The Next Big Milestone: Protama's Independent Episode Generator
 
 ## Building a trustworthy measurement system for structural learning
 
@@ -51,9 +51,9 @@ repeatable test before asking Protama to pass it.
 The dictionary-family development pools also exposed an important design
 requirement before publication. Their first negative controls treated family
 labels as mutually exclusive, but a dictionary definition can express
-multiple valid structural relations. A definition such as “A partial
-evacuation” can support both a noun-equivalence interpretation and an
-action-related interpretation. A phrase such as “used for food” can appear
+multiple valid structural relations. A definition such as â€œA partial
+evacuationâ€ can support both a noun-equivalence interpretation and an
+action-related interpretation. A phrase such as â€œused for foodâ€ can appear
 inside a definition of a person rather than an object. The resulting
 development score is therefore useful for finding routing and control
 problems, but its negative-rejection result is not publication evidence.
@@ -242,7 +242,7 @@ locked final manifest replay: byte-equivalent
 
 This is meaningful progress toward the milestone, but it is not a completed
 Structural Gate evaluation. The locked final boundary is materialized at
-`benchmark/artifacts/structural-gate-final-manifest-v1.json` with 50 canonical
+`benchmark/structural-transfer-v1/artifacts/structural-gate-final-manifest-v1.json` with 50 canonical
 episodes and 25 episodes for each of the two topology slices. Its content
 fingerprint is
 `e3767bc9995aa1b531886deaa82e612ff2e1fa4343fe779e39fc5193059096ce`.
@@ -311,8 +311,8 @@ surface memorization, and post-hoc interpretation.
 
 ## Related artifacts
 
-- [Independent Episode Generator](../benchmark/gate-work/02_Independent_Episode_Generator.md)
-- [Structural Induction and Transfer Gate](../benchmark/Protama_Inductive_Structural_Invention_Test.md)
-- [Structural Gate Publication Task List](../benchmark/Protama_Structural_Gate_Publication_Task_List.md)
+- [Independent Episode Generator](../benchmark/structural-transfer-v1/gate-work/02_Independent_Episode_Generator.md)
+- [Structural Induction and Transfer Gate](../benchmark/structural-transfer-v1/Protama_Inductive_Structural_Invention_Test.md)
+- [Structural Gate Publication Task List](../benchmark/structural-transfer-v1/Protama_Structural_Gate_Publication_Task_List.md)
 - [First Gold Gate Publication](2026-10-16-first-gold-gate.md)
 - [Structural Learning Roadmap](../docs/roadmap/structural-learning-roadmap.md)

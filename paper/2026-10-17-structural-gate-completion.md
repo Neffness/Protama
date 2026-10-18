@@ -1,4 +1,4 @@
-# Protama Structural Gate Completion
+﻿# Protama Structural Gate Completion
 
 ## Abstract
 
@@ -23,16 +23,17 @@ variants. Evaluator-only family gold and expected labels were not provided to
 the adapter.
 
 The active protocol is
-[structural-gate-preregistration-v2.json](../benchmark/artifacts/structural-gate-preregistration-v2.json).
+[structural-gate-preregistration-v2.json](../benchmark/structural-transfer-v1/artifacts/structural-gate-preregistration-v2.json).
 The held-out manifest, adapter output, baseline suite, scored report, and
 internal artifact audit are preserved under
-[benchmark/artifacts/](../benchmark/artifacts/).
+[benchmark/structural-transfer-v1/artifacts/](../benchmark/structural-transfer-v1/artifacts/).
 
 ## Public evaluation instrument
 
 The generator, topology definitions, leakage checks, manifest fingerprinting,
-public data contracts, and scorer used for this benchmark are released in the
-[public `protama_benchmark` source package](../src/protama_benchmark/).
+public data contracts, and scorer used for **Benchmark A: Structural Transfer**
+are released in the [public
+`structural_transfer_benchmark` source package](../src/structural_transfer_benchmark/).
 This release makes the measuring instrument inspectable and reusable without
 publishing Protama's private runtime, learned state, or production adapter.
 
@@ -42,9 +43,10 @@ environment with `python -m venv .venv` followed by
 `.venv/bin/activate` path on Unix-like systems). Its deterministic generator,
 manifest fingerprinting, and scorer support independent inspection of episode
 construction, artifact identity, evaluator-side labels, and pass-rule
-calculations. The published held-out artifacts remain the frozen record for
-this completed gate; future evaluations should use a versioned protocol and,
-where appropriate, unreleased held-out material.
+calculations. Protama is the first evaluated system in this benchmark release.
+The published held-out artifacts remain the frozen record for this completed
+gate; future evaluations should use a versioned protocol and, where
+appropriate, unreleased held-out material.
 
 ## Result
 
@@ -68,7 +70,7 @@ violation, argument omission, single-feature mismatch, surface decoy, lexical
 overlap, novel negative, ambiguity, and contradiction.
 
 The primary held-out report is
-[structural-gate-heldout-report-v2.json](../benchmark/artifacts/structural-gate-heldout-report-v2.json).
+[structural-gate-heldout-report-v2.json](../benchmark/structural-transfer-v1/artifacts/structural-gate-heldout-report-v2.json).
 Its `human_report` field contains the reviewer-readable report, so the JSON
 artifact is the canonical report link.
 
@@ -102,10 +104,10 @@ transfer, interference, operation counts, trace counts, wall-clock time, and
 peak traced memory. These probes are separate from the stateless per-episode
 adapter used for the primary gate and are not additional pass evidence for
 continual learning. It is recorded in
-[structural-gate-publication-evidence-v1.json](../benchmark/artifacts/structural-gate-publication-evidence-v1.json).
+[structural-gate-publication-evidence-v1.json](../benchmark/structural-transfer-v1/artifacts/structural-gate-publication-evidence-v1.json).
 
 The audit record is
-[structural-gate-heldout-review-v1.json](../benchmark/artifacts/structural-gate-heldout-review-v1.json).
+[structural-gate-heldout-review-v1.json](../benchmark/structural-transfer-v1/artifacts/structural-gate-heldout-review-v1.json).
 
 ## Claim boundary
 
@@ -127,7 +129,7 @@ This does not establish:
 - L6 discovery of entirely new reusable categories;
 - L7 self-directed refinement through information-seeking examples;
 - GPU/CPU parity;
-- performance outside the benchmark’s generated distributions.
+- performance outside the benchmarkâ€™s generated distributions.
 
 The active dictionary-learning study remains a companion evaluation. It is not
 silently folded into this Structural Gate result.

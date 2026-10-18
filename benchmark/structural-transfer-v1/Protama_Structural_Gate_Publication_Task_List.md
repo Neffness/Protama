@@ -1,4 +1,4 @@
-# Protama Structural Gate Publication Task List
+﻿# Protama Structural Gate Publication Task List
 
 This is the execution checklist for producing a publishable Structural
 Induction and Transfer Gate result. It is derived from
@@ -63,7 +63,7 @@ publication-ready evidence.
 
 ## Work plan
 
-### Phase A — lock the benchmark contract
+### Phase A â€” lock the benchmark contract
 
 - [x] Define the episode schema:
       hidden family, train examples, held-out positives, negatives,
@@ -83,7 +83,7 @@ publication-ready evidence.
 
 **Exit artifact:** locked configuration plus a versioned pass-rule document.
 
-### Phase B — build the independent episode generator
+### Phase B â€” build the independent episode generator
 
 - [x] Generate at least 100 independently seeded family episodes, subject to
       power analysis.
@@ -102,7 +102,7 @@ publication-ready evidence.
 **Exit artifact:** generator package, seed manifest, leakage report, and
 replayed episode fixtures.
 
-### Phase C — implement the evaluation adapter
+### Phase C â€” implement the evaluation adapter
 
 - [x] Train Protama only on `D_train`.
 - [x] Prevent held-out labels and family names from entering the system.
@@ -123,7 +123,7 @@ replayed episode fixtures.
 **Exit artifact:** one adapter run can produce a complete replayable episode
 artifact without evaluator-only data entering Protama.
 
-### Phase D — implement scoring
+### Phase D â€” implement scoring
 
 - [x] Development positive transfer accuracy.
 - [x] Development negative rejection accuracy.
@@ -148,13 +148,13 @@ human-readable report from raw episode artifacts.
 
 The development package is frozen, and the held-out seed allocation is now
 preregistered separately in
-`benchmark/artifacts/structural-gate-preregistration-v2.json`. Version 2
+`benchmark/structural-transfer-v1/artifacts/structural-gate-preregistration-v2.json`. Version 2
 supersedes version 1 because the scorer audit expanded the category report to
 include the generated ambiguity and contradiction cases. The final allocation
 uses generator seeds `1000..1049` and topology seeds `2000..2024` for each
 topology, keeping it disjoint from the frozen development allocation.
 
-### Phase E — run baselines and ablations
+### Phase E â€” run baselines and ablations
 
 - [x] Development exact-match baseline.
 - [x] Development keyword baseline.
@@ -177,7 +177,7 @@ topology, keeping it disjoint from the frozen development allocation.
 **Exit artifact:** baseline/ablation matrix showing which capability changes
 move each metric, especially lexical-identity ablation.
 
-### Phase F — validate CPU/GPU and replay parity
+### Phase F â€” validate CPU/GPU and replay parity
 
 - [x] GPU parity is explicitly out of scope for the current claim.
 - [x] CPU replay decisions, statuses, evidence, and explanations are
@@ -190,7 +190,7 @@ move each metric, especially lexical-identity ablation.
 
 **Exit artifact:** parity report and deterministic replay report.
 
-### Phase G — final preregistered evaluation
+### Phase G â€” final preregistered evaluation
 
 - [x] Freeze generator, scorer, pass-rule, adapter, and baseline protocol.
 - [x] Freeze final seeds and configuration hash.
@@ -208,7 +208,7 @@ move each metric, especially lexical-identity ablation.
 
 **Exit artifact:** immutable final evaluation bundle.
 
-### Additional benchmark — active dictionary learning boundary
+### Additional benchmark â€” active dictionary learning boundary
 
 This benchmark is a companion intelligence experiment, not a substitute for
 the Structural Induction and Transfer Gate. It measures whether the learned
@@ -319,15 +319,15 @@ Each completed checkpoint gets one dedicated evidence document. The master
 task list records scope and dependency; the checkpoint document records
 decisions, implementation evidence, validation, and remaining limitations.
 
-- [01 — Benchmark Contract](gate-work/01_Benchmark_Contract.md) — **contract artifacts drafted**
-- [02 — Independent Episode Generator](gate-work/02_Independent_Episode_Generator.md) — **held-out package and audit complete**
-- 03 — Evaluation Adapter — **implementation complete; snapshot/retention extensions remain**
-- [04 — Gate Scorer](gate-work/04_Gate_Scorer.md) — **held-out scorer complete**
-- [05 — Baselines and Ablations](gate-work/05_Baselines_and_Ablations.md) — **declared CPU/structured controls complete**
-- [06 — Dictionary to Structural Integration](gate-work/06_Dictionary_Structural_Integration.md) — **development integration probe and active-boundary benchmark**
-- [07 — Surface Relation Learning Experiment](gate-work/07_Surface_Relation_Learning_Experiment.md) — **integrated development experiment**
-- 08 — Replay and Substrate Parity — **replay complete; GPU parity excluded**
-- 09 — Final Preregistered Run — **complete; internal artifact audit passed**
+- [01 â€” Benchmark Contract](gate-work/01_Benchmark_Contract.md) â€” **contract artifacts drafted**
+- [02 â€” Independent Episode Generator](gate-work/02_Independent_Episode_Generator.md) â€” **held-out package and audit complete**
+- 03 â€” Evaluation Adapter â€” **implementation complete; snapshot/retention extensions remain**
+- [04 â€” Gate Scorer](gate-work/04_Gate_Scorer.md) â€” **held-out scorer complete**
+- [05 â€” Baselines and Ablations](gate-work/05_Baselines_and_Ablations.md) â€” **declared CPU/structured controls complete**
+- [06 â€” Dictionary to Structural Integration](gate-work/06_Dictionary_Structural_Integration.md) â€” **development integration probe and active-boundary benchmark**
+- [07 â€” Surface Relation Learning Experiment](gate-work/07_Surface_Relation_Learning_Experiment.md) â€” **integrated development experiment**
+- 08 â€” Replay and Substrate Parity â€” **replay complete; GPU parity excluded**
+- 09 â€” Final Preregistered Run â€” **complete; internal artifact audit passed**
 
 ## Immediate next implementation
 
