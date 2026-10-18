@@ -10,6 +10,9 @@ runtime or learned state.
 
 ## Published research artifacts
 
+- [Making the Full Dictionary Practical for Protama](2026-10-18-dictionary-scale-and-sparse-gpu-execution.md) —
+  results from the complete dictionary-derived GPU capacity experiment,
+  including the sparse-streaming redesign.
 - [Protama Crosses Its First Gold Gate](2026-10-16-first-gold-gate.md) —
   initial evidence of learned structural transfer on a frozen,
   independently labelled dictionary-definition subset. The broader

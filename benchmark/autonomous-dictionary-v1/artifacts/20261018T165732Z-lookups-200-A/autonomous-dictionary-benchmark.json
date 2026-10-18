@@ -1,0 +1,26 @@
+{
+  "runs": [
+    {
+      "benchmark_status": "pass",
+      "contextual_continuation": true,
+      "contextual_terms": 29,
+      "dictionary_hits": 169,
+      "frontier_change": 888,
+      "initial_candidates": 52,
+      "integrity_passed": true,
+      "label": "A-200",
+      "learned_terms": 171,
+      "lookup_budget_respected": true,
+      "lookups": 200,
+      "names_hits": 2,
+      "normalized_lookups": 1,
+      "source_artifact": "D:\\Projects\\NeffAI\\Protama\\benchmark\\autonomous-dictionary-v1\\artifacts\\20261018T165732Z-lookups-200-A\\autonomous-dictionary-pilot.json",
+      "source_misses": 29,
+      "status": "budget_exhausted",
+      "stopping_reason": "maximum_lookup_count",
+      "unresolved_after": 940,
+      "unresolved_before": 52
+    }
+  ],
+  "schema": "protama.autonomous-dictionary-benchmark.v1"
+}

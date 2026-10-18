@@ -19,9 +19,9 @@ revision, uncertainty, and abstention. The goal is not to make a more fluent
 chatbot. The goal is to investigate whether an intelligence can learn
 relationships that remain useful when the words and circumstances change.
 
-This repository contains the public Protama research artifacts and the
-**Protama Structural Induction and Transfer Gate**: a benchmark designed to
-evaluate structural generalization rather than memorization.
+This repository contains the public Protama research artifacts and
+**Benchmark A: Structural Transfer**, a benchmark initially developed to
+evaluate Protama's structural generalization rather than memorization.
 
 [Read the Protama vision](VISION.md) to learn what the project is becoming,
 what it explicitly does not claim, and how its research roadmap is organized.
@@ -34,18 +34,22 @@ human-inspection, external-review, training-control, and guardrail principles.
 
 ## Current evidence
 
-Protama has completed a preregistered, held-out CPU evaluation of its
-Structural Induction and Transfer Gate. Across 100 generated episodes, the
-tested stateless adapter passed the declared L2–L5 rule, including transfer to
-novel vocabulary, typed near-miss rejection, and explanation checks. The
-evaluation package, baselines, and internal artifact audit are preserved in
-the public benchmark artifacts.
+Protama has completed a preregistered, held-out CPU evaluation of Benchmark A:
+Structural Transfer. Across 100 generated episodes, the tested stateless
+adapter passed the declared L2–L5 rule, including transfer to novel
+vocabulary, typed near-miss rejection, and explanation checks. This is a
+bounded result within the benchmark's declared generated families and
+topologies; it is not an out-of-distribution family test. The evaluation
+package, baselines, and internal artifact audit are preserved in the public
+benchmark artifacts.
 
 This is a bounded result under specified benchmark conditions. It is not a
-claim of general intelligence, continual learning, GPU parity, L6 independent
-invention, or L7 self-directed refinement. The separate research-affordance
-result is a supervised demonstration rather than an independent generalization
-evaluation.
+claim of general intelligence, broad out-of-distribution reasoning, continual
+learning, GPU parity, L6 independent invention, or L7 self-directed
+refinement. The current baseline suite does not establish superiority over a
+strong symbolic/program-synthesis solver or a few-shot language-model
+baseline. The separate research-affordance result is a supervised
+demonstration rather than an independent generalization evaluation.
 
 Read the [Structural Gate completion paper](paper/2026-10-17-structural-gate-completion.md)
 for the result, methods, limitations, and claim boundary. The earlier

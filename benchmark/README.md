@@ -31,7 +31,9 @@ The public harness can generate deterministic episodes and score an adapter
 run through the `structural_transfer_benchmark.structural` API. The completed
 Structural Gate's
 frozen artifacts remain the historical evaluation record; a future gate can
-use a new version and separate held-out material.
+use a new version and separate held-out material. Benchmark A's current
+held-out split is disjoint by episode and seed, but remains within its declared
+generator and topology distribution; it is not an external-family test.
 
 The current implementation boundary is summarized in the
 [structural-family development report](../reports/development/2026-10-15-structural-family-progress.md).

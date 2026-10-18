@@ -1,0 +1,35 @@
+{
+  "backend": "TorchStreamingBackend",
+  "cuda_device": "NVIDIA GeForce RTX 5070 Laptop GPU",
+  "cuda_peak_allocated_bytes": 19410432,
+  "cuda_peak_reserved_bytes": 1639972864,
+  "curriculum": "run_all_gates_and_training",
+  "curriculum_completed": true,
+  "edges": 637448,
+  "first_result": [
+    {
+      "score": 679.0,
+      "symbol": "small"
+    },
+    {
+      "score": 547.0,
+      "symbol": "kind"
+    },
+    {
+      "score": 478.0,
+      "symbol": "person"
+    }
+  ],
+  "gpu_graph_build_seconds": 0.5234351000399329,
+  "gpu_graph_plus_score_seconds": 3.797225700051058,
+  "gpu_score_seconds": 3.273790600011125,
+  "observation_batch_size": 4096,
+  "observations_scored": 50000,
+  "schema": "protama.autonomous-dictionary-gpu-full-dictionary-streaming-sparse-trained.v1",
+  "score_mode": "sparse",
+  "source": "D:\\Projects\\NeffAI\\Books\\Dictionary",
+  "source_graph_load_seconds": 3.9142374000512064,
+  "source_shard_size": 16384,
+  "symbols": 125912,
+  "words_processed": 172781
+}

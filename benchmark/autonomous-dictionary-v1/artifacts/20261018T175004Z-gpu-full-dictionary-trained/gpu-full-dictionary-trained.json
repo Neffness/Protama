@@ -1,0 +1,31 @@
+{
+  "cuda_device": "NVIDIA GeForce RTX 5070 Laptop GPU",
+  "cuda_peak_allocated_bytes": 3625188864,
+  "cuda_peak_reserved_bytes": 5251268608,
+  "curriculum": "run_all_gates_and_training",
+  "curriculum_completed": true,
+  "edges": 637448,
+  "first_result": [
+    {
+      "score": 679.0,
+      "symbol": "small"
+    },
+    {
+      "score": 547.0,
+      "symbol": "kind"
+    },
+    {
+      "score": 478.0,
+      "symbol": "person"
+    }
+  ],
+  "gpu_graph_build_seconds": 0.7530795999919064,
+  "gpu_graph_plus_score_seconds": 10.367426099954173,
+  "gpu_score_seconds": 9.614346499962267,
+  "observations_scored": 50000,
+  "schema": "protama.autonomous-dictionary-gpu-full-dictionary-trained.v1",
+  "source": "D:\\Projects\\NeffAI\\Books\\Dictionary",
+  "source_graph_load_seconds": 4.734480600047391,
+  "symbols": 125912,
+  "words_processed": 172781
+}

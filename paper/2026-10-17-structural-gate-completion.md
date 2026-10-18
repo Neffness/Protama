@@ -7,11 +7,13 @@ and Transfer Gate. The held-out package contains 100 independently generated
 episodes spanning canonical relational families and typed equivalence and
 purpose topologies. The evaluation tested L2 latent relational induction, L3
 transfer to novel vocabulary and surface forms, L4 typed structural near-miss
-rejection, and L5 generalization across tested unseen combinations.
+rejection, and L5 generalization across tested unseen combinations within the
+declared generated families and topologies.
 
 Protama passed the declared L2-L5 rule. The result is bounded: it is evidence
-for the tested structural capability under the stated benchmark conditions, not
-a claim of general intelligence, unrestricted language understanding, L6
+for the tested structural capability under the stated benchmark conditions,
+not a test of generalization to entirely new benchmark families and not a
+claim of general intelligence, unrestricted language understanding, L6
 independent invention, or L7 self-directed refinement.
 
 ## What was evaluated
@@ -88,6 +90,35 @@ no-structural-memory controls on the principal transfer and structural metrics.
 Some ablations matched decision accuracy on this task while testing different
 trace or evidence mechanisms; therefore the result is not described as
 superiority over every ablation.
+
+The baseline suite does not include a topology-aware symbolic inducer, a
+program-synthesis solver, or a few-shot language-model baseline. The reported
+comparisons therefore establish separation from the included controls, not
+architectural superiority over strong general alternatives.
+
+## Limitations of the current measurement
+
+The held-out split separates episodes and seeds from development, but it uses
+the same declared generator, family definitions, and topology definitions.
+It demonstrates episode-level transfer within this benchmark distribution, not
+out-of-distribution transfer to families authored after development or by an
+independent benchmark author. A future benchmark version should include
+frozen held-out families or externally authored evaluation items.
+
+The primary adapter and runtime are private. Public release of the generator,
+manifest fingerprinting, and scorer makes the measurement instrument
+inspectable and the artifact chain reproducible, but it does not independently
+reproduce Protama's private execution. A public adapter contract or hosted
+evaluation endpoint would allow external systems to submit outputs without
+disclosing the runtime.
+
+Explanation fidelity is computed from observable evidence and trace fields
+associated with the adapter decision. Because the explanation checks are partly
+coupled to those fields, the `0.978220` result should not be read as proof
+that the explanations are independent post-hoc accounts. Likewise, selective
+risk of `0.000000` is conditional on the current package and its perfect
+decision accuracy; it does not establish risk-free behavior in harder or
+external distributions.
 
 ## Reproducibility and audit
 
