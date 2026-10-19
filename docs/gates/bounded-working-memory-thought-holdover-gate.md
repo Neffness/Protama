@@ -110,6 +110,11 @@ The package must include the generator version, scorer version, baseline
 versions, configuration hash, random seeds, memory-accounting convention, and
 replay artifacts for every published result.
 
+The canonical CPU Protama calibration path is the fully inspectable reference
+implementation on the CPU execution path. It must not substitute GPU kernels
+or introduce substrate-induced nondeterminism; its source version,
+configuration, interpreter, and hardware identity are recorded.
+
 ## Reference evaluation workflow
 
 The reference workflow is:
@@ -365,7 +370,9 @@ the encoded representation, decoder, and relation metadata against the same
 budget. Non-recodable loads must keep each independently necessary item and
 relation reconstructible. The manifest and report must identify the two
 conditions separately, so legitimate compression cannot inflate the reported
-item capacity.
+item capacity. The charged footprint must be the actual runtime representation
+measured during execution, including instantiated encoder/decoder state and
+metadata, rather than a theoretical minimum.
 
 In **Phase 2**, run untouched held-out episodes using the frozen procedure.
 The preregistration must specify numeric minimums or maximums for the nine
@@ -376,6 +383,14 @@ CPU/GPU equivalence, and other condition-level outcomes must still be
 reported, with leakage and uncharged storage remaining mandatory validity
 conditions. Report confidence intervals and abstentions; a threshold is not
 met by omitting difficult trials.
+
+Each numeric threshold must also include a baseline-anchored justification:
+development performance for the strong non-oracle baselines, development
+performance for the oracle baseline, the proposed value and uncertainty, and
+one line explaining why the value discriminates the target capability rather
+than merely describing Protama's own development curve. These nine
+justifications are part of the versioned freeze record and must be completed
+before held-out results are inspected.
 
 ## Pass conditions
 

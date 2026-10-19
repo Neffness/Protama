@@ -28,6 +28,12 @@ This preserves matched comparisons while making the calibration source
 explicit. The GPU implementation is evaluated against the CPU-calibrated
 manifest rather than being allowed to select its own favorable loads.
 
+**Canonical CPU Protama** means the fully inspectable reference
+implementation evaluated on the CPU execution path, with no GPU-kernel
+substitution and no substrate-induced nondeterminism. Its source version,
+configuration, interpreter, and hardware identity are recorded in the
+calibration record.
+
 The calibration record must contain the generator and scorer fingerprints, the
 canonical breakpoint, the below/near/above load values, the distractor loads,
 the recoding annotations, and the seed used to produce the record. Held-out
@@ -57,7 +63,10 @@ and required relation metadata against the same transient budget. A
 non-recodable item or relation is independently necessary and must remain
 individually reconstructible. A system may chunk recodable material, but may
 not use chunking, an uncharged pointer, or an event-log lookup to hide
-non-recodable load. Results are stratified by these two conditions.
+non-recodable load. The charged footprint is the actual runtime representation
+measured during execution, including the instantiated encoder/decoder state
+and metadata, not a theoretical minimum or an abstract description of the
+algorithm. Results are stratified by these two conditions.
 
 Each episode records its thought boundary, thought identifier, authorized
 promotion events, item identities, relation identities and arguments, and
@@ -108,6 +117,58 @@ the maximum tested load. In addition to the gating fields, the report must
 include complex-span submetrics, interference error, decay, cross-thought
 leakage, failure counts, abstentions, promotion dispositions, and resource
 traces.
+
+## Baseline-anchored threshold justification
+
+Before numeric values are frozen, the preregistration must append one
+justification line for each of the nine fields above. Each line must state:
+
+1. the development result for the strong non-oracle baselines;
+2. the development result for the oracle baseline;
+3. the proposed threshold value and its confidence interval or uncertainty
+   range; and
+4. why the value discriminates the intended capability rather than merely
+   describing the observed Protama development curve.
+
+The strong non-oracle comparison is defined before inspecting results as the
+relevance-aware retention baseline, with FIFO, deterministic random, and
+no-holdover results reported alongside it. The unlimited-memory reference is
+reported as an upper-bound control, and the oracle retention policy is the
+privileged upper-bound comparison. No baseline may be designated “strong” only
+after seeing which one performs best.
+
+The justification must use the same estimator, episode strata, and accounting
+convention as the held-out report. A threshold may not be justified solely by
+Protama's own development value, and a value that every baseline and the
+oracle satisfy does not discriminate the capability. If baseline performance
+overlaps the proposed threshold, the record must explain the intended
+separation or revise the threshold before freeze. These justifications are
+part of the versioned freeze record and cannot be added after held-out results
+are inspected.
+
+The freeze record must contain the following nine lines, populated with
+numeric values before the held-out run:
+
+```text
+k_min: [value]; strong-baseline development: [result]; oracle: [result];
+  discrimination rationale: [one line]
+alpha_span: [value]; strong-baseline development: [result]; oracle: [result];
+  discrimination rationale: [one line]
+beta_binding: [value]; strong-baseline development: [result]; oracle: [result];
+  discrimination rationale: [one line]
+delta_distractor_max: [value]; strong-baseline development: [result];
+  oracle: [result]; discrimination rationale: [one line]
+eta_eviction_max: [value]; strong-baseline development: [result];
+  oracle: [result]; discrimination rationale: [one line]
+pi_promotion_max: [value]; strong-baseline development: [result];
+  oracle: [result]; discrimination rationale: [one line]
+rho_replay_min: [value]; strong-baseline development: [result];
+  oracle: [result]; discrimination rationale: [one line]
+m_transient_max: [value]; strong-baseline development: [result];
+  oracle: [result]; discrimination rationale: [one line]
+latency_budget: [value]; strong-baseline development: [result];
+  oracle: [result]; discrimination rationale: [one line]
+```
 
 ## Promotion scoring
 
