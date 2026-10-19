@@ -141,9 +141,18 @@ capacity, distractor, and evidence condition, the lower endpoint of the
 two-sided 95% confidence interval for
 `policy_accuracy - registered_baseline_accuracy` must be no lower than the
 negative of this value. This is a matched comparison on identical episodes,
-not a pooled average, and is inactive for a declared non-learning reference
-configuration. The baseline, condition grid, statistic, confidence procedure,
-and candidate value must be frozen before held-out evaluation.
+not a pooled average. The primary registered baseline is the strong
+non-oracle relevance-aware retention policy; FIFO retention is a required
+secondary regression control. The extension is inactive for a declared
+non-learning reference configuration. The baseline, condition grid, statistic,
+confidence procedure, and candidate value must be frozen before held-out
+evaluation.
+
+The gate therefore has two layers: the original capacity layer evaluates
+bounded-state behavior, while the conditional policy-learning layer evaluates
+whether learned retention adds value without contaminating held-out evidence.
+The latter was added after private-side implementation exposed that a
+fixed-policy gate did not test the learned policy itself.
 
 The current proposal for the capacity criterion is \(a_{\min}=0.75\)
 episode-level binding accuracy, evaluated on the canonical non-distractor

@@ -1,5 +1,11 @@
 # Bounded Working Memory and Thought Holdover Gate
 
+This gate has two modular layers: a capacity gate for bounded-state behavior
+and, when learned retention is enabled, a policy-learning gate for whether the
+learned policy preserves value without evaluation-time leakage. The second
+layer was added in response to private-side implementation evidence; it was
+not assumed to be part of the original fixed-policy capacity claim.
+
 > **Status:** Public evaluation contract; development evidence is in progress.
 > This document defines an evaluation contract, not a completed result.
 
@@ -416,6 +422,11 @@ same episodes. The comparison is condition-stratified by capacity, distractor
 load, and evidence regime; pooled averages must not conceal a regression in a
 harder condition.
 
+The primary registered baseline is the strong non-oracle
+**relevance-aware retention** policy. FIFO retention remains a required
+secondary regression control because a learned policy must not be credited
+with improvement while performing worse than a simpler recency policy.
+
 For condition \(c\), define policy gain as:
 
 $$
@@ -441,6 +452,12 @@ additional learned machinery from being called an improvement when a simpler
 policy performs better. The baseline, condition grid, gain statistic,
 confidence procedure, and candidate value must be registered before final
 held-out evaluation.
+
+The held-out run evaluates a frozen snapshot of the learned policy. The
+development phase tests whether the policy can learn from delayed outcomes;
+the held-out phase tests the frozen retention behavior and the integrity of
+the learning boundary. It does not claim to evaluate a live learner that
+continues updating during the test.
 
 ## Pass conditions
 
