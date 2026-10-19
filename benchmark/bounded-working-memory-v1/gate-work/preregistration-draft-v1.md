@@ -11,14 +11,19 @@ pass.
 
 ## Evaluation order and freeze boundary
 
-The evaluation has two phases:
+The evaluation has three phases:
 
 1. **Calibration:** development material is used to measure the canonical CPU
    Protama capacity curve, validate recodable and non-recodable generators,
    choose fixed load levels, and estimate uncertainty.
-2. **Held-out evaluation:** the generator or complete episode manifest, scoring
-   code, seeds, policies, hardware budget, calibration result, and all
-   thresholds are frozen before any held-out result is inspected.
+2. **Development adaptation:** if a learned retention policy is evaluated,
+   it may update only on registered development episodes. The resulting policy
+   snapshot, update protocol, episode order, and epoch count are recorded and
+   then frozen.
+3. **Held-out evaluation:** the generator or complete episode manifest, scoring
+   code, frozen policy snapshot, seeds, policies, hardware budget, calibration
+   result, and all thresholds are frozen before any held-out result is
+   inspected. Held-out evaluation must reject all policy outcome updates.
 
 The canonical CPU Protama breakpoint anchors the common held-out load grid.
 CPU Protama, GPU Protama, and every baseline run the same held-out episodes and
@@ -39,6 +44,17 @@ canonical breakpoint, the below/near/above load values, the distractor loads,
 the recoding annotations, and the seed used to produce the record. Held-out
 episodes must be generated from a separate seed family or locked manifest and
 must be untouched by threshold selection.
+
+When adaptive retention is enabled, the registered sequence is:
+
+```text
+development episodes -> policy updates -> frozen policy snapshot
+-> held-out restore -> held-out scoring with updates disabled
+```
+
+The held-out runner must record the frozen-policy identity and attempted
+outcome-update count. Any successful held-out update is a protocol failure,
+not a silently excluded episode.
 
 ## Held-out evaluation
 
@@ -94,6 +110,14 @@ decision. Exact tensor values, internal ordering among equal-scoring candidates,
 and resource measurements are not required to match. Any disagreement is
 reported per episode and in aggregate.
 
+Before final calibration, the decision contract must also freeze a
+score-comparison epsilon, the rule for treating scores within that epsilon as
+tied, the canonical tie-break order, and whether unresolved ties abstain.
+These rules must be implemented by both substrates. The calibration runner
+must not normalize or rewrite one substrate's output to match the other.
+Development diagnostics may use a zero-margin stress case to expose ordering
+differences, but such a diagnostic is not held-out evidence.
+
 ## Metrics and threshold definitions
 
 The final report must include condition-level and aggregate values for the
@@ -101,9 +125,9 @@ following. The threshold fields below are all **gating**, not diagnostic.
 
 | Field | What it thresholds | Units | Passing direction |
 |---|---|---|---|
-| `k_min` | canonical non-distractor capacity breakpoint, the smallest independently necessary non-recodable load at which accuracy crosses below the preregistered capacity criterion | items/relations | breakpoint must be at least this value |
+| `k_min` | canonical non-distractor supported capacity, defined as the largest independently necessary non-recodable load whose lower confidence bound meets the preregistered capacity criterion; the next tested load is reported as the first failing load when observed | items/relations | supported capacity must be at least this value |
 | `alpha_span` | complex-span accuracy after the required compare, transform, or bind operation | proportion of episodes, 0–1 | accuracy must be at least this value |
-| `beta_binding` | binding accuracy for the required relation type, including correct arguments | proportion of scored bindings, 0–1 | accuracy must be at least this value |
+| `beta_binding` | binding accuracy for the required relation type, including correct arguments, evaluated at the canonical supported non-distractor load and the preregistered held-out distractor condition | proportion of scored bindings, 0–1 | accuracy must be at least this value |
 | `delta_distractor_max` | matched accuracy decrement from adding the preregistered distractor load | proportion-point difference, 0–1 | decrement must be no greater than this value |
 | `eta_eviction_max` | combined error rate for eviction and expiration decisions, including retaining state that should be absent or losing state that should remain | proportion of scored lifecycle decisions, 0–1 | error must be no greater than this value |
 | `pi_promotion_max` | promotion error rate: unauthorized, contradicted, uncertain, or missing-evidence state promoted as durable, plus any other incorrect promotion disposition | proportion of promotion cases, 0–1 | error must be no greater than this value |
@@ -111,9 +135,27 @@ following. The threshold fields below are all **gating**, not diagnostic.
 | `m_transient_max` | peak charged transient-state footprint during an episode | bytes under the declared accounting convention | footprint must be no greater than this value |
 | `latency_budget` | maximum allowed p95 end-to-end episode latency, including retention, retrieval, scoring, and snapshot operations as applicable to the condition | milliseconds per episode | p95 latency must be no greater than this value |
 
-The capacity criterion used to locate the breakpoint is itself frozen before
-the held-out run. A right-censored breakpoint is not silently converted into
-the maximum tested load. In addition to the gating fields, the report must
+When learned retention or selection is enabled, the report also includes the
+policy-value extension `gamma_policy_regression_max`. For every registered
+capacity, distractor, and evidence condition, the lower endpoint of the
+two-sided 95% confidence interval for
+`policy_accuracy - registered_baseline_accuracy` must be no lower than the
+negative of this value. This is a matched comparison on identical episodes,
+not a pooled average, and is inactive for a declared non-learning reference
+configuration. The baseline, condition grid, statistic, confidence procedure,
+and candidate value must be frozen before held-out evaluation.
+
+The current proposal for the capacity criterion is \(a_{\min}=0.75\)
+episode-level binding accuracy, evaluated on the canonical non-distractor
+grid \(K=1,2,3,4\). The lower endpoint of a two-sided 95% episode bootstrap
+interval must meet or exceed \(a_{\min}\). The capacity criterion,
+confidence-bound rule, and tested load grid used to locate the supported
+capacity are frozen before the held-out run. The
+supported capacity is the largest tested load whose lower confidence bound
+meets the criterion; if the next failing load is not observed, the supported
+capacity is right-censored and the report must say so rather than treating the
+maximum tested load as a measured breakpoint. In addition to the gating fields,
+the report must
 include complex-span submetrics, interference error, decay, cross-thought
 leakage, failure counts, abstentions, promotion dispositions, and resource
 traces.
@@ -206,11 +248,12 @@ For a minimum threshold, the lower 95% confidence bound must meet or exceed
 the threshold. For a maximum threshold, the upper 95% confidence bound must be
 at or below the threshold. For `latency_budget`, the upper 95% confidence
 bound of p95 episode latency must meet the budget. For `m_transient_max`, the
-upper 95% confidence bound of the episode peak must meet the budget. A
-capacity breakpoint is reported with its bootstrap interval and is gating only
-when its lower bound meets `k_min`; right-censored results fail to establish
-the threshold unless the preregistered design explicitly makes the censoring
-bound sufficient.
+upper 95% confidence bound of the episode peak must meet the budget. The
+supported capacity is reported with its bootstrap interval and is gating only
+when its lower bound meets `k_min`; right-censored supported capacity fails to
+establish the threshold unless the preregistered design explicitly makes the
+censoring bound sufficient. The first failing load, when observed, is reported
+separately and is not substituted for supported capacity.
 
 An episode may be excluded only for a preregistered harness or infrastructure
 failure that prevents the episode from being presented or scored: corrupted

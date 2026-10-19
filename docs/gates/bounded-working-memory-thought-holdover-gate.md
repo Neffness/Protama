@@ -127,13 +127,15 @@ The reference workflow is:
    CPU Protama implementation;
 5. freeze the canonical breakpoint, common load grid, recoding annotations,
    and calibrated distractor loads;
-6. run Phase 2 held-out distractor, interference, decay, binding, and
+6. if adaptive retention is enabled, run only the registered development
+   adaptation episodes and freeze the resulting policy snapshot;
+7. run Phase 2 held-out distractor, interference, decay, binding, and
    cross-thought trials;
-7. capture state manifests, provenance, decisions, and resource traces;
-8. run registered baselines, controls, and ablations;
-9. execute snapshot and deterministic-replay checks;
-10. calculate preregistered metrics and confidence intervals;
-11. emit human-readable and machine-readable reports.
+8. capture state manifests, provenance, decisions, and resource traces;
+9. run registered baselines, controls, and ablations;
+10. execute snapshot and deterministic-replay checks;
+11. calculate preregistered metrics and confidence intervals;
+12. emit human-readable and machine-readable reports.
 ```
 
 An evaluation must record:
@@ -156,6 +158,14 @@ Development runs may use visible generators and exploratory loads. Final
 evaluation runs must use an independently held-out generator or locked test
 manifest. Development and pilot results must remain labeled as development
 evidence.
+
+If adaptive retention is enabled, the held-out runner restores a frozen
+development policy snapshot and rejects every outcome update. It must report
+the policy identity (a SHA-256 fingerprint of the canonical policy snapshot),
+the complete adaptation protocol (episode order, epoch count, reward values,
+and update timing), update-attempt count, and any protocol failure. A
+successful held-out update is a failure of the evaluation protocol, not an
+episode exclusion.
 
 ## Evaluation unit
 
@@ -222,11 +232,17 @@ A(L,T,D)=
 \mathbf{1}[\hat{Y}_e=Y_e]
 $$
 
-The capacity breakpoint \(K\) is the smallest independently necessary load
-whose accuracy falls below the preregistered criterion \(a_{\min}\), estimated
-from the no-distractor capacity series. If the criterion is not crossed in the
-tested range, report \(K\) as right-censored rather than treating the tested
-maximum as the capacity.
+The supported capacity \(K_{\mathrm{supported}}\) is the largest independently
+necessary load whose lower confidence bound meets the preregistered criterion
+\(a_{\min}\), estimated from the no-distractor capacity series. The next
+tested load is reported as the first failing load when it is observed. If the
+next failing load is not observed, the supported capacity is right-censored;
+the tested maximum must not be presented as a measured failure breakpoint.
+
+The current proposal for \(a_{\min}\) is `0.75` episode-level binding
+accuracy, using the lower endpoint of a two-sided 95% episode bootstrap
+interval. This remains a proposal until the threshold record is accepted and
+frozen; it is not a gate result.
 
 For matched distractor and no-distractor conditions, define distractor
 decrement as:
@@ -392,6 +408,40 @@ than merely describing Protama's own development curve. These nine
 justifications are part of the versioned freeze record and must be completed
 before held-out results are inspected.
 
+### Policy-value extension
+
+When a learned retention or selection policy is being evaluated, the gate
+also reports its value relative to a registered non-learning baseline on the
+same episodes. The comparison is condition-stratified by capacity, distractor
+load, and evidence regime; pooled averages must not conceal a regression in a
+harder condition.
+
+For condition \(c\), define policy gain as:
+
+$$
+G_c = A_{\mathrm{policy},c} - A_{\mathrm{baseline},c}
+$$
+
+The proposed extension field is `gamma_policy_regression_max`, the maximum
+permitted negative lower-confidence-bound gain. A candidate learned policy
+must satisfy:
+
+$$
+\operatorname{LCB}_{95}(G_c)
+\geq -\gamma_{\mathrm{policy\_regression,max}}
+$$
+
+for every registered condition. A value of zero requires the learned policy to
+be no worse than the baseline; a negative lower bound is a regression even if
+the absolute binding threshold passes. Positive improvement is reported
+separately and is not assumed merely because a learned policy is present.
+
+This extension does not replace absolute binding correctness. It prevents
+additional learned machinery from being called an improvement when a simpler
+policy performs better. The baseline, condition grid, gain statistic,
+confidence procedure, and candidate value must be registered before final
+held-out evaluation.
+
 ## Pass conditions
 
 A pass requires:
@@ -404,6 +454,8 @@ A pass requires:
 - no cross-thought leakage;
 - no unsupported promotion to durable state; and
 - decision-identical replay of retention, retrieval, and final decisions.
+- no condition-level regression beyond the registered policy-value limit when
+  learned retention or selection is enabled.
 
 ## Pass rule
 
@@ -428,7 +480,7 @@ L_{p95}\leq \mathrm{latency\_budget} \\
 \end{cases}
 $$
 
-Here \(K\) is the capacity breakpoint, \(A_{\mathrm{span}}\) and
+Here \(K\) is the canonical supported capacity, \(A_{\mathrm{span}}\) and
 \(A_{\mathrm{bind}}\) are complex-span and binding accuracy, \(\Delta_D\) is
 distractor decrement, \(E_{\mathrm{evict}}\) is eviction error,
 \(I_{\mathrm{leak}}\) is cross-thought leakage, \(P_{\mathrm{err}}\) is
@@ -443,6 +495,9 @@ test run and must not be selected after inspecting final held-out results.
 All nine numeric thresholds are gating. Interference error, decay, CPU/GPU
 decision-equivalence rate, and condition-level curves are reported diagnostics
 unless a future version explicitly promotes them into the threshold set.
+The policy-value extension is an additional gating validity condition whenever
+learned retention or selection is enabled. It is inactive for a declared
+non-learning reference configuration.
 
 The public report must include raw metrics, condition-level metrics, confidence
 intervals, failures and abstentions, excluded episodes and exclusion reasons,
@@ -462,10 +517,20 @@ The benchmark must include:
    and provides an upper-bound reference.
 7. **Inspectable CPU Protama:** tests the reference implementation.
 8. **GPU Protama:** tests the accelerated implementation under evaluation.
+9. **Matched policy-value comparison:** compares the evaluated learned policy
+   with the registered baseline on identical episode realizations and reports
+   condition-level gain and confidence bounds.
 
 CPU and GPU versions must be compared for behavioral equivalence on the shared
 contract, substrate-induced capacity differences, memory accounting, and
 snapshot replay.
+
+The shared decision contract must define score comparison at execution
+precision: a registered epsilon, deterministic ordering among scores within
+that epsilon, and the abstention behavior for unresolved ties. CPU and GPU
+must implement that comparator themselves. A calibration harness may align
+inputs, but it must not normalize or rewrite outputs after either substrate
+has made its decision.
 
 ## Ablation plan
 
