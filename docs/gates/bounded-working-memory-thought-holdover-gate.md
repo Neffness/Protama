@@ -118,8 +118,10 @@ The reference workflow is:
 1. select a locked benchmark configuration;
 2. verify the declared memory and latency accounting;
 3. initialize the system from the declared snapshot;
-4. run Phase 1 capacity calibration without distractors;
-5. freeze the system-specific breakpoint and calibrated loads;
+4. run Phase 1 capacity calibration without distractors using the canonical
+   CPU Protama implementation;
+5. freeze the canonical breakpoint, common load grid, recoding annotations,
+   and calibrated distractor loads;
 6. run Phase 2 held-out distractor, interference, decay, binding, and
    cross-thought trials;
 7. capture state manifests, provenance, decisions, and resource traces;
@@ -336,23 +338,44 @@ Consolidation Gate. That gate begins at the consolidation boundary and owns
 the quality of the durable transformation, so the two gates do not double-count
 promotion quality.
 
+Promotion dispositions are scored by episode condition: supported evidence
+must be promoted with provenance; contradicted evidence must be rejected while
+its contradiction record remains visible; uncertain evidence must abstain or
+remain explicitly pending; and missing-evidence cases must be rejected or
+deferred. Forced promotion in either of the latter three conditions is an
+error. Maintenance must preserve an explicitly supported item through its
+registered interval, while natural expiration, replacement, and supersession
+must produce their declared non-retrievable or replaced outcomes.
+
 ## Calibration and threshold procedure
 
-Use two stages. In **Phase 1**, use development episodes to measure each
-system's capacity curve, select the load levels and distractor fractions
-(below, near, and above the fitted breakpoint), validate the recodable and
-non-recodable generators, estimate uncertainty, and freeze the scoring code,
-thresholds, seeds, hardware budget, and baseline policies. Capacity is
-measured before any distractor trial for that system; “where capacity
-permits” therefore means a preregistered load at or below that measured
-breakpoint, not a post-hoc judgment.
+Use two stages. In **Phase 1**, use development episodes to measure the
+canonical CPU Protama capacity curve, select the common load levels and
+distractor fractions (below, near, and above the fitted breakpoint), validate
+the recodable and non-recodable generators, estimate uncertainty, and freeze
+the scoring code, thresholds, seeds, hardware budget, and baseline policies.
+The held-out CPU Protama, GPU Protama, and baseline runs use this same
+calibrated manifest; they do not receive separate favorable calibration.
+Capacity curves for the other systems are reported diagnostically. “Where
+capacity permits” therefore means a preregistered common load at or below the
+canonical breakpoint, not a post-hoc judgment.
+
+Recodable loads must declare a lossless, task-authorized encoding and charge
+the encoded representation, decoder, and relation metadata against the same
+budget. Non-recodable loads must keep each independently necessary item and
+relation reconstructible. The manifest and report must identify the two
+conditions separately, so legitimate compression cannot inflate the reported
+item capacity.
 
 In **Phase 2**, run untouched held-out episodes using the frozen procedure.
-Pass thresholds must specify numeric minimums or maximums for the capacity
-breakpoint, complex-span and binding accuracy, distractor decrement,
-interference and promotion-error rates, leakage, eviction correctness,
-replay agreement, and resource cost. Report confidence intervals and
-abstentions; a threshold is not met by omitting difficult trials.
+The preregistration must specify numeric minimums or maximums for the nine
+gating fields: capacity breakpoint, complex-span accuracy, binding accuracy,
+distractor decrement, eviction/expiration error, promotion-error rate, replay
+agreement, transient footprint, and latency. Interference, decay, leakage,
+CPU/GPU equivalence, and other condition-level outcomes must still be
+reported, with leakage and uncharged storage remaining mandatory validity
+conditions. Report confidence intervals and abstentions; a threshold is not
+met by omitting difficult trials.
 
 ## Pass conditions
 
@@ -370,21 +393,22 @@ A pass requires:
 ## Pass rule
 
 The gate must use preregistered component thresholds rather than one averaged
-score. A provisional pass rule is:
+score. The nine named thresholds are all gating, and all must pass:
 
 $$
 \operatorname{PASS}
 \iff
 \begin{cases}
 K\geq k_{\min} \\
-A_{\mathrm{span}}\geq \alpha \\
-A_{\mathrm{bind}}\geq \beta \\
-\Delta_D\leq \delta_{\max} \\
-E_{\mathrm{evict}}\leq \eta_{\max} \\
+A_{\mathrm{span}}\geq \alpha_{\mathrm{span}} \\
+A_{\mathrm{bind}}\geq \beta_{\mathrm{binding}} \\
+\Delta_D\leq \delta_{\mathrm{distractor,max}} \\
+E_{\mathrm{evict}}\leq \eta_{\mathrm{eviction,max}} \\
 I_{\mathrm{leak}}=0 \\
-P_{\mathrm{err}}\leq \pi_{\max} \\
-R_{\mathrm{replay}}\geq \rho \\
-M\leq m_{\max} \\
+P_{\mathrm{err}}\leq \pi_{\mathrm{promotion,max}} \\
+R_{\mathrm{replay}}\geq \rho_{\mathrm{replay,min}} \\
+M\leq m_{\mathrm{transient,max}} \\
+L_{p95}\leq \mathrm{latency\_budget} \\
 \text{no critical leakage or uncharged storage detected}
 \end{cases}
 $$
@@ -394,10 +418,16 @@ Here \(K\) is the capacity breakpoint, \(A_{\mathrm{span}}\) and
 distractor decrement, \(E_{\mathrm{evict}}\) is eviction error,
 \(I_{\mathrm{leak}}\) is cross-thought leakage, \(P_{\mathrm{err}}\) is
 promotion error rate, \(R_{\mathrm{replay}}\) is decision-identical replay
-agreement, and \(M\) is peak transient-state footprint. The values
-\(k_{\min},\alpha,\beta,\delta_{\max},\eta_{\max},\pi_{\max},\rho\), and
-\(m_{\max}\) must be fixed before the final test run. They must not be selected
-after inspecting final held-out results.
+agreement, \(M\) is peak transient-state footprint, and \(L_{p95}\) is p95
+end-to-end episode latency. The exact threshold definitions, units, direction,
+and confidence-bound rules are registered in the public preregistration draft.
+The leakage and uncharged-storage conditions are mandatory validity conditions
+in addition to the nine numeric fields. All must be fixed before the final
+test run and must not be selected after inspecting final held-out results.
+
+All nine numeric thresholds are gating. Interference error, decay, CPU/GPU
+decision-equivalence rate, and condition-level curves are reported diagnostics
+unless a future version explicitly promotes them into the threshold set.
 
 The public report must include raw metrics, condition-level metrics, confidence
 intervals, failures and abstentions, excluded episodes and exclusion reasons,
@@ -467,7 +497,8 @@ The final benchmark should include, at minimum:
 independently generated episode families
 multiple evaluation seeds, or a deterministic equivalent
 separate development and final-test generators
-95% confidence intervals
+95% confidence intervals from 10,000 episode-level bootstrap resamples using
+seed 1729
 locked final-test generator
 preregistered pass thresholds
 complete snapshots and state manifests
@@ -475,9 +506,13 @@ decision-identical replay artifacts
 ```
 
 Exact sample counts may be revised after a power analysis, but the protocol
-must be fixed before final evaluation. Use bootstrap or binomial confidence
-intervals appropriate to each metric. Report episode-level variation rather
-than treating every operation within one episode as independent.
+must be fixed before final evaluation. Resample complete episodes within
+condition strata, not individual operations. Minimum thresholds use the lower
+95% bound; maximum thresholds use the upper 95% bound, including the upper
+bound of p95 latency and peak transient footprint. A model failure, timeout,
+abstention, contradiction, promotion rejection, or poor outcome is not an
+exclusion. Only preregistered harness or infrastructure failures with saved
+traces may be excluded.
 
 ## Failure conditions
 
