@@ -40,3 +40,8 @@ The current implementation boundary is summarized in the
 
 The separate [Epistemic Growth and Active Inquiry Gate](../docs/gates/epistemic-growth-active-inquiry-gate.md)
 is a proposed future gate and has no released benchmark implementation yet.
+
+The [Bounded Working Memory and Thought Holdover benchmark](./bounded-working-memory-v1/)
+is under development. Its public record contains the gate-aligned schemas and
+will receive generated artifacts as the control policies and evaluator are
+completed.

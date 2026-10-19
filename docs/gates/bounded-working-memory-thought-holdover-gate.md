@@ -3,9 +3,57 @@
 > **Status:** Public evaluation contract; development evidence is in progress.
 > This document defines an evaluation contract, not a completed result.
 
+## Abstract
+
+The Protama Bounded Working Memory and Thought Holdover Gate is a benchmark
+for evaluating bounded transient retention, multi-step manipulation, relational
+binding, controlled decay, interference resistance, and thought-local state
+discipline.
+
+Each benchmark episode gives a system a finite workbench, a sequence of
+operations, items and relations that must remain available, competing material,
+and a required final decision. The system must retain and manipulate what the
+task requires, evict or decay what the budget cannot support, preserve the
+identity and arguments of bindings, and prevent transient state from becoming
+an untracked durable store.
+
+The benchmark is designed to distinguish bounded working state from unlimited
+logging, pointer-based retrieval, independent-item recall without manipulation,
+and accidental persistence across thought boundaries. It evaluates a specific
+transient-memory capability. It does not claim to establish human working
+memory, consciousness, or general intelligence.
+
 This specification is intentionally implementation-neutral. It is suitable for
 independent review, adversarial testing, and matched baseline comparisons
 without exposing private runtime layouts or unpublished training records.
+
+## Why this gate exists
+
+A system can appear to remember while relying on a complete event log, an
+unbounded pointer structure, durable writes made during the task, or a
+retrieval mechanism that never reconstructs the requested content. It can also
+recall isolated items while failing to preserve the relations that make those
+items useful.
+
+These shortcuts are especially difficult to detect when evaluation asks only
+for a final answer. A valid test must require intermediate manipulation, vary
+load and retention interval independently, introduce controlled competition,
+and inspect what remains available after eviction, expiration, snapshot
+restore, and thought termination.
+
+## Motivation
+
+The gate therefore measures whether a system can:
+
+- maintain a finite, auditable transient workbench;
+- manipulate retained items rather than merely repeat them;
+- preserve role-filler, feature, and relational bindings;
+- benefit from legitimate lossless chunking without hiding capacity;
+- distinguish decay from interference and distractor-task failure;
+- make calibrated retention and eviction decisions;
+- reconstruct retained content without dereferencing an unbounded log;
+- prevent completed thoughts from influencing later thoughts; and
+- reproduce decisions after snapshot restoration.
 
 ## Purpose
 
@@ -16,10 +64,91 @@ For this gate, a **cycle** is one externally prompted cognitive operation
 transition, such as observe, compare, verify, or synthesize. It is not a lesson
 cycle, a probe schedule, or a consolidation cycle.
 
+A **thought** is one evaluator-delimited episode: it begins when the evaluator
+issues the episode task and ends at the required final decision or an explicit
+abort. All retained state created for that episode is thought-local unless the
+episode explicitly authorizes a promotion event. A cycle is an operation within
+that thought.
+
 ## Scope
 
 The evaluator supplies the task and requires a bounded sequence of operations.
 Protama does not need autonomous thought or self-generated goals.
+
+### Scope and non-claims
+
+This gate measures bounded transient retention and manipulation under controlled
+load. It is not a test of a fixed biological item limit, Baddeley's component
+architecture, consciousness, autonomous motivation, or general intelligence.
+A system that passes may have demonstrated an important component of intelligent
+behavior without demonstrating any of those broader properties.
+
+## Public benchmark package
+
+A complete public release should contain:
+
+```text
+benchmark/
+    generators/
+    binding_types/
+    recodable_loads/
+    nonrecodable_loads/
+    distractors/
+    scoring/
+    leakage_checks/
+    replay/
+baselines/
+protama_adapter/
+configs/
+results/
+reports/
+tests/
+README.md
+```
+
+The package must include the generator version, scorer version, baseline
+versions, configuration hash, random seeds, memory-accounting convention, and
+replay artifacts for every published result.
+
+## Reference evaluation workflow
+
+The reference workflow is:
+
+```text
+1. select a locked benchmark configuration;
+2. verify the declared memory and latency accounting;
+3. initialize the system from the declared snapshot;
+4. run Phase 1 capacity calibration without distractors;
+5. freeze the system-specific breakpoint and calibrated loads;
+6. run Phase 2 held-out distractor, interference, decay, binding, and
+   cross-thought trials;
+7. capture state manifests, provenance, decisions, and resource traces;
+8. run registered baselines, controls, and ablations;
+9. execute snapshot and deterministic-replay checks;
+10. calculate preregistered metrics and confidence intervals;
+11. emit human-readable and machine-readable reports.
+```
+
+An evaluation must record:
+
+```text
+gate version
+generator version
+scorer version
+system version or commit
+configuration hash
+episode seeds
+backend and hardware
+initial snapshot identity
+final snapshot identity
+memory-accounting convention
+threshold-set identity
+```
+
+Development runs may use visible generators and exploratory loads. Final
+evaluation runs must use an independently held-out generator or locked test
+manifest. Development and pilot results must remain labeled as development
+evidence.
 
 ## Evaluation unit
 
@@ -40,12 +169,20 @@ required final decision
 The episode must include complex-span trials in which Protama must hold items
 while comparing, transforming, or binding them.
 
+Binding trials must identify the binding type being tested: role-filler
+bindings, feature bindings, or relational bindings. Loads must include both
+recodable items (where a stated rule permits lossless chunking) and
+non-recodable items (where each item or relation remains independently
+necessary).
+
 ## Required behavior
 
 Protama must:
 
 - retain only bounded transient state;
-- retrieve retained items by thought and generation;
+- retrieve retained items by thought and generation, meaning it must
+  reconstruct the requested item or relation from the retained representation,
+  not dereference an index into an unbounded buffer or event log;
 - manipulate retained items while preserving identity and relations;
 - bind relations to the correct arguments under load;
 - resist distractor replacement where capacity permits;
@@ -54,19 +191,125 @@ Protama must:
 - preserve provenance for retained and evicted items; and
 - reproduce behavior after snapshot restoration.
 
+Transient state may be compressed or chunked. Chunking is legitimate when the
+compressed representation is lossless for the stated task and its size is
+charged against the same memory budget. It is not legitimate when it silently
+stores independently necessary non-recodable items, relations, or an
+unbounded replay pointer. The harness must report performance separately for
+recodable and non-recodable loads.
+
+## Formal evaluation quantities
+
+For episode \(e\), let \(L_e\) be the number of independently necessary items
+and relations, \(T_e\) the retention interval in cognitive operation cycles,
+and \(D_e\) the distractor load. Let \(Y_e\) be the required decision and
+\(\hat{Y}_e\) the system decision. Let \(M_e\) be peak transient-state
+footprint under the declared accounting convention.
+
+The basic decision accuracy is:
+
+$$
+A(L,T,D)=
+\frac{1}{|E_{L,T,D}|}
+\sum_{e\in E_{L,T,D}}
+\mathbf{1}[\hat{Y}_e=Y_e]
+$$
+
+The capacity breakpoint \(K\) is the smallest independently necessary load
+whose accuracy falls below the preregistered criterion \(a_{\min}\), estimated
+from the no-distractor capacity series. If the criterion is not crossed in the
+tested range, report \(K\) as right-censored rather than treating the tested
+maximum as the capacity.
+
+For matched distractor and no-distractor conditions, define distractor
+decrement as:
+
+$$
+\Delta_D(L,T)=A(L,T,0)-A(L,T,D)
+$$
+
+For matched target-only and competing-item conditions, define interference
+error as the proportion of target failures attributable to a changed
+competitor or relation, not merely to the presence of an additional task.
+
+Every episode must preserve the distinction between:
+
+```text
+item identity
+binding identity
+binding arguments
+retention status
+eviction status
+expiration status
+durable-promotion status
+```
+
+These fields are scored separately. A correct final answer does not erase an
+incorrect intermediate binding, unauthorized promotion, or leakage event.
+
+## Episode and condition design
+
+The generator must include:
+
+- load series spanning below, near, and above the measured breakpoint;
+- fixed-load interval series for decay;
+- fixed-interval load series for capacity and interference;
+- target-only, distractor-only, and competing-target conditions;
+- role-filler, feature, and relational binding trials;
+- item permutations and relation reversals;
+- recodable and non-recodable item families;
+- snapshot points before and after at least one manipulation; and
+- thought-boundary probes with overlapping surface vocabulary but disjoint
+  episode identities.
+
+No condition may be scored as evidence for two causal explanations when its
+design cannot distinguish them. In particular, interval must vary at fixed
+load for decay estimates, and load must vary at fixed interval for
+interference estimates.
+
 ## Primary metrics
 
-- capacity curve;
-- complex-span accuracy;
-- binding accuracy;
-- distractor resistance;
-- interference error;
-- decay curve;
-- replacement and eviction correctness;
-- cross-thought leakage;
-- promotion error rate;
-- snapshot replay equivalence; and
-- memory and latency cost.
+- **Capacity curve:** exact decision accuracy as a function of independently
+  necessary load, measured at fixed retention interval and without distractors.
+  Report the full load-response curve and the fitted breakpoint at which
+  accuracy first falls below the preregistered criterion; do not assume a
+  particular functional form.
+- **Complex-span accuracy:** proportion of trials on which the final decision
+  is correct after the required compare, transform, or bind operations, with
+  item identity and relation errors reported separately.
+- **Binding accuracy:** proportion of role-filler, feature, and relational
+  bindings reproduced with the correct arguments, conditioned on the relevant
+  items being retained.
+- **Distractor resistance:** accuracy on distractor trials minus accuracy at
+  the same load and interval without distractors, reported at calibrated
+  loads relative to the measured capacity breakpoint.
+- **Interference error:** an incorrect response caused by a competing item or
+  relation replacing, confusing, or misbinding a target, measured by comparing
+  matched target-only and interference conditions. A failure caused by the
+  distractor task itself, without target competition, is a distractor failure,
+  not an interference error.
+- **Decay curve:** accuracy as retention interval increases at fixed load and
+  with no competing material. This is dissociated from interference by varying
+  load at a fixed interval in a separate condition.
+- **Replacement and eviction correctness:** precision and recall of the
+  state-selection policy: whether items that should remain are retrievable and
+  items that should be evicted or expired are absent, including provenance for
+  each decision.
+- **Cross-thought leakage:** proportion of trials in which an item, relation,
+  or actionable influence from a completed thought affects a later thought
+  without an authorized durable promotion. The denominator and item identity
+  are recorded per boundary.
+- **Promotion error rate:** unsupported durable-write events divided by all
+  attempted durable-write events, with unauthorized writes counted as errors.
+  Report zero attempted writes separately; do not treat an undefined rate as
+  zero error.
+- **Snapshot replay equivalence:** agreement between original and restored
+  runs on retention, retrieval, manipulation, eviction, and final decision
+  outcomes under the same seed and inputs. The contract requires
+  decision-identical behavior, not bit-identical internal memory layout.
+- **Memory and latency cost:** peak transient-state footprint and operation
+  latency, measured with the same accounting and hardware configuration for
+  every system and baseline.
 
 ## Controls
 
@@ -81,17 +324,160 @@ Compare against:
 
 Include item-permutation controls and relation-reversal controls.
 
+## Promotion boundary
+
+This gate does not decide which experience deserves durable memory. A
+promotion is **supported** here only when the episode explicitly authorizes a
+durable write and supplies the authorization and provenance record; rehearsal,
+frequency, value, or apparent usefulness alone is not support. The gate scores
+unauthorized or unproven writes as promotion errors and hands an authorized
+promotion, with its provenance, to the Evidence Promotion and Memory
+Consolidation Gate. That gate begins at the consolidation boundary and owns
+the quality of the durable transformation, so the two gates do not double-count
+promotion quality.
+
+## Calibration and threshold procedure
+
+Use two stages. In **Phase 1**, use development episodes to measure each
+system's capacity curve, select the load levels and distractor fractions
+(below, near, and above the fitted breakpoint), validate the recodable and
+non-recodable generators, estimate uncertainty, and freeze the scoring code,
+thresholds, seeds, hardware budget, and baseline policies. Capacity is
+measured before any distractor trial for that system; “where capacity
+permits” therefore means a preregistered load at or below that measured
+breakpoint, not a post-hoc judgment.
+
+In **Phase 2**, run untouched held-out episodes using the frozen procedure.
+Pass thresholds must specify numeric minimums or maximums for the capacity
+breakpoint, complex-span and binding accuracy, distractor decrement,
+interference and promotion-error rates, leakage, eviction correctness,
+replay agreement, and resource cost. Report confidence intervals and
+abstentions; a threshold is not met by omitting difficult trials.
+
 ## Pass conditions
 
 A pass requires:
 
 - bounded memory use;
 - above-baseline manipulation and binding;
-- measurable degradation when capacity is exceeded;
+- a preregistered capacity curve with measurable degradation when capacity is
+  exceeded;
 - correct eviction and expiration;
 - no cross-thought leakage;
 - no unsupported promotion to durable state; and
-- exact replay of retention and retrieval decisions.
+- decision-identical replay of retention, retrieval, and final decisions.
+
+## Pass rule
+
+The gate must use preregistered component thresholds rather than one averaged
+score. A provisional pass rule is:
+
+$$
+\operatorname{PASS}
+\iff
+\begin{cases}
+K\geq k_{\min} \\
+A_{\mathrm{span}}\geq \alpha \\
+A_{\mathrm{bind}}\geq \beta \\
+\Delta_D\leq \delta_{\max} \\
+E_{\mathrm{evict}}\leq \eta_{\max} \\
+I_{\mathrm{leak}}=0 \\
+P_{\mathrm{err}}\leq \pi_{\max} \\
+R_{\mathrm{replay}}\geq \rho \\
+M\leq m_{\max} \\
+\text{no critical leakage or uncharged storage detected}
+\end{cases}
+$$
+
+Here \(K\) is the capacity breakpoint, \(A_{\mathrm{span}}\) and
+\(A_{\mathrm{bind}}\) are complex-span and binding accuracy, \(\Delta_D\) is
+distractor decrement, \(E_{\mathrm{evict}}\) is eviction error,
+\(I_{\mathrm{leak}}\) is cross-thought leakage, \(P_{\mathrm{err}}\) is
+promotion error rate, \(R_{\mathrm{replay}}\) is decision-identical replay
+agreement, and \(M\) is peak transient-state footprint. The values
+\(k_{\min},\alpha,\beta,\delta_{\max},\eta_{\max},\pi_{\max},\rho\), and
+\(m_{\max}\) must be fixed before the final test run. They must not be selected
+after inspecting final held-out results.
+
+The public report must include raw metrics, condition-level metrics, confidence
+intervals, failures and abstentions, excluded episodes and exclusion reasons,
+and the exact pass-rule version.
+
+## Baselines
+
+The benchmark must include:
+
+1. **Unlimited-memory reference:** estimates task performance without a
+   capacity constraint.
+2. **No-holdover baseline:** clears transient state between every operation.
+3. **FIFO retention:** tests whether recency alone explains retention choices.
+4. **Random retention:** provides a lower policy baseline.
+5. **Relevance-aware retention:** provides the strong non-oracle policy baseline.
+6. **Oracle retention policy:** receives the episode's required future targets
+   and provides an upper-bound reference.
+7. **Inspectable CPU Protama:** tests the reference implementation.
+8. **GPU Protama:** tests the accelerated implementation under evaluation.
+
+CPU and GPU versions must be compared for behavioral equivalence on the shared
+contract, substrate-induced capacity differences, memory accounting, and
+snapshot replay.
+
+## Ablation plan
+
+At minimum, run ablations that remove or replace:
+
+- transient-state compression;
+- chunk formation;
+- provenance tracking;
+- relevance scoring;
+- explicit eviction;
+- decay or expiration;
+- binding-specific storage;
+- distractor detection;
+- snapshot restoration; and
+- thought-boundary clearing.
+
+The critical chunking ablation compares recodable and non-recodable loads. A
+system must not pass by compressing away independently necessary relations or
+by replacing the workbench with a replayable event log.
+
+## Leakage and validity rules
+
+A run must be rejected or separately labeled if the system receives any
+unpermitted path to the target state or answer, including:
+
+- the complete event log as a freely queryable memory;
+- an uncharged pointer to evicted or future items;
+- durable writes made without an episode authorization;
+- future target identities or relation answers;
+- held-out episodes or labels before final scoring;
+- a hidden capacity value or threshold;
+- a thought identifier that exposes the required response; or
+- a benchmark-specific output token that encodes retention status.
+
+The evaluator must record not only whether the final answer was correct, but
+whether the path to that answer respected the declared capacity, provenance,
+and thought boundary.
+
+## Statistical and reproducibility protocol
+
+The final benchmark should include, at minimum:
+
+```text
+independently generated episode families
+multiple evaluation seeds, or a deterministic equivalent
+separate development and final-test generators
+95% confidence intervals
+locked final-test generator
+preregistered pass thresholds
+complete snapshots and state manifests
+decision-identical replay artifacts
+```
+
+Exact sample counts may be revised after a power analysis, but the protocol
+must be fixed before final evaluation. Use bootstrap or binomial confidence
+intervals appropriate to each metric. Report episode-level variation rather
+than treating every operation within one episode as independent.
 
 ## Failure conditions
 
@@ -102,6 +488,7 @@ The gate fails if Protama:
 - loses relation bindings under load;
 - retrieves evicted state as if it were present;
 - leaks state between thoughts;
+- uses an uncharged chunk or replay pointer to bypass the memory budget;
 - changes behavior after restore; or
 - treats the entire event log as working memory.
 
@@ -119,8 +506,11 @@ Any claimed result should publish:
 - the episode generator or complete episode manifest;
 - all baseline and Protama outcomes, including failures and abstentions;
 - capacity, accuracy, interference, promotion-error, latency, and memory
-  measurements; and
-- enough metadata to reproduce snapshot and restore comparisons.
+  measurements, stratified by binding type and recodable versus non-recodable
+  load;
+- thought boundaries, promotion authorizations, and provenance records; and
+- enough metadata to reproduce decision-identical snapshot and restore
+  comparisons.
 
 Development observations must remain labeled as development evidence until the
 thresholds and matched controls are frozen.
