@@ -1,0 +1,240 @@
+{
+  "aggregation": "policy-capacity-mean-curves",
+  "benchmark": "bounded-working-memory-v1",
+  "capacities": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "seeds": [
+    11,
+    19,
+    23
+  ],
+  "source_artifact": "development-capacity-policy-sweep.json",
+  "status": "development",
+  "summaries": [
+    {
+      "binding_accuracy_mean": 0.0,
+      "capacity": 1,
+      "cross_thought_leakage_any": false,
+      "evicted_count_mean": 5.0,
+      "policy": "fifo",
+      "replay_equivalent_all": true,
+      "retained_count_mean": 1.0,
+      "retained_distractor_count_mean": 1.0,
+      "trial_count": 3
+    },
+    {
+      "binding_accuracy_mean": 0.0,
+      "capacity": 2,
+      "cross_thought_leakage_any": false,
+      "evicted_count_mean": 4.0,
+      "policy": "fifo",
+      "replay_equivalent_all": true,
+      "retained_count_mean": 2.0,
+      "retained_distractor_count_mean": 2.0,
+      "trial_count": 3
+    },
+    {
+      "binding_accuracy_mean": 0.0,
+      "capacity": 3,
+      "cross_thought_leakage_any": false,
+      "evicted_count_mean": 3.0,
+      "policy": "fifo",
+      "replay_equivalent_all": true,
+      "retained_count_mean": 3.0,
+      "retained_distractor_count_mean": 2.0,
+      "trial_count": 3
+    },
+    {
+      "binding_accuracy_mean": 0.333333,
+      "capacity": 4,
+      "cross_thought_leakage_any": false,
+      "evicted_count_mean": 2.0,
+      "policy": "fifo",
+      "replay_equivalent_all": true,
+      "retained_count_mean": 4.0,
+      "retained_distractor_count_mean": 2.0,
+      "trial_count": 3
+    },
+    {
+      "binding_accuracy_mean": 0.0,
+      "capacity": 1,
+      "cross_thought_leakage_any": false,
+      "evicted_count_mean": 4.0,
+      "policy": "none",
+      "replay_equivalent_all": true,
+      "retained_count_mean": 0.0,
+      "retained_distractor_count_mean": 0.0,
+      "trial_count": 3
+    },
+    {
+      "binding_accuracy_mean": 0.0,
+      "capacity": 2,
+      "cross_thought_leakage_any": false,
+      "evicted_count_mean": 4.0,
+      "policy": "none",
+      "replay_equivalent_all": true,
+      "retained_count_mean": 0.0,
+      "retained_distractor_count_mean": 0.0,
+      "trial_count": 3
+    },
+    {
+      "binding_accuracy_mean": 0.0,
+      "capacity": 3,
+      "cross_thought_leakage_any": false,
+      "evicted_count_mean": 4.0,
+      "policy": "none",
+      "replay_equivalent_all": true,
+      "retained_count_mean": 0.0,
+      "retained_distractor_count_mean": 0.0,
+      "trial_count": 3
+    },
+    {
+      "binding_accuracy_mean": 0.0,
+      "capacity": 4,
+      "cross_thought_leakage_any": false,
+      "evicted_count_mean": 4.0,
+      "policy": "none",
+      "replay_equivalent_all": true,
+      "retained_count_mean": 0.0,
+      "retained_distractor_count_mean": 0.0,
+      "trial_count": 3
+    },
+    {
+      "binding_accuracy_mean": 0.0,
+      "capacity": 1,
+      "cross_thought_leakage_any": false,
+      "evicted_count_mean": 5.0,
+      "policy": "oracle",
+      "replay_equivalent_all": true,
+      "retained_count_mean": 1.0,
+      "retained_distractor_count_mean": 0.0,
+      "trial_count": 3
+    },
+    {
+      "binding_accuracy_mean": 0.333333,
+      "capacity": 2,
+      "cross_thought_leakage_any": false,
+      "evicted_count_mean": 4.0,
+      "policy": "oracle",
+      "replay_equivalent_all": true,
+      "retained_count_mean": 2.0,
+      "retained_distractor_count_mean": 0.0,
+      "trial_count": 3
+    },
+    {
+      "binding_accuracy_mean": 0.666667,
+      "capacity": 3,
+      "cross_thought_leakage_any": false,
+      "evicted_count_mean": 3.0,
+      "policy": "oracle",
+      "replay_equivalent_all": true,
+      "retained_count_mean": 3.0,
+      "retained_distractor_count_mean": 0.0,
+      "trial_count": 3
+    },
+    {
+      "binding_accuracy_mean": 1.0,
+      "capacity": 4,
+      "cross_thought_leakage_any": false,
+      "evicted_count_mean": 2.0,
+      "policy": "oracle",
+      "replay_equivalent_all": true,
+      "retained_count_mean": 4.0,
+      "retained_distractor_count_mean": 0.0,
+      "trial_count": 3
+    },
+    {
+      "binding_accuracy_mean": 0.0,
+      "capacity": 1,
+      "cross_thought_leakage_any": false,
+      "evicted_count_mean": 5.0,
+      "policy": "random",
+      "replay_equivalent_all": true,
+      "retained_count_mean": 1.0,
+      "retained_distractor_count_mean": 1.0,
+      "trial_count": 3
+    },
+    {
+      "binding_accuracy_mean": 0.0,
+      "capacity": 2,
+      "cross_thought_leakage_any": false,
+      "evicted_count_mean": 4.0,
+      "policy": "random",
+      "replay_equivalent_all": true,
+      "retained_count_mean": 2.0,
+      "retained_distractor_count_mean": 1.333333,
+      "trial_count": 3
+    },
+    {
+      "binding_accuracy_mean": 0.0,
+      "capacity": 3,
+      "cross_thought_leakage_any": false,
+      "evicted_count_mean": 3.0,
+      "policy": "random",
+      "replay_equivalent_all": true,
+      "retained_count_mean": 3.0,
+      "retained_distractor_count_mean": 1.666667,
+      "trial_count": 3
+    },
+    {
+      "binding_accuracy_mean": 0.333333,
+      "capacity": 4,
+      "cross_thought_leakage_any": false,
+      "evicted_count_mean": 2.0,
+      "policy": "random",
+      "replay_equivalent_all": true,
+      "retained_count_mean": 4.0,
+      "retained_distractor_count_mean": 1.666667,
+      "trial_count": 3
+    },
+    {
+      "binding_accuracy_mean": 0.0,
+      "capacity": 1,
+      "cross_thought_leakage_any": false,
+      "evicted_count_mean": 5.0,
+      "policy": "relevance",
+      "replay_equivalent_all": true,
+      "retained_count_mean": 1.0,
+      "retained_distractor_count_mean": 0.0,
+      "trial_count": 3
+    },
+    {
+      "binding_accuracy_mean": 0.222222,
+      "capacity": 2,
+      "cross_thought_leakage_any": false,
+      "evicted_count_mean": 4.0,
+      "policy": "relevance",
+      "replay_equivalent_all": true,
+      "retained_count_mean": 2.0,
+      "retained_distractor_count_mean": 0.333333,
+      "trial_count": 3
+    },
+    {
+      "binding_accuracy_mean": 0.222222,
+      "capacity": 3,
+      "cross_thought_leakage_any": false,
+      "evicted_count_mean": 3.0,
+      "policy": "relevance",
+      "replay_equivalent_all": true,
+      "retained_count_mean": 3.0,
+      "retained_distractor_count_mean": 0.666667,
+      "trial_count": 3
+    },
+    {
+      "binding_accuracy_mean": 0.222222,
+      "capacity": 4,
+      "cross_thought_leakage_any": false,
+      "evicted_count_mean": 2.0,
+      "policy": "relevance",
+      "replay_equivalent_all": true,
+      "retained_count_mean": 4.0,
+      "retained_distractor_count_mean": 1.666667,
+      "trial_count": 3
+    }
+  ],
+  "version": "v1"
+}

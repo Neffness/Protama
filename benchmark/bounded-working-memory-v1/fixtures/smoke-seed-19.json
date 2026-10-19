@@ -1,0 +1,21 @@
+{
+  "benchmark": "bounded-working-memory-v1",
+  "seed": 19,
+  "task_id": "generated-19",
+  "thought_id": "thought-19",
+  "capacity": 3,
+  "items": [
+    {"item_id": "item-0", "payload": {"value": 693}, "relevance": 0.043254, "cycle": 1},
+    {"item_id": "item-1", "payload": {"value": 916}, "relevance": 0.520466, "cycle": 2},
+    {"item_id": "item-2", "payload": {"value": 523}, "relevance": 0.199497, "cycle": 3},
+    {"item_id": "item-3", "payload": {"value": 355}, "relevance": 0.996817, "cycle": 4}
+  ],
+  "relations": [
+    {"relation_id": "relation-0", "subject_id": "item-0", "object_id": "item-1", "label": "precedes"},
+    {"relation_id": "relation-1", "subject_id": "item-1", "object_id": "item-2", "label": "precedes"},
+    {"relation_id": "relation-2", "subject_id": "item-2", "object_id": "item-3", "label": "precedes"}
+  ],
+  "distractors": [
+    {"item_id": "distractor-0", "payload": {"value": 296}, "relevance": 0.584706, "cycle": 5}
+  ]
+}

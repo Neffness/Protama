@@ -1,0 +1,73 @@
+{
+  "benchmark": "bounded-working-memory-v1",
+  "capacity": 4,
+  "operations": [
+    "observe",
+    "maintain",
+    "compare:revised",
+    "verify:contradict",
+    "expire",
+    "restore"
+  ],
+  "results": [
+    {
+      "capacity": 4,
+      "contradicted_item_id": "item-2",
+      "contradiction_visible": true,
+      "maintained_item_id": "item-0",
+      "maintenance_preserved": true,
+      "replacement_linked": true,
+      "replay_equivalent": true,
+      "retained_item_ids": [
+        "item-0",
+        "item-1:revised"
+      ],
+      "revised_item_id": "item-1:revised",
+      "seed": 11,
+      "thought_id": "thought-11",
+      "unmaintained_expired": true
+    },
+    {
+      "capacity": 4,
+      "contradicted_item_id": "item-2",
+      "contradiction_visible": true,
+      "maintained_item_id": "item-0",
+      "maintenance_preserved": true,
+      "replacement_linked": true,
+      "replay_equivalent": true,
+      "retained_item_ids": [
+        "item-0",
+        "item-1:revised"
+      ],
+      "revised_item_id": "item-1:revised",
+      "seed": 19,
+      "thought_id": "thought-19",
+      "unmaintained_expired": true
+    },
+    {
+      "capacity": 4,
+      "contradicted_item_id": "item-2",
+      "contradiction_visible": true,
+      "maintained_item_id": "item-0",
+      "maintenance_preserved": true,
+      "replacement_linked": true,
+      "replay_equivalent": true,
+      "retained_item_ids": [
+        "item-0",
+        "item-1:revised"
+      ],
+      "revised_item_id": "item-1:revised",
+      "seed": 23,
+      "thought_id": "thought-23",
+      "unmaintained_expired": true
+    }
+  ],
+  "seeds": [
+    11,
+    19,
+    23
+  ],
+  "status": "development",
+  "sweep": "multi-cycle-maintenance-replacement-decay",
+  "version": "v1"
+}

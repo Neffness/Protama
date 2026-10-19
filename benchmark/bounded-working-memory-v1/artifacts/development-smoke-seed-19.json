@@ -1,0 +1,51 @@
+{
+  "benchmark": "bounded-working-memory-v1",
+  "version": "v1",
+  "status": "development",
+  "fixture": "../fixtures/smoke-seed-19.json",
+  "seed": 19,
+  "capacity": 3,
+  "trials": [
+    {
+      "policy": "none",
+      "retained_item_ids": [],
+      "evicted_item_ids": ["item-0", "item-1", "item-2", "item-3"],
+      "bound_relation_ids": [],
+      "replay_equivalent": true,
+      "cross_thought_leakage": false
+    },
+    {
+      "policy": "fifo",
+      "retained_item_ids": ["item-2", "item-3", "distractor-0"],
+      "evicted_item_ids": ["item-0", "item-1"],
+      "bound_relation_ids": ["relation-2"],
+      "replay_equivalent": true,
+      "cross_thought_leakage": false
+    },
+    {
+      "policy": "random",
+      "seed": 0,
+      "retained_item_ids": ["item-0", "item-3", "distractor-0"],
+      "evicted_item_ids": ["item-1", "item-2"],
+      "bound_relation_ids": [],
+      "replay_equivalent": true,
+      "cross_thought_leakage": false
+    },
+    {
+      "policy": "relevance",
+      "retained_item_ids": ["item-1", "item-3", "distractor-0"],
+      "evicted_item_ids": ["item-0", "item-2"],
+      "bound_relation_ids": [],
+      "replay_equivalent": true,
+      "cross_thought_leakage": false
+    },
+    {
+      "policy": "oracle",
+      "retained_item_ids": ["item-0", "item-1", "item-2"],
+      "evicted_item_ids": ["item-3", "distractor-0"],
+      "bound_relation_ids": ["relation-0", "relation-1"],
+      "replay_equivalent": true,
+      "cross_thought_leakage": false
+    }
+  ]
+}

@@ -1,0 +1,464 @@
+{
+  "benchmark": "bounded-working-memory-v1",
+  "capacity": 4,
+  "results": [
+    {
+      "capacity": 4,
+      "original_pairs": [
+        [
+          "item-0",
+          "item-1"
+        ],
+        [
+          "item-1",
+          "item-2"
+        ],
+        [
+          "item-2",
+          "item-3"
+        ]
+      ],
+      "permutation_pairs_equal": true,
+      "permutation_relation_ids_equal": true,
+      "permuted_pairs": [
+        [
+          "item-0",
+          "item-1"
+        ],
+        [
+          "item-1",
+          "item-2"
+        ],
+        [
+          "item-2",
+          "item-3"
+        ]
+      ],
+      "policy": "fifo",
+      "reversal_direction_preserved": true,
+      "reversed_pairs": [
+        [
+          "item-1",
+          "item-0"
+        ],
+        [
+          "item-2",
+          "item-1"
+        ],
+        [
+          "item-3",
+          "item-2"
+        ]
+      ],
+      "seed": 11
+    },
+    {
+      "capacity": 4,
+      "original_pairs": [
+        [
+          "item-0",
+          "item-1"
+        ],
+        [
+          "item-1",
+          "item-2"
+        ],
+        [
+          "item-2",
+          "item-3"
+        ]
+      ],
+      "permutation_pairs_equal": true,
+      "permutation_relation_ids_equal": true,
+      "permuted_pairs": [
+        [
+          "item-0",
+          "item-1"
+        ],
+        [
+          "item-1",
+          "item-2"
+        ],
+        [
+          "item-2",
+          "item-3"
+        ]
+      ],
+      "policy": "relevance",
+      "reversal_direction_preserved": true,
+      "reversed_pairs": [
+        [
+          "item-1",
+          "item-0"
+        ],
+        [
+          "item-2",
+          "item-1"
+        ],
+        [
+          "item-3",
+          "item-2"
+        ]
+      ],
+      "seed": 11
+    },
+    {
+      "capacity": 4,
+      "original_pairs": [
+        [
+          "item-0",
+          "item-1"
+        ],
+        [
+          "item-1",
+          "item-2"
+        ],
+        [
+          "item-2",
+          "item-3"
+        ]
+      ],
+      "permutation_pairs_equal": true,
+      "permutation_relation_ids_equal": true,
+      "permuted_pairs": [
+        [
+          "item-0",
+          "item-1"
+        ],
+        [
+          "item-1",
+          "item-2"
+        ],
+        [
+          "item-2",
+          "item-3"
+        ]
+      ],
+      "policy": "oracle",
+      "reversal_direction_preserved": true,
+      "reversed_pairs": [
+        [
+          "item-1",
+          "item-0"
+        ],
+        [
+          "item-2",
+          "item-1"
+        ],
+        [
+          "item-3",
+          "item-2"
+        ]
+      ],
+      "seed": 11
+    },
+    {
+      "capacity": 4,
+      "original_pairs": [
+        [
+          "item-0",
+          "item-1"
+        ],
+        [
+          "item-1",
+          "item-2"
+        ],
+        [
+          "item-2",
+          "item-3"
+        ]
+      ],
+      "permutation_pairs_equal": true,
+      "permutation_relation_ids_equal": true,
+      "permuted_pairs": [
+        [
+          "item-0",
+          "item-1"
+        ],
+        [
+          "item-1",
+          "item-2"
+        ],
+        [
+          "item-2",
+          "item-3"
+        ]
+      ],
+      "policy": "fifo",
+      "reversal_direction_preserved": true,
+      "reversed_pairs": [
+        [
+          "item-1",
+          "item-0"
+        ],
+        [
+          "item-2",
+          "item-1"
+        ],
+        [
+          "item-3",
+          "item-2"
+        ]
+      ],
+      "seed": 19
+    },
+    {
+      "capacity": 4,
+      "original_pairs": [
+        [
+          "item-0",
+          "item-1"
+        ],
+        [
+          "item-1",
+          "item-2"
+        ],
+        [
+          "item-2",
+          "item-3"
+        ]
+      ],
+      "permutation_pairs_equal": true,
+      "permutation_relation_ids_equal": true,
+      "permuted_pairs": [
+        [
+          "item-0",
+          "item-1"
+        ],
+        [
+          "item-1",
+          "item-2"
+        ],
+        [
+          "item-2",
+          "item-3"
+        ]
+      ],
+      "policy": "relevance",
+      "reversal_direction_preserved": true,
+      "reversed_pairs": [
+        [
+          "item-1",
+          "item-0"
+        ],
+        [
+          "item-2",
+          "item-1"
+        ],
+        [
+          "item-3",
+          "item-2"
+        ]
+      ],
+      "seed": 19
+    },
+    {
+      "capacity": 4,
+      "original_pairs": [
+        [
+          "item-0",
+          "item-1"
+        ],
+        [
+          "item-1",
+          "item-2"
+        ],
+        [
+          "item-2",
+          "item-3"
+        ]
+      ],
+      "permutation_pairs_equal": true,
+      "permutation_relation_ids_equal": true,
+      "permuted_pairs": [
+        [
+          "item-0",
+          "item-1"
+        ],
+        [
+          "item-1",
+          "item-2"
+        ],
+        [
+          "item-2",
+          "item-3"
+        ]
+      ],
+      "policy": "oracle",
+      "reversal_direction_preserved": true,
+      "reversed_pairs": [
+        [
+          "item-1",
+          "item-0"
+        ],
+        [
+          "item-2",
+          "item-1"
+        ],
+        [
+          "item-3",
+          "item-2"
+        ]
+      ],
+      "seed": 19
+    },
+    {
+      "capacity": 4,
+      "original_pairs": [
+        [
+          "item-0",
+          "item-1"
+        ],
+        [
+          "item-1",
+          "item-2"
+        ],
+        [
+          "item-2",
+          "item-3"
+        ]
+      ],
+      "permutation_pairs_equal": true,
+      "permutation_relation_ids_equal": true,
+      "permuted_pairs": [
+        [
+          "item-0",
+          "item-1"
+        ],
+        [
+          "item-1",
+          "item-2"
+        ],
+        [
+          "item-2",
+          "item-3"
+        ]
+      ],
+      "policy": "fifo",
+      "reversal_direction_preserved": true,
+      "reversed_pairs": [
+        [
+          "item-1",
+          "item-0"
+        ],
+        [
+          "item-2",
+          "item-1"
+        ],
+        [
+          "item-3",
+          "item-2"
+        ]
+      ],
+      "seed": 23
+    },
+    {
+      "capacity": 4,
+      "original_pairs": [
+        [
+          "item-0",
+          "item-1"
+        ],
+        [
+          "item-1",
+          "item-2"
+        ],
+        [
+          "item-2",
+          "item-3"
+        ]
+      ],
+      "permutation_pairs_equal": true,
+      "permutation_relation_ids_equal": true,
+      "permuted_pairs": [
+        [
+          "item-0",
+          "item-1"
+        ],
+        [
+          "item-1",
+          "item-2"
+        ],
+        [
+          "item-2",
+          "item-3"
+        ]
+      ],
+      "policy": "relevance",
+      "reversal_direction_preserved": true,
+      "reversed_pairs": [
+        [
+          "item-1",
+          "item-0"
+        ],
+        [
+          "item-2",
+          "item-1"
+        ],
+        [
+          "item-3",
+          "item-2"
+        ]
+      ],
+      "seed": 23
+    },
+    {
+      "capacity": 4,
+      "original_pairs": [
+        [
+          "item-0",
+          "item-1"
+        ],
+        [
+          "item-1",
+          "item-2"
+        ],
+        [
+          "item-2",
+          "item-3"
+        ]
+      ],
+      "permutation_pairs_equal": true,
+      "permutation_relation_ids_equal": true,
+      "permuted_pairs": [
+        [
+          "item-0",
+          "item-1"
+        ],
+        [
+          "item-1",
+          "item-2"
+        ],
+        [
+          "item-2",
+          "item-3"
+        ]
+      ],
+      "policy": "oracle",
+      "reversal_direction_preserved": true,
+      "reversed_pairs": [
+        [
+          "item-1",
+          "item-0"
+        ],
+        [
+          "item-2",
+          "item-1"
+        ],
+        [
+          "item-3",
+          "item-2"
+        ]
+      ],
+      "seed": 23
+    }
+  ],
+  "seeds": [
+    11,
+    19,
+    23
+  ],
+  "status": "development",
+  "sweep": "item-permutation-relation-reversal-controls",
+  "version": "v1"
+}

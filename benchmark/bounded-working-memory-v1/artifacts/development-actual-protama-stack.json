@@ -1,0 +1,33 @@
+{
+  "api_path": [
+    "start_cognitive_evaluation",
+    "run_cognitive_cycle",
+    "snapshot",
+    "from_snapshot"
+  ],
+  "benchmark": "bounded-working-memory-v1",
+  "operations": [
+    "observe",
+    "compare",
+    "verify",
+    "synthesize"
+  ],
+  "results": [
+    {
+      "active_thought_completed": true,
+      "evidence_present": true,
+      "holdover_replay_equivalent": true,
+      "operation_sequence": [
+        "observe",
+        "compare",
+        "verify",
+        "synthesize"
+      ],
+      "supported_synthesis_present": true,
+      "thought_id": "thought:0"
+    }
+  ],
+  "status": "development",
+  "sweep": "actual-protama-operation-stack",
+  "version": "v1"
+}
