@@ -52,11 +52,17 @@ Every submission therefore declares a profile:
 
 ```text
 grounded-symbolic-composition
-role-filler-binding
-feature-binding
-relational-manipulation
-language-mediated-composition
+legacy-relational-manipulation
+role-filler-binding (reserved)
+feature-binding (reserved)
+language-mediated-composition (reserved)
 ```
+
+Only `grounded-symbolic-composition` and
+`legacy-relational-manipulation` are declarable in this gate version. The
+other profiles are reserved names, not blank checks: they cannot be selected
+until their task families, complete threshold sets, baselines, scoring
+schemas, and freeze records are published.
 
 The parent gate has invariant requirements shared by every profile:
 
@@ -69,6 +75,12 @@ The parent gate has invariant requirements shared by every profile:
 - completed thoughts do not leak into later thoughts; and
 - no uncharged event log, future target, or hidden answer path is available.
 
+Eviction and expiration must be correct for every profile: retrieving an
+evicted item as present is a validity failure, not a soft metric miss.
+Unauthorized durable promotion is also a zero-tolerance validity failure.
+Profiles may add numeric precision thresholds for these events, but they may
+not use a numeric average to excuse either validity violation.
+
 Profile metrics are chosen to measure the declared claim. Grounded symbolic
 composition scores withheld symbolic results, capacity-aware abstention, and
 distractor invariance. A language profile may add language parsing and
@@ -77,8 +89,19 @@ it is also not failed by an unrelated metric that its declared task does not
 instantiate.
 
 The previous synthetic relation battery remains useful as a historical
-`relational-manipulation` profile. Its results must not be presented as the
-result of every profile or as a universal intelligence score.
+`legacy-relational-manipulation` profile. Its results must not be presented as
+the result of every profile or as a universal intelligence score.
+
+### Meta-freeze rule
+
+The profile, task families, complete threshold set, baselines, curriculum or
+lesson manifest, scoring schema, and adaptation protocol freeze together in
+one preregistration record before any final-test or held-out result is
+inspected. A profile is declarable only when that complete record exists.
+Development experience may motivate a new gate version, but it cannot change
+the active version's profile, metrics, thresholds, baselines, or lesson set.
+Switching profiles after any held-out inspection opens a new gate version and
+requires a new freeze and new held-out run.
 
 ### Grounded symbolic composition profile
 
@@ -113,6 +136,19 @@ The minimum profile report includes:
 
 The profile must report its exact held-out lesson families and must not score
 an exact memorized list as composition generalization.
+
+For any profile containing determinate and underdetermined episodes, binding
+thresholds are split into two independently frozen values:
+
+```text
+beta_determinate
+beta_epistemic
+```
+
+A false-ambiguity call on a determinate episode is a determinate-stratum
+error. An unsupported assertion on an underdetermined episode is an
+epistemic-stratum error. Neither error may be reassigned to the other stratum
+to use a more favorable threshold.
 
 ## Why this gate exists
 
@@ -213,9 +249,10 @@ The reference workflow is:
 4. run Phase 1 capacity calibration without distractors using the canonical
    CPU Protama implementation;
 5. freeze the canonical breakpoint, common load grid, recoding annotations,
-   and calibrated distractor loads;
+   calibrated distractor loads, and the complete profile manifest;
 6. if adaptive retention is enabled, run only the registered development
-   adaptation episodes and freeze the resulting policy snapshot;
+   adaptation episodes, then freeze the resulting policy snapshot before any
+   held-out episode;
 7. run Phase 2 held-out distractor, interference, decay, binding, and
    cross-thought trials;
 8. capture state manifests, provenance, decisions, and resource traces;
@@ -239,6 +276,9 @@ initial snapshot identity
 final snapshot identity
 memory-accounting convention
 threshold-set identity
+profile identity and meta-freeze record
+curriculum or lesson-manifest identity and SHA-256 hash, when applicable
+adaptation protocol identity and frozen policy fingerprint, when applicable
 ```
 
 Development runs may use visible generators and exploratory loads. Final
@@ -253,6 +293,12 @@ the complete adaptation protocol (episode order, epoch count, reward values,
 and update timing), update-attempt count, and any protocol failure. A
 successful held-out update is a failure of the evaluation protocol, not an
 episode exclusion.
+
+For a grounded profile, the lesson manifest is part of the frozen initial
+state. It must enumerate every vocabulary, syntax, association, composition,
+negative, and abstention lesson. Teaching anything after the freeze and
+before or during held-out evaluation is contamination, not adaptation, and
+invalidates the run.
 
 ## Evaluation unit
 
@@ -656,6 +702,20 @@ The policy-value extension is an additional gating validity condition whenever
 learned retention or selection is enabled. It is inactive for a declared
 non-learning reference configuration.
 
+### Threshold schema
+
+When a profile evaluates both determinate and underdetermined episodes, its
+freeze record must contain separate fields:
+
+```text
+beta_determinate: minimum determinate binding accuracy
+beta_epistemic: minimum epistemic-state accuracy
+```
+
+The determinate interval includes false-ambiguity errors. The epistemic
+interval includes unsupported assertions on underdetermined episodes. A single
+`beta_binding` value is not a valid substitute for these two strata.
+
 The public report must include raw metrics, condition-level metrics, confidence
 intervals, failures and abstentions, excluded episodes and exclusion reasons,
 the declared profile, the exact pass-rule version, and the justification for
@@ -679,8 +739,13 @@ underdetermined interpretations. The profile may report, where applicable:
 Inquiry quality is decomposed into action correctness, exact missing-role
 identification, complete candidate enumeration, and message evidence. A
 generic uncertainty response is not equivalent to a useful clarification.
-These results are diagnostic in this gate version; promotion to a hard
-threshold requires independent baselines and held-out validation.
+For gate v1, epistemic scoring is explicitly state-only: the manifest-declared
+supported, partial, ambiguous, contradicted, or unknown state is the required
+epistemic output. Candidate enumeration and inquiry-message quality are not
+silently credited. If a future profile claims those outputs, their trace
+fields, scoring rules, baselines, and thresholds must be frozen in the same
+meta-freeze record before held-out evaluation; otherwise they are not part of
+the claim.
 
 These results are extra evidence and must not replace the core metrics,
 retroactively change pass conditions, or exclude difficult core episodes. A
@@ -813,6 +878,14 @@ A readable token is not a built-in definition. The profile records the lesson
 that establishes the token and its role. If English semantics are claimed,
 they require a separate language-mediated profile. The symbolic profile can
 be evaluated without English comprehension.
+
+### “Grounded” means sensorimotor grounding.
+
+Not in this gate version. **Grounded** here means operationally grounded in a
+declared lesson curriculum before evaluation: the system is taught the symbol
+inventory, syntax, and associations that define the task. It does not claim
+physical, sensorimotor, or human-world grounding. Those claims require a
+separate profile and evidence.
 
 ### “A withheld list may be trivial memorization.”
 

@@ -1,0 +1,72 @@
+{
+  "gate_version": "bounded-working-memory-thought-holdover-v2",
+  "profile": "grounded-symbolic-composition",
+  "freeze_id": "grounded-symbolic-composition-freeze-v1",
+  "manifest_sha256": "4941cceed300baa1f8feee9b7139397baf3d6721d9823f70453e26d24466fc05",
+  "result": "PASS",
+  "post_freeze_teaching": "none",
+  "held_out_policy_update_attempts": 0,
+  "metrics": {
+    "withheld_composition_accuracy": 1.0,
+    "capacity_aware_abstention_accuracy": 1.0,
+    "minimum_complete_capacity": 7,
+    "snapshot_replay_agreement": 1.0,
+    "cross_thought_leakage": 0,
+    "eviction_validity_failures": 0,
+    "unauthorized_promotion_validity_failures": 0,
+    "distractor_decrement": 0.0
+  },
+  "held_out_compositions": [
+    {
+      "input": "[0, 0, 0, 0, 0]",
+      "expected": "inert",
+      "actual": "inert",
+      "status": "composed"
+    },
+    {
+      "input": "[0, 0, 0, 0, 1]",
+      "expected": "safe",
+      "actual": "safe",
+      "status": "composed"
+    }
+  ],
+  "abstention_cases": [
+    {
+      "input": "[0, 50]",
+      "expected": "ambiguous",
+      "actual": "ambiguous",
+      "abstained": true
+    },
+    {
+      "input": "[0, 101]",
+      "expected": "unknown",
+      "actual": "unknown",
+      "abstained": true
+    }
+  ],
+  "capacity_results": {
+    "inert": {
+      "4": false,
+      "5": false,
+      "6": false,
+      "7": true,
+      "8": true
+    },
+    "safe": {
+      "4": false,
+      "5": false,
+      "6": false,
+      "7": true,
+      "8": true
+    }
+  },
+  "scope": {
+    "claim": "Grounded symbolic composition under bounded working-memory thought holdover.",
+    "not_claimed": [
+      "general intelligence",
+      "sensorimotor grounding",
+      "English comprehension",
+      "universal capacity across task families"
+    ]
+  }
+}

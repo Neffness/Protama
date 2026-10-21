@@ -5,51 +5,26 @@ This directory is the public review package for the
 
 ## Status
 
-**Development evidence only.** This is not a passing gate result. Thresholds,
-held-out episodes, confidence intervals, and the final pass decision remain
-unfrozen.
+**Frozen grounded-symbolic profile.** The release result is recorded in the
+frozen manifest and final report linked below. The broader historical
+development evidence is not part of this active package.
 
 ## Package contents
 
-- `schemas/` — machine-readable trial contract;
-- `fixtures/` — deterministic smoke fixture;
-- `gate-work/` — public development report and preregistration draft; and
-- `artifacts/` — curated primary evidence only.
+- `gate-work/` — frozen release inputs and calibration manifests.
 
 Private implementation code, learned state, and exploratory development
 records are not part of this public package.
 
-## Curated primary artifacts
+## Frozen grounded-symbolic release
 
-- [development-capacity-policy-sweep.json](./artifacts/development-capacity-policy-sweep.json) —
-  matched retention-policy trials;
-- [development-capacity-policy-curves.json](./artifacts/development-capacity-policy-curves.json) —
-  aggregate capacity curves;
-- [development-long-span-capacity-curves.json](./artifacts/development-long-span-capacity-curves.json) —
-  eight-item capacity extension;
-- [development-complex-span-battery.json](./artifacts/development-complex-span-battery.json) —
-  difference, sum, and ordered-pair manipulation;
-- [development-interference-decrement.json](./artifacts/development-interference-decrement.json) —
-  matched distractor decrement;
-- [development-binding-controls.json](./artifacts/development-binding-controls.json) —
-  permutation and relation-reversal controls;
-- [development-multicycle-lifecycle.json](./artifacts/development-multicycle-lifecycle.json) —
-  maintenance, revision, contradiction, expiration, and replay;
-- [development-actual-protama-stack.json](./artifacts/development-actual-protama-stack.json) —
-  actual Protama observe/compare/verify/synthesize execution; and
-- [development-resource-cost.json](./artifacts/development-resource-cost.json) —
-  snapshot size and local latency measurements.
+- [grounded-symbolic-composition-freeze-v1.json](./gate-work/grounded-symbolic-composition-freeze-v1.json)
+- [grounded-symbolic-composition-final-v1.json](./gate-work/grounded-symbolic-composition-final-v1.json)
 
-The smoke fixture is
-[smoke-seed-19.json](./fixtures/smoke-seed-19.json), and the machine-readable
-schema is
-[working-memory-trial.schema.json](./schemas/working-memory-trial.schema.json).
+The frozen profile is implemented and verified by the private Protama source
+and documented in the
+[publication draft](../../paper/2026-10-21-bounded-working-memory-grounded-symbolic-composition.md).
 
-## Review documents
-
-- [development-report.md](./gate-work/development-report.md)
-- [preregistration-draft-v1.md](./gate-work/preregistration-draft-v1.md)
-
-The preregistration is explicitly a draft for opposition review. No threshold
-was selected after inspecting held-out results, because no final held-out run
-has yet been performed.
+The calibration manifests remain in `gate-work/` because the existing
+calibration tests use them as inputs. They are not part of the frozen
+grounded-symbolic result.
