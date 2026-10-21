@@ -116,7 +116,7 @@
     "cross_thought_leakage_max": 0.0,
     "eviction_validity_failures_max": 0,
     "unauthorized_promotion_validity_failures_max": 0,
-    "minimum_complete_capacity": 7
+    "minimum_complete_capacity": 10
   },
   "threshold_justifications": {
     "withheld_composition_accuracy_min": "A 0.95 floor preserves a meaningful error allowance while requiring reliable composition across 20 structurally varied cases.",
@@ -126,7 +126,7 @@
     "cross_thought_leakage_max": "Cross-thought leakage would invalidate the episode boundary and therefore remains zero-tolerance.",
     "eviction_validity_failures_max": "Retrieving evicted state is a validity failure, not an average metric.",
     "unauthorized_promotion_validity_failures_max": "Unregistered durable promotion is a validity failure, not an average metric.",
-    "minimum_complete_capacity": "The declared seven-frame structure is five number frames plus one list frame and one result frame."
+    "minimum_complete_capacity": "The maximum complete capacity is ten frames for the longest eight-number held-out list plus one list frame and one result frame."
   },
   "freeze_rules": {
     "profile_selection": "frozen before held-out evaluation",
@@ -139,5 +139,5 @@
     "adaptive_retention": "disabled; no policy learning or updates during held-out evaluation",
     "trial_records": "publish every held-out, baseline, capacity, replay, distractor, leakage, eviction, and promotion trial"
   },
-  "manifest_sha256": "de8de11e60cfb0c064416624b443188a23c4a17e9c6a853ddb302d9dcd0baae4"
+  "manifest_sha256": "03e069eb4612fe496d5c456c1693c99b7f5a632ede5e135d0503389b3b7283c8"
 }
