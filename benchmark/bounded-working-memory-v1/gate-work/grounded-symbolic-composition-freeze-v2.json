@@ -1,0 +1,143 @@
+{
+  "gate_version": "bounded-working-memory-thought-holdover-v2",
+  "profile": "grounded-symbolic-composition",
+  "freeze_id": "grounded-symbolic-composition-freeze-v2",
+  "status": "frozen-development-preregistration",
+  "curriculum": {
+    "number_domain": {
+      "first": 0,
+      "last": 100,
+      "count": 101
+    },
+    "type_symbols": [
+      "inert",
+      "safe",
+      "warning",
+      "danger"
+    ],
+    "syntax_symbols": [
+      "[",
+      "]",
+      ",",
+      ":",
+      " "
+    ],
+    "value_type_rule": {
+      "0": "inert",
+      "1-49": "safe",
+      "50-79": "warning",
+      "80-100": "danger"
+    },
+    "list_lessons": [
+      {"input": "[0]", "result": "inert"},
+      {"input": "[0, 0]", "result": "inert"},
+      {"input": "[0, 0, 0, 0]", "result": "inert"},
+      {"input": "[0, 0, 1]", "result": "safe"},
+      {"input": "[0, 0, 0, 1]", "result": "safe"},
+      {"input": "[0, 50]", "result": "warning"},
+      {"input": "[0, 80]", "result": "danger"}
+    ],
+    "post_freeze_teaching": "invalidates evaluation"
+  },
+  "held_out_compositions": [
+    {"input": "[0, 0, 0]", "result": "inert", "length": 3, "structure": "homogeneous"},
+    {"input": "[0, 0, 0, 0, 0]", "result": "inert", "length": 5, "structure": "homogeneous"},
+    {"input": "[0, 0, 0, 0, 0, 0, 0, 0]", "result": "inert", "length": 8, "structure": "homogeneous"},
+    {"input": "[0, 1, 1]", "result": "safe", "length": 3, "structure": "mixed"},
+    {"input": "[0, 1, 2, 1]", "result": "safe", "length": 4, "structure": "mixed"},
+    {"input": "[0, 1, 2, 3, 4, 5, 1]", "result": "safe", "length": 7, "structure": "mixed"},
+    {"input": "[0, 50, 50]", "result": "warning", "length": 3, "structure": "mixed"},
+    {"input": "[0, 50, 51, 52]", "result": "warning", "length": 4, "structure": "mixed"},
+    {"input": "[0, 50, 51, 52, 53, 54, 50]", "result": "warning", "length": 7, "structure": "mixed"},
+    {"input": "[0, 80, 80]", "result": "danger", "length": 3, "structure": "mixed"},
+    {"input": "[0, 80, 81, 82]", "result": "danger", "length": 4, "structure": "mixed"},
+    {"input": "[0, 80, 81, 82, 83, 84, 80]", "result": "danger", "length": 7, "structure": "mixed"},
+    {"input": "[0, 1, 2, 3, 4, 5, 6, 1]", "result": "safe", "length": 8, "structure": "mixed"},
+    {"input": "[0, 50, 51, 52, 53, 54, 55, 50]", "result": "warning", "length": 8, "structure": "mixed"},
+    {"input": "[0, 80, 81, 82, 83, 84, 85, 80]", "result": "danger", "length": 8, "structure": "mixed"},
+    {"input": "[0, 0, 0, 0, 1, 0, 0, 0]", "result": "safe", "length": 8, "structure": "sparse"},
+    {"input": "[0, 0, 50, 0, 0, 0, 0]", "result": "warning", "length": 7, "structure": "sparse"},
+    {"input": "[0, 0, 80, 0, 0, 0, 0]", "result": "danger", "length": 7, "structure": "sparse"},
+    {"input": "[0, 1, 1, 2, 3, 4]", "result": "safe", "length": 6, "structure": "clustered"},
+    {"input": "[0, 50, 50, 51, 52, 53]", "result": "warning", "length": 6, "structure": "clustered"}
+  ],
+  "abstention_cases": [
+    {"input": "[50, 80]", "result": "ambiguous"},
+    {"input": "[0, 50, 80]", "result": "ambiguous"},
+    {"input": "[1, 50, 80]", "result": "ambiguous"},
+    {"input": "[0, 101]", "result": "unknown"},
+    {"input": "[101, 101]", "result": "unknown"}
+  ],
+  "capacity_conditions": [4, 5, 6, 7, 8, 9, 10],
+  "distractor_values": [50, 80, 99],
+  "baselines": [
+    {
+      "name": "no-holdover",
+      "definition": "answer from the current query without retained episode state",
+      "required_result": "run-and-publish"
+    },
+    {
+      "name": "fifo-retention",
+      "definition": "retain the newest frames in insertion order",
+      "required_result": "run-and-publish"
+    },
+    {
+      "name": "random-retention",
+      "definition": "retain a seeded random subset at the declared capacity",
+      "required_result": "run-and-publish"
+    },
+    {
+      "name": "relevance-aware-retention",
+      "definition": "retain frames using evaluator-independent learned relevance",
+      "required_result": "run-and-publish"
+    },
+    {
+      "name": "oracle-retention",
+      "definition": "retain the evaluator-identified required frames",
+      "required_result": "run-and-publish"
+    }
+  ],
+  "confidence_intervals": {
+    "method": "wilson",
+    "confidence_level": 0.95,
+    "required_for": [
+      "withheld_composition_accuracy",
+      "capacity_aware_abstention_accuracy",
+      "baseline_accuracy"
+    ],
+    "zero_failure_metrics_reported_as": "upper_bound"
+  },
+  "thresholds": {
+    "substrate_completeness_min": 1.0,
+    "withheld_composition_accuracy_min": 0.95,
+    "capacity_aware_abstention_accuracy_min": 0.95,
+    "distractor_decrement_max": 0.10,
+    "snapshot_replay_agreement_min": 1.0,
+    "cross_thought_leakage_max": 0.0,
+    "eviction_validity_failures_max": 0,
+    "unauthorized_promotion_validity_failures_max": 0,
+    "minimum_complete_capacity": 7
+  },
+  "threshold_justifications": {
+    "withheld_composition_accuracy_min": "A 0.95 floor preserves a meaningful error allowance while requiring reliable composition across 20 structurally varied cases.",
+    "capacity_aware_abstention_accuracy_min": "A 0.95 floor requires abstention on unsupported or underdetermined inputs rather than rewarding guesses.",
+    "distractor_decrement_max": "A 0.10 maximum allows bounded variance while requiring distractors not to materially change the held-out decision.",
+    "snapshot_replay_agreement_min": "Replay is an identity condition for the same learned state and therefore remains zero-tolerance.",
+    "cross_thought_leakage_max": "Cross-thought leakage would invalidate the episode boundary and therefore remains zero-tolerance.",
+    "eviction_validity_failures_max": "Retrieving evicted state is a validity failure, not an average metric.",
+    "unauthorized_promotion_validity_failures_max": "Unregistered durable promotion is a validity failure, not an average metric.",
+    "minimum_complete_capacity": "The declared seven-frame structure is five number frames plus one list frame and one result frame."
+  },
+  "freeze_rules": {
+    "profile_selection": "frozen before held-out evaluation",
+    "thresholds": "frozen before held-out evaluation",
+    "curriculum": "frozen before held-out evaluation",
+    "held_out_labels": "evaluator-only",
+    "policy_updates_during_held_out": 0,
+    "language_semantics_required": false,
+    "sensorimotor_grounding_claimed": false,
+    "adaptive_retention": "disabled; no policy learning or updates during held-out evaluation",
+    "trial_records": "publish every held-out, baseline, capacity, replay, distractor, leakage, eviction, and promotion trial"
+  },
+  "manifest_sha256": "de8de11e60cfb0c064416624b443188a23c4a17e9c6a853ddb302d9dcd0baae4"
+}
