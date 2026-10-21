@@ -3,7 +3,7 @@
   "profile": "grounded-symbolic-composition",
   "freeze_id": "grounded-symbolic-composition-freeze-v1",
   "manifest_sha256": "4941cceed300baa1f8feee9b7139397baf3d6721d9823f70453e26d24466fc05",
-  "result": "PASS",
+  "result": "DEVELOPMENT_PASS",
   "post_freeze_teaching": "none",
   "held_out_policy_update_attempts": 0,
   "metrics": {

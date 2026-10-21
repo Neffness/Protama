@@ -15,7 +15,7 @@ def test_frozen_grounded_symbolic_profile_is_publicly_validated():
     )
 
     assert report["valid"]
-    assert report["result"] == "PASS"
+    assert report["result"] == "DEVELOPMENT_PASS"
     assert report["errors"] == ()
 
 

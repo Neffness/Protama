@@ -58,11 +58,12 @@ feature-binding (reserved)
 language-mediated-composition (reserved)
 ```
 
-Only `grounded-symbolic-composition` and
-`legacy-relational-manipulation` are declarable in this gate version. The
-other profiles are reserved names, not blank checks: they cannot be selected
-until their task families, complete threshold sets, baselines, scoring
-schemas, and freeze records are published.
+Only `grounded-symbolic-composition` is declarable in this gate version. The
+legacy relational battery is historical evidence, not a declarable profile,
+because its complete threshold, baseline, scoring, and freeze record is not
+present in the active public package. The other profiles are reserved names,
+not blank checks: they cannot be selected until their task families, complete
+threshold sets, baselines, scoring schemas, and freeze records are published.
 
 The parent gate has invariant requirements shared by every profile:
 

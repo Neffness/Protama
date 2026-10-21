@@ -52,8 +52,8 @@ def verify_frozen_profile(
     for field in ("gate_version", "profile", "freeze_id", "manifest_sha256"):
         if result.get(field) != manifest.get(field):
             errors.append(f"result does not match manifest field: {field}")
-    if result.get("result") != "PASS":
-        errors.append("result is not PASS")
+    if result.get("result") != "DEVELOPMENT_PASS":
+        errors.append("result is not DEVELOPMENT_PASS")
     if result.get("post_freeze_teaching") != "none":
         errors.append("post-freeze teaching was recorded")
     if result.get("held_out_policy_update_attempts") != 0:
@@ -74,8 +74,6 @@ def verify_frozen_profile(
         threshold = thresholds.get(threshold_name)
         metric = metrics.get(metric_name)
         if metric is None:
-            if threshold_name == "substrate_completeness_min":
-                continue
             errors.append(f"metric is missing: {metric_name}")
         elif not isinstance(threshold, (int, float)) or metric < threshold:
             errors.append(f"{metric_name} is below its declared threshold")

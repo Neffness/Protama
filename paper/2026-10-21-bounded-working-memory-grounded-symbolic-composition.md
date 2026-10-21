@@ -4,7 +4,7 @@
 **Gate version:** `bounded-working-memory-thought-holdover-v2`  
 **Profile:** `grounded-symbolic-composition`  
 **Freeze:** `grounded-symbolic-composition-freeze-v1`  
-**Result:** **PASS**
+**Result:** **DEVELOPMENT_PASS**
 
 ## Abstract
 
@@ -17,7 +17,8 @@ or arbitrary numeric arrays. It first teaches the symbol inventory, list
 syntax, value/type associations, and a limited set of list compositions.
 The held-out test then asks for compositions that were not taught verbatim.
 
-The grounded symbolic composition profile passed all frozen criteria.
+The grounded symbolic composition profile passed its frozen development
+criteria. This v1 record is not presented as a final statistical gate pass.
 
 ## Frozen curriculum
 
@@ -140,7 +141,7 @@ The runtime implementation and development tests are maintained separately from
 this public reproducibility package. The public validation harness below checks
 the frozen manifest and result without importing that implementation.
 
-The final machine-readable result is:
+The machine-readable development result is:
 
 - [grounded-symbolic-composition-final-v1.json](../benchmark/bounded-working-memory-v1/gate-work/grounded-symbolic-composition-final-v1.json)
 

@@ -5,9 +5,10 @@ This directory is the public review package for the
 
 ## Status
 
-**Frozen grounded-symbolic profile.** The release result is recorded in the
-frozen manifest and final report linked below. The broader historical
-development evidence is not part of this active package.
+**Frozen grounded-symbolic development profile.** The development result is
+recorded in the frozen manifest and report linked below. It is not a final
+statistical gate pass. The broader historical development evidence is not part
+of this active package.
 
 ## Package contents
 
@@ -16,7 +17,7 @@ development evidence is not part of this active package.
 Private implementation code, learned state, and exploratory development
 records are not part of this public package.
 
-## Frozen grounded-symbolic release
+## Frozen grounded-symbolic development release
 
 - [grounded-symbolic-composition-freeze-v1.json](./gate-work/grounded-symbolic-composition-freeze-v1.json)
 - [grounded-symbolic-composition-final-v1.json](./gate-work/grounded-symbolic-composition-final-v1.json)
