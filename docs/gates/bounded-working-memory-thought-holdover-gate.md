@@ -6,8 +6,9 @@ learned policy preserves value without evaluation-time leakage. The second
 layer was added in response to private-side implementation evidence; it was
 not assumed to be part of the original fixed-policy capacity claim.
 
-> **Status:** Public evaluation contract; development evidence is in progress.
-> This document defines an evaluation contract, not a completed result.
+> **Status:** Public evaluation contract; profile-aligned revision.
+> This document defines the parent capability and its evaluation profiles; it
+> does not declare a completed result.
 
 ## Abstract
 
@@ -32,6 +33,86 @@ memory, consciousness, or general intelligence.
 This specification is intentionally implementation-neutral. It is suitable for
 independent review, adversarial testing, and matched baseline comparisons
 without exposing private runtime layouts or unpublished training records.
+The gate requires state-aware binding decisions for manifest-declared
+underdetermined episodes, but does not require a particular epistemic theory or
+runtime implementation. The broader epistemic-precision profile described
+below remains optional.
+
+## Capability profiles and claim alignment
+
+The gate name identifies the capability under test, not one mandatory task
+family. A **bounded working-memory thought holdover** is transient,
+capacity-limited state that survives across cognitive operation cycles, can be
+manipulated to produce a later decision, and is cleared, evicted, or promoted
+according to an auditable thought boundary.
+
+Different task families may demonstrate that capability. They must not be
+forced through metrics that assume a different representation or operation.
+Every submission therefore declares a profile:
+
+```text
+grounded-symbolic-composition
+role-filler-binding
+feature-binding
+relational-manipulation
+language-mediated-composition
+```
+
+The parent gate has invariant requirements shared by every profile:
+
+- required information is explicitly taught or provided by the episode;
+- the final decision depends on transient retained state;
+- capacity is declared and charged;
+- missing retained information produces the declared abstention or
+  uncertainty outcome rather than an unsupported answer;
+- snapshot replay is decision-identical;
+- completed thoughts do not leak into later thoughts; and
+- no uncharged event log, future target, or hidden answer path is available.
+
+Profile metrics are chosen to measure the declared claim. Grounded symbolic
+composition scores withheld symbolic results, capacity-aware abstention, and
+distractor invariance. A language profile may add language parsing and
+rendering metrics. A profile is not allowed to omit the shared invariants, but
+it is also not failed by an unrelated metric that its declared task does not
+instantiate.
+
+The previous synthetic relation battery remains useful as a historical
+`relational-manipulation` profile. Its results must not be presented as the
+result of every profile or as a universal intelligence score.
+
+### Grounded symbolic composition profile
+
+This profile establishes a finite symbolic substrate before testing holdover.
+The curriculum teaches the symbols, syntax, value/type bindings, and a
+declared subset of compositions. The final test withholds compositions rather
+than withholding the meaning of ungrounded raw arrays.
+
+The profile's core claim is:
+
+```text
+grounded symbolic lessons
+→ bounded transient retention
+→ withheld symbolic composition
+→ correct result or principled abstention
+```
+
+Readable domain labels such as `inert`, `safe`, `warning`, and `danger` are
+valid learned symbols. Their appearance as English words does not grant them
+pretrained English meaning. Natural-language rendering is a separate optional
+profile layer.
+
+The minimum profile report includes:
+
+- substrate lesson completeness;
+- withheld-composition accuracy;
+- capacity curve and minimum complete retained structure;
+- abstention correctness below that capacity;
+- matched distractor decrement;
+- snapshot replay agreement; and
+- cross-thought leakage.
+
+The profile must report its exact held-out lesson families and must not score
+an exact memorized list as composition generalization.
 
 ## Why this gate exists
 
@@ -187,10 +268,32 @@ capacity condition
 manipulation requirement
 snapshot point
 required final decision
+expected epistemic state for any underdetermined binding
 ```
 
-The episode must include complex-span trials in which Protama must hold items
-while comparing, transforming, or binding them.
+The episode must include the profile's declared manipulation trial. For a
+complex-span profile, this is a compare, transform, or bind operation while
+items are held. For grounded symbolic composition, it is a withheld symbolic
+query whose answer requires retained symbols and learned composition. The
+profile manifest must state which manipulation is being tested and which
+items are independently necessary.
+
+An episode's required final decision must distinguish determinate from
+underdetermined tasks. When the registered evidence does not establish a
+unique answer, a declared abstention, uncertainty response, or clarification
+request may be the correct decision. This is a property of the episode's
+expected outcome, not a requirement to use any particular internal
+architecture. Binding evaluation distinguishes determinate binding from
+epistemic handling: determinate episodes require the correct relation
+arguments, while underdetermined episodes require the manifest-declared
+supported, partial, ambiguous, contradicted, or unknown state without
+unsupported assertion. A system cannot pass by abstaining on determinate
+episodes or by declaring every episode ambiguous; determinate coverage and
+false-ambiguity errors are reported and included in the binding decision
+criteria. Where an episode declares multiple supported interpretations, future
+held-out versions must also score whether the reported alternatives match the
+manifest-supported alternatives, not merely whether the response uses the word
+"ambiguous".
 
 Binding trials must identify the binding type being tested: role-filler
 bindings, feature bindings, or relational bindings. Loads must include both
@@ -298,6 +401,38 @@ interference estimates.
 
 ## Primary metrics
 
+Metrics are reported in two groups. **Core metrics** are required for every
+profile. **Profile metrics** are required only when the declared profile
+instantiates them.
+
+Core metrics are:
+
+- **Capacity curve:** decision accuracy and principled abstention as a
+  function of independently necessary retained structure;
+- **Distractor resistance:** matched accuracy change after adding irrelevant
+  material;
+- **Cross-thought leakage:** influence from completed thoughts without
+  authorized promotion;
+- **Snapshot replay equivalence:** decision-identical behavior after restore;
+- **Eviction and expiration correctness:** whether unavailable information is
+  treated as unavailable; and
+- **Transient accounting:** charged footprint, provenance, and latency.
+
+For the `grounded-symbolic-composition` profile, the required profile metrics
+are:
+
+- **Substrate completeness:** all declared symbols and syntax lessons are
+  present before evaluation;
+- **Withheld-composition accuracy:** correct result tokens for compositions not
+  taught verbatim;
+- **Capacity-aware abstention:** no unsupported result when a required symbol
+  or relation has been evicted; and
+- **Symbolic replay:** identical result token and epistemic state after
+  snapshot restoration.
+
+The following legacy/profile metrics remain required only for profiles that
+instantiate them:
+
 - **Capacity curve:** exact decision accuracy as a function of independently
   necessary load, measured at fixed retention interval and without distractors.
   Report the full load-response curve and the fitted breakpoint at which
@@ -397,22 +532,23 @@ measured during execution, including instantiated encoder/decoder state and
 metadata, rather than a theoretical minimum.
 
 In **Phase 2**, run untouched held-out episodes using the frozen procedure.
-The preregistration must specify numeric minimums or maximums for the nine
-gating fields: capacity breakpoint, complex-span accuracy, binding accuracy,
-distractor decrement, eviction/expiration error, promotion-error rate, replay
-agreement, transient footprint, and latency. Interference, decay, leakage,
-CPU/GPU equivalence, and other condition-level outcomes must still be
-reported, with leakage and uncharged storage remaining mandatory validity
-conditions. Report confidence intervals and abstentions; a threshold is not
-met by omitting difficult trials.
+The preregistration must specify numeric minimums or maximums for the core
+metrics and for the declared profile metrics. The former fixed nine-field set
+remains available as the `legacy-relational-manipulation` profile; it is not
+automatically gating for a profile that does not instantiate complex span or
+the corresponding binding family. Interference, decay, leakage, CPU/GPU
+equivalence, and other condition-level outcomes must still be reported, with
+leakage and uncharged storage remaining mandatory validity conditions. Report
+confidence intervals and abstentions; a threshold is not met by omitting
+difficult trials.
 
 Each numeric threshold must also include a baseline-anchored justification:
 development performance for the strong non-oracle baselines, development
 performance for the oracle baseline, the proposed value and uncertainty, and
 one line explaining why the value discriminates the target capability rather
-than merely describing Protama's own development curve. These nine
-justifications are part of the versioned freeze record and must be completed
-before held-out results are inspected.
+than merely describing Protama's own development curve. These justifications
+are part of the versioned freeze record and must be completed for every
+numeric threshold before held-out results are inspected.
 
 ### Policy-value extension
 
@@ -464,9 +600,12 @@ continues updating during the test.
 A pass requires:
 
 - bounded memory use;
-- above-baseline manipulation and binding;
+- successful manipulation for the declared profile, with the registered
+  baseline comparison where a learned policy is being evaluated;
 - a preregistered capacity curve with measurable degradation when capacity is
   exceeded;
+- profile-correct abstention or uncertainty when required retained state is
+  unavailable;
 - correct eviction and expiration;
 - no cross-thought leakage;
 - no unsupported promotion to durable state; and
@@ -477,48 +616,76 @@ A pass requires:
 ## Pass rule
 
 The gate must use preregistered component thresholds rather than one averaged
-score. The nine named thresholds are all gating, and all must pass:
+score. Every profile must pass the shared invariants and every threshold
+declared by that profile. A profile may not add or remove thresholds after
+held-out results are inspected.
 
 $$
 \operatorname{PASS}
 \iff
 \begin{cases}
-K\geq k_{\min} \\
-A_{\mathrm{span}}\geq \alpha_{\mathrm{span}} \\
-A_{\mathrm{bind}}\geq \beta_{\mathrm{binding}} \\
-\Delta_D\leq \delta_{\mathrm{distractor,max}} \\
-E_{\mathrm{evict}}\leq \eta_{\mathrm{eviction,max}} \\
-I_{\mathrm{leak}}=0 \\
-P_{\mathrm{err}}\leq \pi_{\mathrm{promotion,max}} \\
-R_{\mathrm{replay}}\geq \rho_{\mathrm{replay,min}} \\
-M\leq m_{\mathrm{transient,max}} \\
-L_{p95}\leq \mathrm{latency\_budget} \\
+\text{all shared invariants pass} \\
+\text{all declared profile thresholds pass} \\
 \text{no critical leakage or uncharged storage detected}
 \end{cases}
 $$
 
-Here \(K\) is the canonical supported capacity, \(A_{\mathrm{span}}\) and
-\(A_{\mathrm{bind}}\) are complex-span and binding accuracy, \(\Delta_D\) is
-distractor decrement, \(E_{\mathrm{evict}}\) is eviction error,
-\(I_{\mathrm{leak}}\) is cross-thought leakage, \(P_{\mathrm{err}}\) is
-promotion error rate, \(R_{\mathrm{replay}}\) is decision-identical replay
-agreement, \(M\) is peak transient-state footprint, and \(L_{p95}\) is p95
-end-to-end episode latency. The exact threshold definitions, units, direction,
-and confidence-bound rules are registered in the public preregistration draft.
-The leakage and uncharged-storage conditions are mandatory validity conditions
-in addition to the nine numeric fields. All must be fixed before the final
-test run and must not be selected after inspecting final held-out results.
+For the `grounded-symbolic-composition` profile, the declared thresholds must
+cover at least:
 
-All nine numeric thresholds are gating. Interference error, decay, CPU/GPU
-decision-equivalence rate, and condition-level curves are reported diagnostics
-unless a future version explicitly promotes them into the threshold set.
+```text
+withheld-composition accuracy
+capacity-aware abstention correctness
+matched distractor decrement
+snapshot replay agreement
+cross-thought leakage
+```
+
+For the `legacy-relational-manipulation` profile, the nine-field threshold
+set remains available: capacity breakpoint, complex-span accuracy, binding
+accuracy, distractor decrement, eviction/expiration error, promotion-error
+rate, replay agreement, transient footprint, and latency. Those thresholds
+are gating only when that profile is declared.
+
+Interference, decay, CPU/GPU decision-equivalence rate, and condition-level
+curves remain mandatory diagnostics unless a profile explicitly promotes them
+into its frozen threshold set. The leakage and uncharged-storage conditions
+are mandatory validity conditions for every profile.
+
 The policy-value extension is an additional gating validity condition whenever
 learned retention or selection is enabled. It is inactive for a declared
 non-learning reference configuration.
 
 The public report must include raw metrics, condition-level metrics, confidence
 intervals, failures and abstentions, excluded episodes and exclusion reasons,
-and the exact pass-rule version.
+the declared profile, the exact pass-rule version, and the justification for
+each profile threshold.
+
+## Additional optional epistemic-precision profile
+
+The core gate does not require a particular theory of inference beyond the
+state-aware binding decision contract. A system may submit an additional,
+non-gating epistemic-precision profile to demonstrate
+that it distinguishes evidence-supported claims from associations or
+underdetermined interpretations. The profile may report, where applicable:
+
+- correct abstention on underdetermined episodes;
+- unsupported-assertion rate;
+- ambiguity and contradiction recognition;
+- partial-structure recognition;
+- inquiry or clarification quality;
+- separation of local linguistic correctness from unsupported global claims.
+
+Inquiry quality is decomposed into action correctness, exact missing-role
+identification, complete candidate enumeration, and message evidence. A
+generic uncertainty response is not equivalent to a useful clarification.
+These results are diagnostic in this gate version; promotion to a hard
+threshold requires independent baselines and held-out validation.
+
+These results are extra evidence and must not replace the core metrics,
+retroactively change pass conditions, or exclude difficult core episodes. A
+future gate version may promote profile metrics only after independent task
+definitions, baselines, and held-out evidence are available.
 
 ## Baselines
 
@@ -629,6 +796,49 @@ The gate fails if Protama:
 Passing does not establish human working memory, Baddeley's component
 architecture, or a fixed biological item limit. It establishes bounded,
 manipulable, auditable transient state.
+
+## Expected objections and responses
+
+### “The gate was changed after seeing the result.”
+
+Profile alignment is not a post-hoc threshold exemption. The parent
+capability and its shared invariants remain unchanged. The revision makes the
+task-to-metric mapping explicit before a profile's final held-out run. The
+older nine-field relation battery remains preserved as a separate historical
+profile and is not relabeled as a pass.
+
+### “Readable labels such as `inert` are preloaded English knowledge.”
+
+A readable token is not a built-in definition. The profile records the lesson
+that establishes the token and its role. If English semantics are claimed,
+they require a separate language-mediated profile. The symbolic profile can
+be evaluated without English comprehension.
+
+### “A withheld list may be trivial memorization.”
+
+The scorer must distinguish exact list lessons from withheld compositions.
+Held-out lists must vary structure, length, and member composition. Exact
+matches are reported separately and do not count as composition
+generalization.
+
+### “A capacity of seven is arbitrary.”
+
+The profile reports the complete load structure, charged representation, and
+the full capacity curve. The capacity is an empirical result for that
+representation and task, not a claim about a universal item limit.
+
+### “The evaluator already knows the relations.”
+
+Expected relations may exist in the manifest for scoring, but they must not be
+provided to the system as relevance flags, future target identities, or answer
+tokens. The final report must separate evaluator-owned expected outcomes from
+runtime inputs and reject any leakage path.
+
+### “A symbolic profile does not prove general intelligence.”
+
+Correct. The gate claims bounded transient manipulation for the declared
+profile. Additional profiles are required for language, other binding types,
+or broader generalization claims.
 
 ## Public reporting standard
 

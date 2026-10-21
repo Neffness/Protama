@@ -127,7 +127,7 @@ following. The threshold fields below are all **gating**, not diagnostic.
 |---|---|---|---|
 | `k_min` | canonical non-distractor supported capacity, defined as the largest independently necessary non-recodable load whose lower confidence bound meets the preregistered capacity criterion; the next tested load is reported as the first failing load when observed | items/relations | supported capacity must be at least this value |
 | `alpha_span` | complex-span accuracy after the required compare, transform, or bind operation | proportion of episodes, 0–1 | accuracy must be at least this value |
-| `beta_binding` | binding accuracy for the required relation type, including correct arguments, evaluated at the canonical supported non-distractor load and the preregistered held-out distractor condition | proportion of scored bindings, 0–1 | accuracy must be at least this value |
+| `beta_binding` | mandatory binding-decision accuracy for the required relation type, evaluated at the canonical supported non-distractor load and the preregistered held-out distractor condition; determinate cases require the correct relation arguments, while manifest-labeled underdetermined cases require the correct declared `supported`, `partial`, `ambiguous`, `contradicted`, or `unknown` decision without unsupported assertion | proportion of scored binding decisions, 0–1 | accuracy must be at least this value, with determinate and epistemic strata reported separately |
 | `delta_distractor_max` | matched accuracy decrement from adding the preregistered distractor load | proportion-point difference, 0–1 | decrement must be no greater than this value |
 | `eta_eviction_max` | combined error rate for eviction and expiration decisions, including retaining state that should be absent or losing state that should remain | proportion of scored lifecycle decisions, 0–1 | error must be no greater than this value |
 | `pi_promotion_max` | promotion error rate: unauthorized, contradicted, uncertain, or missing-evidence state promoted as durable, plus any other incorrect promotion disposition | proportion of promotion cases, 0–1 | error must be no greater than this value |
@@ -168,6 +168,26 @@ the report must
 include complex-span submetrics, interference error, decay, cross-thought
 leakage, failure counts, abstentions, promotion dispositions, and resource
 traces.
+
+For `beta_binding`, state-aware scoring is mandatory rather than an optional
+profile. The scorer must retain separate determinate and epistemic-decision
+submetrics. A determinate relation is correct only when its required relation
+type and argument bindings are correct. An underdetermined episode is correct
+when the system emits the manifest-declared epistemic state and does not
+assert an unsupported complete binding. The manifest must declare the expected
+state before execution; the scorer may not infer ambiguity or partial credit
+from the system's output. The overall lower confidence bound may not conceal
+failure in either registered stratum; the determinate and epistemic stratum
+results must each satisfy their preregistered criterion when both are present.
+For ambiguity cases whose manifest declares multiple supported alternatives,
+the manifest must also enumerate those alternatives and the scorer must
+compare the system's candidate set with that declaration. For partial cases,
+the manifest may declare the missing role(s), which must be identified by the
+system for structural credit. These candidate/missing-evidence checks are
+reported separately from state accuracy and become required for held-out
+epistemic cases once the corresponding output trace fields are frozen.
+The numeric criterion remains unfrozen until the development evidence and
+independent review are complete.
 
 ## Baseline-anchored threshold justification
 
@@ -274,16 +294,42 @@ Every exclusion requires a reason code, raw trace, and reviewer-visible count;
 excluded episodes remain outside metric denominators but are included in the
 run accounting.
 
+## Additional optional epistemic-precision profile
+
+The core gate remains implementation-neutral and does not require a specific
+inference architecture. State-aware binding decisions are already mandatory
+within `beta_binding`; a system may additionally submit a separate,
+non-gating profile for underdetermined or inference-sensitive episodes. The
+profile may report
+correct abstention, unsupported-assertion rate, ambiguity and contradiction
+recognition, partial-structure recognition, inquiry quality, and the
+distinction between locally supported language facts and unsupported global
+interpretations.
+When inquiry quality is reported, it must be decomposed into action
+correctness, missing-role correctness, candidate-enumeration completeness,
+and message-evidence correctness. A generic uncertainty phrase does not
+receive clarification credit.
+
+Profile cases must declare their expected outcome before execution. Profile
+results must use saved raw traces and must not replace, relax, or retroactively
+modify any core threshold. They also must not be used to exclude difficult
+core episodes. Promotion of a profile metric into a future gate version
+requires an independently reviewed task definition, registered baselines,
+held-out evidence, and an explicit anti-boilerplate criterion for inquiry
+responses.
+
 ## Pass rule
 
 The gate passes only if **all nine threshold fields** satisfy their stated
-confidence-bound rules on the held-out run, no critical leakage or uncharged
-storage is detected, and all required baselines, failure/abstention reports,
-promotion cases, contradiction/maintenance cases, and replay comparisons are
-present. The following are reported but are not additional independent
-threshold fields: interference error, decay curve, CPU/GPU equivalence rate,
-and per-condition diagnostic curves. A critical leakage or uncharged-storage
-finding fails the gate even if the nine numeric thresholds are met.
+confidence-bound rules on the held-out run, both the determinate and
+epistemic `beta_binding` strata satisfy their independently registered
+criteria, no critical leakage or uncharged storage is detected, and all
+required baselines, failure/abstention reports, promotion cases,
+contradiction/maintenance cases, and replay comparisons are present. The
+following are reported but are not additional independent threshold fields:
+interference error, decay curve, CPU/GPU equivalence rate, and per-condition
+diagnostic curves. A critical leakage or uncharged-storage finding fails the
+gate even if the nine numeric thresholds are met.
 
 ## Current status
 
