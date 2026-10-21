@@ -132,11 +132,13 @@ profiles with their own frozen curricula, baselines, metrics, and thresholds.
 
 ## Reproducibility
 
-The source implementation is in:
+- [Public validation harness](../src/bounded_working_memory_benchmark/)
 
-- [symbolic_geiger_curriculum.py](../../Protama_Private/Protama/benchmarks/symbolic_geiger_curriculum.py)
-- [working_memory_gate.py](../../Protama_Private/Protama/benchmarks/working_memory_gate.py)
-- [test_symbolic_geiger_curriculum.py](../../Protama_Private/Protama/tests/test_symbolic_geiger_curriculum.py)
+Implementation boundary:
+
+The runtime implementation and development tests are maintained separately from
+this public reproducibility package. The public validation harness below checks
+the frozen manifest and result without importing that implementation.
 
 The final machine-readable result is:
 

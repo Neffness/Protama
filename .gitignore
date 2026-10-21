@@ -47,6 +47,9 @@ Thumbs.db
 !src/structural_transfer_benchmark/structural/models.py
 !src/structural_transfer_benchmark/structural/scorer.py
 !src/structural_transfer_benchmark/structural/topologies.py
+!src/bounded_working_memory_benchmark/
+!src/bounded_working_memory_benchmark/__init__.py
+!src/bounded_working_memory_benchmark/verifier.py
 !tests/
 !tests/**
 !tests/**/*.py

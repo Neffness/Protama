@@ -25,6 +25,10 @@ The frozen profile is implemented and verified by the private Protama source
 and documented in the
 [publication draft](../../paper/2026-10-21-bounded-working-memory-grounded-symbolic-composition.md).
 
+An external viewer can validate the frozen manifest and result with the
+public [`bounded_working_memory_benchmark`](../../src/bounded_working_memory_benchmark/)
+harness; it does not require private Protama imports.
+
 The calibration manifests remain in `gate-work/` because the existing
 calibration tests use them as inputs. They are not part of the frozen
 grounded-symbolic result.

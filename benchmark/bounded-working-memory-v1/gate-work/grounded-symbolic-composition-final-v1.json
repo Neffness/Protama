@@ -7,6 +7,7 @@
   "post_freeze_teaching": "none",
   "held_out_policy_update_attempts": 0,
   "metrics": {
+    "substrate_completeness": 1.0,
     "withheld_composition_accuracy": 1.0,
     "capacity_aware_abstention_accuracy": 1.0,
     "minimum_complete_capacity": 7,
