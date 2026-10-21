@@ -37,3 +37,13 @@ def test_public_verifier_rejects_tampered_result(tmp_path):
     assert "withheld_composition_accuracy is below its declared threshold" in report[
         "errors"
     ]
+
+
+def test_public_verifier_checks_v2_trial_and_baseline_evidence():
+    report = verify_frozen_profile(
+        BENCHMARK / "grounded-symbolic-composition-freeze-v2.json",
+        BENCHMARK / "grounded-symbolic-composition-development-v2.json",
+    )
+
+    assert report["valid"]
+    assert report["result"] == "DEVELOPMENT_PASS"

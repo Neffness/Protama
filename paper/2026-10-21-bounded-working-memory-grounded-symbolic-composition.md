@@ -144,6 +144,32 @@ the frozen manifest and result without importing that implementation.
 The machine-readable development result is:
 
 - [grounded-symbolic-composition-final-v1.json](../benchmark/bounded-working-memory-v1/gate-work/grounded-symbolic-composition-final-v1.json)
+- [grounded-symbolic-composition-freeze-v2.json](../benchmark/bounded-working-memory-v1/gate-work/grounded-symbolic-composition-freeze-v2.json)
+- [grounded-symbolic-composition-development-v2.json](../benchmark/bounded-working-memory-v1/gate-work/grounded-symbolic-composition-development-v2.json)
+
+## v2 development run
+
+The v2 preregistration expanded the held-out battery to 20 compositions across
+four learned result types, lengths three through eight, and homogeneous,
+mixed, sparse, and clustered structures. It also declared five retention
+baselines, trial-level evidence requirements, and Wilson 95% intervals before
+the run.
+
+The frozen v2 development run produced:
+
+| Measure | Result |
+|---|---:|
+| Held-out compositions | 20/20 |
+| Abstention cases | 5/5 |
+| Composition Wilson 95% interval | 0.839–1.000 |
+| Abstention Wilson 95% interval | 0.566–1.000 |
+| Maximum complete capacity | 10 |
+| Baseline trial records | 5 × 20 |
+
+The v2 result is `DEVELOPMENT_PASS`, not a final statistical gate pass. The
+public verifier checks the manifest hash, every held-out and abstention record,
+all baseline trial counts and accuracies, capacity trial count, intervals, and
+declared thresholds.
 
 The integrated startup verification gate is:
 

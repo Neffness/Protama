@@ -123,6 +123,55 @@ def verify_frozen_profile(
     if capacity != declared_capacity:
         errors.append("minimum complete capacity does not match the threshold")
 
+    if manifest.get("freeze_id") == "grounded-symbolic-composition-freeze-v2":
+        expected_baselines = {
+            baseline["name"] for baseline in manifest.get("baselines", [])
+        }
+        actual_baselines = {
+            baseline.get("name") for baseline in result.get("baselines", [])
+        }
+        if actual_baselines != expected_baselines:
+            errors.append("baseline result set does not match the manifest")
+        for baseline in result.get("baselines", []):
+            rows = baseline.get("trials", [])
+            if len(rows) != len(manifest.get("held_out_compositions", [])):
+                errors.append(
+                    f"baseline trial count is wrong: {baseline.get('name')}"
+                )
+                continue
+            successes = sum(row.get("correct") is True for row in rows)
+            if baseline.get("accuracy") != successes / len(rows):
+                errors.append(
+                    f"baseline accuracy is not reproducible: {baseline.get('name')}"
+                )
+            interval = baseline.get("accuracy_interval_95")
+            if (
+                not isinstance(interval, list)
+                or len(interval) != 2
+                or not 0 <= interval[0] <= interval[1] <= 1
+            ):
+                errors.append(
+                    f"baseline interval is invalid: {baseline.get('name')}"
+                )
+
+        capacity_trials = result.get("capacity_trials", [])
+        expected_capacity_trials = len(
+            manifest.get("held_out_compositions", [])
+        ) * len(manifest.get("capacity_conditions", []))
+        if len(capacity_trials) != expected_capacity_trials:
+            errors.append("capacity trial count does not match the manifest")
+        for metric_name in (
+            "withheld_composition_interval_95",
+            "capacity_aware_abstention_interval_95",
+        ):
+            interval = metrics.get(metric_name)
+            if (
+                not isinstance(interval, list)
+                or len(interval) != 2
+                or not 0 <= interval[0] <= interval[1] <= 1
+            ):
+                errors.append(f"metric interval is invalid: {metric_name}")
+
     return {
         "valid": not errors,
         "errors": tuple(errors),
