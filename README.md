@@ -1,10 +1,10 @@
 # Protama
 
-Protama is a research‑stage developmental cognitive architecture that acquires
-conceptual structure through lesson‑based instruction and is evaluated using a
-formal L2–L5 structural gate. It also has a bounded, supervised demonstration
-of a research affordance involving hypothesis formation, structural induction,
-and conceptual expansion.
+Protama is a research-stage developmental cognitive architecture that acquires
+conceptual structure through lesson-based instruction and is evaluated through
+formal structural-transfer and bounded-working-memory gates. It also has a
+bounded, supervised demonstration of a research affordance involving
+hypothesis formation, structural induction, and conceptual expansion.
 
 We make no official claim to general intelligence, yet. That is, in fact,
 <u>the goal</u>.
@@ -19,9 +19,11 @@ revision, uncertainty, and abstention. The goal is not to make a more fluent
 chatbot. The goal is to investigate whether an intelligence can learn
 relationships that remain useful when the words and circumstances change.
 
-This repository contains the public Protama research artifacts and
-**Benchmark A: Structural Transfer**, a benchmark initially developed to
-evaluate Protama's structural generalization rather than memorization.
+This repository contains the public Protama research artifacts,
+**Benchmark A: Structural Transfer**, and the public **Bounded Working Memory
+and Thought Holdover** provability package. These benchmarks were developed to
+evaluate structural generalization, bounded transient retention, and
+evidence-grounded decisions rather than memorization alone.
 
 [Read the Protama vision](VISION.md) to learn what the project is becoming,
 what it explicitly does not claim, and how its research roadmap is organized.
@@ -55,6 +57,20 @@ Read the [Structural Gate completion paper](paper/2026-10-17-structural-gate-com
 for the result, methods, limitations, and claim boundary. The earlier
 [research-affordance paper](paper/2026-10-16-learned-research-affordance.md)
 describes that companion demonstration.
+
+Protama also has a completed public provability profile for bounded working
+memory and thought holdover. Under its frozen temporal protocol, the result
+records task-relevant retention across intervals, principled abstention,
+replayable evidence paths, and zero replay, provenance, leakage, and
+unauthorized-promotion failures. The result is scoped to the declared
+140-episode case set; it is not a claim of general intelligence or universal
+memory.
+
+Read the [Bounded Working Memory and Thought Holdover Gate specification](docs/gates/bounded-working-memory-thought-holdover-gate.md)
+and the [public provability package](benchmark/bounded-working-memory/) for the
+freeze, materialized cases, result, structured review, verifier, and publication
+claim boundary. The grounded-symbolic composition report remains development
+evidence rather than a separate final statistical gate.
 
 ## What Protama is trying to achieve
 
@@ -94,9 +110,9 @@ not copied here automatically.
 
 ## Core benchmark
 
-The primary public evaluation is **Benchmark A: Structural Transfer**, whose
-first completed evaluation was the Protama Structural Induction and Transfer
-Gate. It evaluates whether a system can:
+The primary public structural evaluation is **Benchmark A: Structural
+Transfer**, whose first completed evaluation was the Protama Structural
+Induction and Transfer Gate. It evaluates whether a system can:
 
 1. infer a reusable latent relational structure from limited examples;
 2. transfer that structure to novel vocabulary and surface forms;
@@ -106,6 +122,11 @@ Gate. It evaluates whether a system can:
 
 Read the [Structural Induction and Transfer Gate specification](docs/gates/Protama_Inductive_Structural_Invention_Test.md)
 for the formal task, controls, metrics, and claim boundaries.
+
+The separate [Bounded Working Memory and Thought Holdover Gate](docs/gates/bounded-working-memory-thought-holdover-gate.md)
+evaluates whether task-relevant state remains available across temporal
+intervals, supports a later justified decision, and is bounded, replayable,
+and provenance-preserving.
 
 The proposed [Epistemic Growth and Active Inquiry Gate](docs/gates/epistemic-growth-active-inquiry-gate.md)
 is a separate, future evaluation of knowledge-boundary regulation and
