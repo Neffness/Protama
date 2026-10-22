@@ -52,8 +52,9 @@ def verify_frozen_profile(
     for field in ("gate_version", "profile", "freeze_id", "manifest_sha256"):
         if result.get(field) != manifest.get(field):
             errors.append(f"result does not match manifest field: {field}")
-    if result.get("result") != "DEVELOPMENT_PASS":
-        errors.append("result is not DEVELOPMENT_PASS")
+    allowed_results = {"DEVELOPMENT_PASS"}
+    if result.get("result") not in allowed_results:
+        errors.append("result does not satisfy the declared result status")
     if result.get("post_freeze_teaching") != "none":
         errors.append("post-freeze teaching was recorded")
     if result.get("held_out_policy_update_attempts") != 0:
@@ -123,7 +124,9 @@ def verify_frozen_profile(
     if capacity != declared_capacity:
         errors.append("minimum complete capacity does not match the threshold")
 
-    if manifest.get("freeze_id") == "grounded-symbolic-composition-freeze-v2":
+    if manifest.get("freeze_id") in {
+        "grounded-symbolic-composition-freeze-v2",
+    }:
         expected_baselines = {
             baseline["name"] for baseline in manifest.get("baselines", [])
         }
@@ -154,6 +157,37 @@ def verify_frozen_profile(
                     f"baseline interval is invalid: {baseline.get('name')}"
                 )
 
+    gate_rule = manifest.get("gate_pass_rule")
+    if gate_rule is not None:
+        if result.get("result") != "PASS":
+            errors.append("declared gate_pass rule did not pass")
+        composition_interval = metrics.get("withheld_composition_interval_95")
+        abstention_interval = metrics.get(
+            "capacity_aware_abstention_interval_95"
+        )
+        if (
+            not isinstance(composition_interval, list)
+            or composition_interval[0] < gate_rule["composition_lower_bound_min"]
+        ):
+            errors.append("composition confidence lower bound is below gate threshold")
+        if (
+            not isinstance(abstention_interval, list)
+            or abstention_interval[0] < gate_rule["abstention_lower_bound_min"]
+        ):
+            errors.append("abstention confidence lower bound is below gate threshold")
+        if len(result.get("held_out_compositions", [])) != gate_rule[
+            "composition_trial_count"
+        ]:
+            errors.append("composition trial count does not match gate rule")
+        if len(result.get("abstention_cases", [])) != gate_rule[
+            "abstention_trial_count"
+        ]:
+            errors.append("abstention trial count does not match gate rule")
+        if len(result.get("capacity_trials", [])) != gate_rule[
+            "capacity_trial_count"
+        ]:
+            errors.append("capacity trial count does not match gate rule")
+
         capacity_trials = result.get("capacity_trials", [])
         expected_capacity_trials = len(
             manifest.get("held_out_compositions", [])
@@ -177,4 +211,61 @@ def verify_frozen_profile(
         "errors": tuple(errors),
         "manifest_sha256": manifest.get("manifest_sha256"),
         "result": result.get("result"),
+    }
+
+
+def verify_provability_gate(
+    manifest_path: str | Path,
+    case_data_path: str | Path,
+    result_path: str | Path,
+) -> dict[str, Any]:
+    """Validate the published bounded thought-holdover proof package."""
+    manifest = _read_json(manifest_path)
+    result = _read_json(result_path)
+    errors: list[str] = []
+
+    expected_manifest_digest = manifest.get("manifest_sha256")
+    if not isinstance(expected_manifest_digest, str):
+        errors.append("manifest_sha256 is missing")
+    elif _manifest_digest(manifest) != expected_manifest_digest:
+        errors.append("manifest_sha256 does not match the manifest contents")
+
+    case_path = Path(case_data_path)
+    case_digest = hashlib.sha256(case_path.read_bytes()).hexdigest()
+    if case_digest != manifest.get("case_data_sha256"):
+        errors.append("case_data_sha256 does not match the case data")
+
+    cases = _read_json(case_path)
+    episodes = cases.get("episodes")
+    expected_episode_count = sum(
+        int(group["count"]) for group in manifest.get("episode_groups", [])
+    )
+    if not isinstance(episodes, list) or len(episodes) != expected_episode_count:
+        errors.append("case data episode count does not match the manifest")
+
+    if manifest.get("freeze_id") != "protama-bounded-working-memory-thought-holdover":
+        errors.append("unexpected provability freeze")
+    if result.get("status") != "PROVABILITY_PASS":
+        errors.append("provability gate did not pass")
+    if result.get("manifest_sha256") != expected_manifest_digest:
+        errors.append("result does not match the manifest hash")
+    if result.get("human_review_status") != "not-required":
+        errors.append("human review status is not not-required")
+    if result.get("episode_count") != expected_episode_count:
+        errors.append("result episode count does not match the manifest")
+
+    integrity = result.get("integrity", {})
+    for field in (
+        "replay_failures",
+        "cross_episode_leakage_failures",
+        "unauthorized_promotion_failures",
+        "evidence_provenance_failures",
+    ):
+        if integrity.get(field) != 0:
+            errors.append(f"{field} is nonzero")
+
+    return {
+        "valid": not errors,
+        "errors": tuple(errors),
+        "status": result.get("status"),
     }

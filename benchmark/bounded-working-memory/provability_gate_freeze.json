@@ -1,0 +1,99 @@
+{
+  "profile": "protama-bounded-working-memory-thought-holdover-provability",
+  "freeze_id": "protama-bounded-working-memory-thought-holdover",
+  "claim": "Under a bounded temporal observation protocol, Protama retains and uses task-relevant state across temporal intervals, distinguishes insufficient evidence from supported conclusions, and exposes a replayable evidence path for its decisions.",
+  "generator": {
+    "sampling_hz": 10,
+    "duration_seconds": 10,
+    "burst_size": 5,
+    "source_mechanisms": {
+      "ambiguous": "step",
+      "interrupted-source": "step",
+      "no-source": "step",
+      "persistent-source": "step",
+      "transient-source": "step",
+      "near-miss": "step",
+      "unknown-mechanism": "triangular-rise"
+    }
+  },
+  "episode_groups": [
+    {
+      "family": "ambiguous",
+      "start_seed": 1000,
+      "count": 20,
+      "justified_conclusion": "ambiguous"
+    },
+    {
+      "family": "interrupted-source",
+      "start_seed": 1050,
+      "count": 20,
+      "justified_conclusion": "ambiguous"
+    },
+    {
+      "family": "no-source",
+      "start_seed": 1100,
+      "count": 20,
+      "justified_conclusion": "no-source"
+    },
+    {
+      "family": "persistent-source",
+      "start_seed": 1120,
+      "count": 20,
+      "justified_conclusion": "source-present"
+    },
+    {
+      "family": "transient-source",
+      "start_seed": 1140,
+      "count": 20,
+      "justified_conclusion": "source-present"
+    },
+    {
+      "family": "near-miss",
+      "start_seed": 1160,
+      "count": 20,
+      "justified_conclusion": "no-source"
+    },
+    {
+      "family": "unknown-mechanism",
+      "start_seed": 1180,
+      "count": 20,
+      "justified_conclusion": "source-present"
+    }
+  ],
+  "capacity_conditions": [
+    4,
+    8,
+    12,
+    16,
+    20
+  ],
+  "capacity_rule": "When retention is partial, a negative conclusion without a retained positive evidence span is also ambiguous because the retained history cannot establish that no event occurred.",
+  "case_data_file": "provability_gate_cases.json",
+  "case_data_sha256": "22d68bd5d045759309f34549ee622f7e94b00b9c1af3c7dbc0c3a61eaa91c4eb",
+  "baselines": [
+    "no-holdover"
+  ],
+  "fairness_key": {
+    "required_fields": [
+      "ground_truth",
+      "observable_evidence",
+      "justified_conclusion",
+      "remaining_alternatives",
+      "resolving_information"
+    ],
+    "conclusion_rule": "The justified conclusion is the declared family conclusion, not necessarily the hidden ground truth.",
+    "human_review_required": false,
+    "structured_review": "temporal-fairness-key-structured-review.md"
+  },
+  "completion_conditions": {
+    "manifest_replayable": true,
+    "decision_records_complete": true,
+    "fairness_keys_complete": true,
+    "replay_failures_max": 0,
+    "cross_episode_leakage_failures_max": 0,
+    "unauthorized_promotion_failures_max": 0,
+    "evidence_provenance_failures_max": 0,
+    "human_review_status": "not-required"
+  },
+  "manifest_sha256": "45a47efc1000c2057086283b40d5efee2400f5ac91832598f3a4228eee5fd095"
+}

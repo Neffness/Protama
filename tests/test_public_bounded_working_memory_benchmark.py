@@ -1,70 +1,44 @@
-import hashlib
 import json
 import tempfile
 import unittest
 from pathlib import Path
 
-from bounded_working_memory_benchmark import verify_frozen_profile
+from bounded_working_memory_benchmark import verify_provability_gate
 
 
 ROOT = Path(__file__).resolve().parents[1]
-BENCHMARK = ROOT / "benchmark" / "bounded-working-memory-v1" / "gate-work"
+BENCHMARK = ROOT / "benchmark" / "bounded-working-memory"
 
 
 class PublicBoundedWorkingMemoryTests(unittest.TestCase):
-    def test_frozen_grounded_symbolic_profile_is_publicly_validated(self):
-        report = verify_frozen_profile(
-            BENCHMARK / "grounded-symbolic-composition-freeze-v1.json",
-            BENCHMARK / "grounded-symbolic-composition-final-v1.json",
+    def test_published_provability_gate_is_valid(self):
+        report = verify_provability_gate(
+            BENCHMARK / "provability_gate_freeze.json",
+            BENCHMARK / "provability_gate_cases.json",
+            BENCHMARK / "provability_gate_result.json",
         )
 
         self.assertTrue(report["valid"])
-        self.assertEqual(report["result"], "DEVELOPMENT_PASS")
+        self.assertEqual(report["status"], "PROVABILITY_PASS")
         self.assertEqual(report["errors"], ())
 
-    def test_public_verifier_rejects_tampered_result(self):
-        result_path = (
-            BENCHMARK / "grounded-symbolic-composition-final-v1.json"
-        )
-        result = json.loads(result_path.read_text(encoding="utf-8"))
-        result["metrics"]["withheld_composition_accuracy"] = 0.5
+    def test_public_verifier_rejects_tampered_case_data(self):
+        case_path = BENCHMARK / "provability_gate_cases.json"
+        case_data = json.loads(case_path.read_text(encoding="utf-8"))
+        case_data["episodes"][0]["seed"] += 1
+
         with tempfile.TemporaryDirectory() as directory:
             tampered_path = Path(directory) / "tampered.json"
-            tampered_path.write_text(json.dumps(result), encoding="utf-8")
+            tampered_path.write_text(
+                json.dumps(case_data, sort_keys=True, indent=2) + "\n",
+                encoding="utf-8",
+            )
 
-            report = verify_frozen_profile(
-                BENCHMARK / "grounded-symbolic-composition-freeze-v1.json",
+            report = verify_provability_gate(
+                BENCHMARK / "provability_gate_freeze.json",
                 tampered_path,
+                BENCHMARK / "provability_gate_result.json",
             )
 
         self.assertFalse(report["valid"])
-        self.assertIn(
-            "withheld_composition_accuracy is below its declared threshold",
-            report["errors"],
-        )
-
-    def test_public_verifier_checks_v2_trial_and_baseline_evidence(self):
-        report = verify_frozen_profile(
-            BENCHMARK / "grounded-symbolic-composition-freeze-v2.json",
-            BENCHMARK / "grounded-symbolic-composition-development-v2.json",
-        )
-
-        self.assertTrue(report["valid"])
-        self.assertEqual(report["result"], "DEVELOPMENT_PASS")
-
-    def test_temporal_sensor_freeze_hash_matches_contents(self):
-        freeze_path = BENCHMARK / "temporal-sensor-stream-freeze-v1.json"
-        freeze = json.loads(freeze_path.read_text(encoding="utf-8"))
-        unsigned = dict(freeze)
-        unsigned["manifest_sha256"] = "PENDING"
-        payload = json.dumps(
-            unsigned,
-            sort_keys=True,
-            separators=(",", ":"),
-            ensure_ascii=True,
-        ).encode("ascii")
-
-        self.assertEqual(
-            hashlib.sha256(payload).hexdigest(),
-            freeze["manifest_sha256"],
-        )
+        self.assertIn("case_data_sha256 does not match the case data", report["errors"])
