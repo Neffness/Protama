@@ -92083,7 +92083,7 @@
     "unauthorized_promotion_failures": 0
   },
   "machine_gate_pass": true,
-  "manifest_sha256": "45a47efc1000c2057086283b40d5efee2400f5ac91832598f3a4228eee5fd095",
+  "manifest_sha256": "57ea29394121efa8fa6e44ec8fc345eb27176c86463de0a06409e5b8afe96abd",
   "no_holdover_summary": {
     "abstention_correctness": 0.2857142857142857,
     "accuracy": 0.2857142857142857,

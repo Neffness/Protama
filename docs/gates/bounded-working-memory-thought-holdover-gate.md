@@ -6,9 +6,9 @@ learned policy preserves value without evaluation-time leakage. The second
 layer was added in response to private-side implementation evidence; it was
 not assumed to be part of the original fixed-policy capacity claim.
 
-> **Status:** Public evaluation contract; profile-aligned revision.
-> This document defines the parent capability and its evaluation profiles; it
-> does not declare a completed result.
+> **Status:** Public evaluation contract; completed profiles are listed below.
+> This document defines the parent capability, profile completion rules, and
+> the public status of each profile.
 
 ## Abstract
 
@@ -52,18 +52,29 @@ Every submission therefore declares a profile:
 
 ```text
 grounded-symbolic-composition
+temporal-sensor-stream-state-tracking
+provability
 legacy-relational-manipulation
 role-filler-binding (reserved)
 feature-binding (reserved)
 language-mediated-composition (reserved)
 ```
 
-Only `grounded-symbolic-composition` is declarable in this gate version. The
-legacy relational battery is historical evidence, not a declarable profile,
-because its complete threshold, baseline, scoring, and freeze record is not
-present in the active public package. The other profiles are reserved names,
-not blank checks: they cannot be selected until their task families, complete
-threshold sets, baselines, scoring schemas, and freeze records are published.
+Profile status at the current public release:
+
+| Profile | Status | Meaning |
+| --- | --- | --- |
+| `grounded-symbolic-composition` | `DEVELOPMENT_PASS` | Frozen development evidence; not a final statistical gate pass. |
+| `temporal-sensor-stream-state-tracking` | `SUPERSEDED` | Historical sensor-stream curriculum superseded by the provability profile. |
+| `provability` | `COMPLETED` | Frozen public evidence-path and bounded-retention completion profile. |
+| `legacy-relational-manipulation` | `HISTORICAL` | Not declarable in the active public package. |
+| `role-filler-binding` | `RESERVED` | No complete public freeze. |
+| `feature-binding` | `RESERVED` | No complete public freeze. |
+| `language-mediated-composition` | `RESERVED` | No complete public freeze. |
+
+The provability profile is declarable because its public package contains the
+frozen protocol, materialized cases, result, baseline, integrity checks,
+performance thresholds, and structured fairness-key review.
 
 The parent gate has invariant requirements shared by every profile:
 
@@ -92,6 +103,39 @@ instantiate.
 The previous synthetic relation battery remains useful as a historical
 `legacy-relational-manipulation` profile. Its results must not be presented as
 the result of every profile or as a universal intelligence score.
+
+### Provability profile
+
+The provability profile tests whether a bounded temporal result is supported by
+an inspectable evidence path rather than only by a final label. Its claim is:
+
+```text
+bounded temporal observation
+→ retained task-relevant state
+→ justified conclusion or principled abstention
+→ replayable, provenance-preserving decision
+```
+
+The public completion rule requires all of the following:
+
+- 140 materialized episodes across the seven declared case families;
+- overall Protama accuracy of at least `0.95`;
+- Protama coverage of at least `0.70`;
+- Protama selective accuracy of at least `0.95`;
+- Protama abstention correctness of at least `0.95`;
+- capacity-aware accuracy and abstention correctness of at least `0.90`;
+- Protama accuracy and coverage greater than the `no-holdover` baseline;
+- zero replay, cross-episode leakage, unauthorized-promotion, and
+  evidence-provenance failures;
+- matching manifest and case-data hashes;
+- a published structured fairness-key review.
+
+These are completion thresholds for this profile, not a claim of general
+intelligence or universal correctness. `PROVABILITY_PASS` means this declared profile completion rule passed. The
+current public record treats this as publication-level completion; it does not
+retroactively claim that the numeric thresholds were independently published
+before the original run. A future preregistered statistical run must freeze
+its thresholds in a separately dated record before evaluation.
 
 ### Meta-freeze rule
 

@@ -253,6 +253,44 @@ def verify_provability_gate(
         errors.append("human review status is not not-required")
     if result.get("episode_count") != expected_episode_count:
         errors.append("result episode count does not match the manifest")
+    review_file = manifest.get("fairness_key", {}).get("structured_review")
+    if not isinstance(review_file, str) or not (
+        Path(manifest_path).with_name(review_file).is_file()
+    ):
+        errors.append("structured fairness-key review is not published")
+
+    thresholds = manifest.get("performance_thresholds", {})
+    protama = result.get("protama_summary", {})
+    capacity = result.get("capacity_summary", {})
+    baseline = result.get("no_holdover_summary", {})
+    minimums = (
+        ("protama_accuracy_min", protama.get("accuracy")),
+        ("protama_coverage_min", protama.get("coverage")),
+        ("protama_selective_accuracy_min", protama.get("selective_accuracy")),
+        (
+            "protama_abstention_correctness_min",
+            protama.get("abstention_correctness"),
+        ),
+        ("capacity_aware_accuracy_min", capacity.get("accuracy")),
+        (
+            "capacity_aware_abstention_correctness_min",
+            capacity.get("abstention_correctness"),
+        ),
+    )
+    for threshold_name, metric in minimums:
+        threshold = thresholds.get(threshold_name)
+        if not isinstance(threshold, (int, float)) or not isinstance(
+            metric, (int, float)
+        ) or metric < threshold:
+            errors.append(f"{threshold_name} is not satisfied")
+    if thresholds.get("protama_accuracy_must_exceed_no_holdover") and not (
+        protama.get("accuracy", 0) > baseline.get("accuracy", 0)
+    ):
+        errors.append("Protama accuracy does not exceed no-holdover")
+    if thresholds.get("protama_coverage_must_exceed_no_holdover") and not (
+        protama.get("coverage", 0) > baseline.get("coverage", 0)
+    ):
+        errors.append("Protama coverage does not exceed no-holdover")
 
     integrity = result.get("integrity", {})
     for field in (

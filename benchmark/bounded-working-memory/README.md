@@ -22,6 +22,10 @@ inputs.
   materialized case data used by the final run.
 - [`provability_gate_result.json`](./provability_gate_result.json) —
   final auditable result.
+- [`temporal-fairness-key-structured-review.md`](./temporal-fairness-key-structured-review.md)
+  — structured review of the seven representative fairness-key cases.
+- [`provability-profile-publication-record.md`](./provability-profile-publication-record.md)
+  — the claim boundary and public-record provenance statement.
 
 The result is `PROVABILITY_PASS`, with 140 episodes, 97.14% overall accuracy,
 72.86% coverage, 97.06% selective accuracy, 94.00% capacity-aware accuracy,
@@ -31,4 +35,7 @@ freeze.
 
 The public verifier validates the manifest hash, case-data hash, episode count,
 result status, result linkage, review status, and zero-integrity-failure
-conditions without importing Protama's private implementation.
+conditions without importing Protama's private implementation. It also checks
+the declared performance thresholds and the required improvement over the
+no-holdover baseline. The publication record distinguishes reproducible
+completion from a retroactive claim of preregistered statistical significance.

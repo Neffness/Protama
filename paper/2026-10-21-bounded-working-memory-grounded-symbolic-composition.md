@@ -43,9 +43,9 @@ freeze was prohibited.
 
 The frozen manifest is:
 
-- [grounded-symbolic-composition-freeze-v1.json](../benchmark/bounded-working-memory-v1/gate-work/grounded-symbolic-composition-freeze-v1.json)
-- SHA-256:
-  `4941cceed300baa1f8feee9b7139397baf3d6721d9823f70453e26d24466fc05`
+The historical grounded-symbolic freeze is retained in repository history. The
+active public package is the completed provability profile in
+[benchmark/bounded-working-memory](../benchmark/bounded-working-memory/).
 
 ## Held-out composition
 
@@ -141,11 +141,9 @@ The runtime implementation and development tests are maintained separately from
 this public reproducibility package. The public validation harness below checks
 the frozen manifest and result without importing that implementation.
 
-The machine-readable development result is:
-
-- [grounded-symbolic-composition-final-v1.json](../benchmark/bounded-working-memory-v1/gate-work/grounded-symbolic-composition-final-v1.json)
-- [grounded-symbolic-composition-freeze-v2.json](../benchmark/bounded-working-memory-v1/gate-work/grounded-symbolic-composition-freeze-v2.json)
-- [grounded-symbolic-composition-development-v2.json](../benchmark/bounded-working-memory-v1/gate-work/grounded-symbolic-composition-development-v2.json)
+The historical machine-readable development result is retained in repository
+history. The current public machine-readable result is
+[provability_gate_result.json](../benchmark/bounded-working-memory/provability_gate_result.json).
 
 ## v2 development run
 

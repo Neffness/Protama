@@ -73,6 +73,17 @@
   "baselines": [
     "no-holdover"
   ],
+  "profile_status": "completed",
+  "performance_thresholds": {
+    "protama_accuracy_min": 0.95,
+    "protama_coverage_min": 0.7,
+    "protama_selective_accuracy_min": 0.95,
+    "protama_abstention_correctness_min": 0.95,
+    "capacity_aware_accuracy_min": 0.9,
+    "capacity_aware_abstention_correctness_min": 0.9,
+    "protama_accuracy_must_exceed_no_holdover": true,
+    "protama_coverage_must_exceed_no_holdover": true
+  },
   "fairness_key": {
     "required_fields": [
       "ground_truth",
@@ -95,5 +106,5 @@
     "evidence_provenance_failures_max": 0,
     "human_review_status": "not-required"
   },
-  "manifest_sha256": "45a47efc1000c2057086283b40d5efee2400f5ac91832598f3a4228eee5fd095"
+  "manifest_sha256": "57ea29394121efa8fa6e44ec8fc345eb27176c86463de0a06409e5b8afe96abd"
 }
