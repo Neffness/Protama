@@ -39,6 +39,24 @@ Benchmark changes should include tests or a clear explanation of why tests are
 not applicable. Changes to scoring, generators, thresholds, or leakage rules
 must be called out explicitly.
 
+## Running public tests
+
+With the repository's `src` directory on `PYTHONPATH`, run the public suite
+with:
+
+```text
+PYTHONPATH=src python -m pytest -q tests
+```
+
+The bounded-working-memory checks are also implemented with `unittest.TestCase`
+and can be run by standard-library discovery:
+
+```text
+PYTHONPATH=src python -m unittest discover -s tests -p "test_public_bounded_working_memory_benchmark.py"
+```
+
+Both commands execute the freeze-integrity hash guard.
+
 ## Research conduct
 
 Development results must be labeled as development or pilot results until the
