@@ -18,8 +18,10 @@ and require a new freeze.
 ## Simulator contract
 
 - Sampling rate: **10 samples per second** for **10 seconds**.
-- Each sample is a burst of **5 independent count draws**.
-- Counts are Poisson-distributed.
+- Each sample contains **one Poisson count draw**.
+- Five consecutive samples form a burst group for missing-burst encoding.
+- The five counts are not summed before reaching the evaluator or retention
+  system.
 - `background_rate = 4.0 expected counts/second`.
 - `source_rate = 24.0 expected counts/second`.
 - `shielding_multiplier = 0.45` applies to source counts when shielding is

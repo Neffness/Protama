@@ -1,15 +1,16 @@
 {
   "gate_version": "bounded-working-memory-thought-holdover-v2",
   "profile": "temporal-sensor-stream-state-tracking",
-  "freeze_id": "temporal-sensor-stream-freeze-v1",
+  "freeze_id": "temporal-sensor-stream-freeze-v1.1",
   "status": "frozen-development-preregistration",
   "simulator": {
     "sampling_hz": 10,
     "duration_seconds": 10,
     "sample_count": 100,
     "burst_size": 5,
-    "burst_rule": "fixed-size and independent of event onset, offset, environment transitions, and labels",
+    "burst_rule": "five consecutive samples grouped for missing-burst encoding; grouping is independent of event onset, offset, environment transitions, and labels",
     "count_model": "Poisson event counts",
+    "count_unit": "one Poisson count per sample; five consecutive samples form one burst group",
     "rate_units": "expected counts per second before burst encoding",
     "background_rate": 4.0,
     "shielding_multiplier": 0.45,
@@ -2367,5 +2368,5 @@
       "burst_size": 5
     }
   ],
-  "manifest_sha256": "f76f7c3aadef41f51e85258582b9a9ed5c2e688cd1916cd1e905ea720c22b512"
+  "manifest_sha256": "674baf0c61178a3566449f952ac2790d278fb1a0fa8b16fd3d4d984e384cd557"
 }

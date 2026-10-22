@@ -11,3 +11,7 @@ All notable public changes to Protama will be documented here.
   `efd287c8b1f81d5ee1b4a2bf88a314a1776e48dbd6ee28a21983d8824b5a3c36`.
   The regenerated package remains locally staged for review and was not
   committed or pushed by this workspace session.
+- Amended the temporal sensor-stream freeze to `v1.1` with additive
+  clarifications only: explicit count units, burst grouping semantics, and
+  threshold rationale. No seeds, thresholds, episodes, or simulator rates
+  changed.

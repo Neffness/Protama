@@ -1,3 +1,4 @@
+import hashlib
 import json
 from pathlib import Path
 
@@ -47,3 +48,18 @@ def test_public_verifier_checks_v2_trial_and_baseline_evidence():
 
     assert report["valid"]
     assert report["result"] == "DEVELOPMENT_PASS"
+
+
+def test_temporal_sensor_freeze_hash_matches_contents():
+    freeze_path = BENCHMARK / "temporal-sensor-stream-freeze-v1.json"
+    freeze = json.loads(freeze_path.read_text(encoding="utf-8"))
+    unsigned = dict(freeze)
+    unsigned["manifest_sha256"] = "PENDING"
+    payload = json.dumps(
+        unsigned,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=True,
+    ).encode("ascii")
+
+    assert hashlib.sha256(payload).hexdigest() == freeze["manifest_sha256"]
