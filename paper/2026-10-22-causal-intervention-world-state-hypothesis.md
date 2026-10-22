@@ -92,6 +92,13 @@ The environment must support both successful and failed predictions. A
 system that only receives confirming outcomes cannot demonstrate belief
 revision.
 
+Counterfactual scoring must preserve the episode's exogenous randomness. The
+theory-state environment should record the episode's exogenous draws and
+re-run the same episode with those draws held fixed while the action changes.
+Resampling noise would turn a definite counterfactual into a distribution
+different from the one being asked about. The abduction and noise-replay rule
+is therefore a theory-freeze decision, not an implementation detail.
+
 ## Proposed evaluation episode
 
 An episode may contain:
@@ -123,6 +130,20 @@ observe
 → revise beliefs
 → answer a counterfactual
 ```
+
+Intervention selection and intervention receipt are separate evaluation
+capabilities. A received-intervention stratum tests prediction and
+outcome-dependent revision. A selection stratum tests whether Protama chooses
+an action for information gain among competing hypotheses. These strata must
+be reported separately at theory freeze so success in one cannot conceal
+failure in the other.
+
+The research must also decide whether candidate causal hypotheses are supplied
+by the evaluator or induced by Protama from observations. Selecting among
+supplied alternatives is a meaningful but narrower claim than constructing
+the alternatives itself. The hypothesis publication leaves this boundary
+open; the theory publication must state it explicitly and use corresponding
+claim language.
 
 ## Evidence and provenance hypothesis
 
@@ -186,6 +207,13 @@ Diagnostics should examine:
 - world-state versus belief-state separation; and
 - provenance and replay integrity.
 
+Belief revision should be scored for direction and justification, not merely
+for dependence on the outcome. The post-outcome belief should be compared with
+the belief that is justified by the pre-outcome state, the observed outcome,
+and the declared causal model. A system that changes its belief after every
+outcome, but moves toward the wrong explanation, must not receive credit for
+revision.
+
 No diagnostic number in this hypothesis publication is a final gate
 threshold.
 
@@ -219,6 +247,11 @@ ordinary development iterations. It will publish this hypothesis once, do the
 substantial research, and then publish one agreed frozen theory and gate
 result.
 
+During hypothesis research, dated amendments may be appended to this
+publication when the public understanding materially changes. An amendment
+must identify what changed and why; it does not create a new gate version,
+alter the one-time theory freeze, or turn exploratory evidence into a result.
+
 ## Claim boundary
 
 This hypothesis does not claim:
@@ -243,4 +276,3 @@ Private implementation details, exploratory traces, simulator development,
 bug investigations, provisional thresholds, and pre-freeze results remain in
 the private research tree. They are not part of this publication and must not
 be interpreted as a completed gate result.
-
