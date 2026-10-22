@@ -10,9 +10,11 @@
     "burst_size": 5,
     "burst_rule": "fixed-size and independent of event onset, offset, environment transitions, and labels",
     "count_model": "Poisson event counts",
+    "rate_units": "expected counts per second before burst encoding",
     "background_rate": 4.0,
     "shielding_multiplier": 0.45,
     "source_rate": 24.0,
+    "rate_interpretation": "rates are simulation parameters for independent Poisson counts, not physical detector calibration",
     "source_mechanisms_taught": [
       "step",
       "exponential-decay"
@@ -132,6 +134,17 @@
     "cross_episode_leakage_max": 0.0,
     "eviction_validity_failures_max": 0,
     "unauthorized_promotion_validity_failures_max": 0
+  },
+  "threshold_justifications": {
+    "determinate_event_accuracy_min": "0.95 requires near-ceiling event identification while allowing a small finite-sample error margin.",
+    "epistemic_ambiguous_abstention_accuracy_min": "0.95 requires reliable abstention on evidence-insufficient episodes rather than forced guesses.",
+    "capacity_aware_eviction_abstention_accuracy_min": "0.95 requires the bounded-memory policy to recognize when eviction removes required evidence.",
+    "evidence_span_iou_min": "0.80 requires temporal localization to substantially overlap the evaluator span.",
+    "near_miss_false_positive_rate_max": "0.05 limits false commitments on structurally similar but invalid episodes.",
+    "snapshot_replay_agreement_min": "1.0 ensures serialized state replay is exact, not approximate.",
+    "cross_episode_leakage_max": "0.0 forbids evaluation information from carrying across episode boundaries.",
+    "eviction_validity_failures_max": "0 enforces the declared eviction invariant.",
+    "unauthorized_promotion_validity_failures_max": "0 enforces the declared promotion invariant."
   },
   "label_rule": {
     "development_pass": "at least 100 determinate and 100 epistemic episodes, complete baseline suite, all trial records, independent strata thresholds, and all zero-tolerance conditions pass",
